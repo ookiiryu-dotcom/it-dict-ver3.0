@@ -10,13 +10,15 @@
 
 html{
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body{
   font-family: "Yu Gothic", sans-serif;
   background: #f4f7fb;
   color: #333;
-  line-height: 1.9;
+  line-height: 1.8;
+  font-size: 16px;
 }
 
 img{
@@ -194,6 +196,7 @@ h2{
   text-align: center;
   font-weight: bold;
   transition: 0.3s;
+  margin-bottom: 10px;
 }
 
 .list-box:hover{
@@ -229,6 +232,7 @@ h2{
 table{
   width: 100%;
   border-collapse: collapse;
+  background: white;
 }
 
 th{
@@ -362,20 +366,25 @@ footer{
   margin-top: 60px;
 }
 
-/* ===== スマホ対応 ===== */
+/* =========================================================
+   スマホ対応
+   「PCに近い見た目」を維持する軽め縮小版
+========================================================= */
 
 @media screen and (max-width:768px){
 
   body{
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   header{
-    padding: 50px 15px;
+    padding: 45px 14px;
   }
 
   header h1{
-    font-size: 34px;
+    font-size: 28px;
+    margin-bottom: 10px;
   }
 
   header p{
@@ -383,59 +392,107 @@ footer{
   }
 
   .container{
-    width: 95%;
-    margin: 25px auto;
+    width: 94%;
+    margin: 24px auto;
   }
 
   .card,
   .search-box,
   .word-section{
-    padding: 22px;
+    padding: 18px;
     border-radius: 14px;
+    margin-bottom: 22px;
   }
 
   h2,
   .search-box h2,
   .word-section h2{
-    font-size: 22px;
+    font-size: 20px;
+    margin-bottom: 16px;
+    padding-left: 10px;
   }
 
-  #searchBox{
-    font-size: 15px;
-    padding: 14px;
-  }
-
-  #result{
-    font-size: 14px;
+  .point-box,
+  .warning-box,
+  .example,
+  .example-box,
+  .security-box{
     padding: 16px;
+    margin-top: 18px;
   }
 
-  #wordList{
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .list p,
+  .flow p{
+    padding: 12px;
+    font-size: 13px;
   }
 
-  #wordList li{
-    padding: 15px;
-    font-size: 15px;
+  .flow{
+    gap: 12px;
+  }
+
+  .flow-box,
+  .part-box,
+  .list-box{
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .part-box h3{
+    font-size: 18px;
+  }
+
+  .structure span{
+    padding: 10px 18px;
+    font-size: 13px;
   }
 
   table{
-    min-width: 650px;
+    min-width: 600px;
   }
 
   th,
   td{
-    font-size: 14px;
-    padding: 12px;
-    line-height: 1.7;
+    font-size: 13px;
+    padding: 10px;
+    line-height: 1.6;
     white-space: normal;
     word-break: break-word;
   }
 
+  #searchBox{
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  #result{
+    font-size: 13px;
+    padding: 14px;
+  }
+
+  #wordList{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  #wordList li{
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .back{
+    margin-top: 30px;
+  }
+
+  .back a{
+    padding: 12px 22px;
+    font-size: 13px;
+  }
+
   footer{
-    font-size: 12px;
-    padding: 20px;
+    font-size: 11px;
+    padding: 18px;
+    margin-top: 40px;
   }
 
 }
