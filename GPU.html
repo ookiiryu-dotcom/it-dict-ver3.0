@@ -1,469 +1,659 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPU（Graphics Processing Unit）</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>DRAM（Dynamic Random Access Memory）</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-  <!-- ===== ヘッダー ===== -->
+<!-- ===== ヘッダー ===== -->
 
-  <header>
+<header>
 
-    <h1>GPU<br>
+  <h1>
+    DRAM<br>
 
-  <span style="
-    font-size:0.6em;
-    font-weight:normal;">
-    （Graphics Processing Unit）
-  </span></h1>
+    <span style="
+      font-size:0.55em;
+      font-weight:normal;">
+      （Dynamic Random Access Memory）
+    </span>
+
+  </h1>
+
+  <p>
+    コンピュータの「高速な作業用メモリ」
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== まず結論 ===== -->
+
+  <section class="card">
+
+    <h2>まず簡単に言うと</h2>
 
     <p>
-      映像処理や大量計算を高速で行うための装置
+      DRAMとは、
+      CPUが現在使用しているデータを
+      一時的に保存しておくための
+      高速メモリです。
     </p>
 
-  </header>
-
-  <!-- ===== メイン ===== -->
-
-  <div class="container">
-
-    <!-- ===== GPUとは ===== -->
-
-    <div class="card">
-
-      <h2>GPUとは？</h2>
+    <div class="point-box">
 
       <p>
-        <span class="highlight">
-          GPU（Graphics Processing Unit）
-        </span>
-        とは、
-        映像処理や大量の計算を高速に行うための部品です。
+        一般的に
+        「メモリ」
+        と呼ばれている部品の多くが
+        DRAMです。
       </p>
-
-      <p style="margin-top:15px;">
-        もともとは
-        <span class="blue">ゲームの映像描画</span>
-        のために発展しましたが、
-        現在ではAI、動画編集、科学計算など、
-        さまざまな分野で活躍しています。
-      </p>
-
-      <div class="point-box">
-
-        <p>
-          GPUは
-          「同じ種類の計算を大量に同時処理する」
-          ことが得意です。
-        </p>
-
-      </div>
 
     </div>
 
-    <!-- ===== CPUとの違い ===== -->
+  </section>
 
-    <div class="card">
+  <!-- ===== なぜ必要か ===== -->
 
-      <h2>CPUとの違い</h2>
+  <section class="card">
+
+    <h2>なぜDRAMが必要なのか</h2>
+
+    <p>
+      CPUは非常に高速ですが、
+      作業するためには
+      「すぐ取り出せる場所」
+      が必要です。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      padding:18px;
+      border-radius:10px;
+      margin:20px 0;
+      text-align:center;
+      line-height:2;
+      border:1px solid #ddd;">
+
+      <strong>【データの流れ】</strong><br>
+
+      SSD（倉庫）
+      →
+      <strong style="color:#2b579a;">
+        DRAM（作業机）
+      </strong>
+      →
+      CPU（作業する人）
+
+    </div>
+
+    <p>
+      SSDから毎回直接データを読むと、
+      CPUの速度についていけず、
+      動作が遅くなります。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      必要なデータを
+      DRAMへ一時的に置いておくことで、
+      CPUは高速に処理できます。
+
+    </p>
+
+  </section>
+
+  <!-- ===== DRAMが行うこと ===== -->
+
+  <section class="card">
+
+    <h2>DRAMが行っていること</h2>
+
+    <p>
+      DRAMは、
+      現在使用中のデータを
+      一時的に保持しています。
+    </p>
+
+    <div class="example">
+
+      <ul style="
+        margin:0;
+        padding-left:20px;
+        line-height:2;">
+
+        <li>
+          <strong>ゲーム：</strong>
+          マップ・画像データ保存
+        </li>
+
+        <li>
+          <strong>ブラウザ：</strong>
+          タブやページ情報保持
+        </li>
+
+        <li>
+          <strong>動画編集：</strong>
+          大量データの高速処理
+        </li>
+
+        <li>
+          <strong>AI：</strong>
+          巨大データを一時展開
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="point-box">
 
       <p>
-        パソコンには
-        <span class="highlight">CPU</span>
-        という部品もあります。
+        多くのアプリを同時に開けるのは、
+        DRAMが一時的に情報を保持しているからです。
       </p>
 
-      <p style="margin-top:15px;">
-        CPUはパソコン全体を管理する「頭脳」のような存在で、
-        アプリ実行やWindowsの動作、
-        複雑な判断処理を担当しています。
-      </p>
+    </div>
 
-      <div class="table-wrap">
+  </section>
 
-        <table>
+  <!-- ===== メモリ容量 ===== -->
+
+  <section class="card">
+
+    <h2>メモリ容量（GB）が大きいと何が良い？</h2>
+
+    <p>
+      DRAM容量が大きいほど、
+      同時に置いておけるデータ量が増えます。
+    </p>
+
+    <div style="
+      overflow-x:auto;
+      margin-top:20px;">
+
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        text-align:left;">
+
+        <thead>
+
+          <tr style="
+            background:#f2f2f2;">
+
+            <th style="
+              padding:12px;
+              border:1px solid #ddd;">
+              容量
+            </th>
+
+            <th style="
+              padding:12px;
+              border:1px solid #ddd;">
+              用途イメージ
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
 
           <tr>
-            <th>項目</th>
-            <th>CPU</th>
-            <th>GPU</th>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              4GB
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              最低限
+            </td>
+
           </tr>
 
           <tr>
-            <td>得意な処理</td>
-            <td>複雑な判断</td>
-            <td>大量の単純計算</td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              8GB
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              普通用途
+            </td>
+
           </tr>
 
           <tr>
-            <td>構造</td>
-            <td>少数の高性能コア</td>
-            <td>大量の計算コア</td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              16GB
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              快適・ゲーム向け
+            </td>
+
           </tr>
 
           <tr>
-            <td>役割</td>
-            <td>PC全体の管理</td>
-            <td>映像・AI計算</td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              32GB以上
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              AI・動画編集・重作業
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        メモリ不足になると、
+        SSDを代わりに使うため、
+        動作が大きく遅くなる場合があります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== DRAMの仕組み ===== -->
+
+  <section class="card">
+
+    <h2>DRAMの仕組み</h2>
+
+    <p>
+      DRAMは、
+      コンデンサへ電気をためることで
+      「0」と「1」を保存しています。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      padding:18px;
+      border-radius:10px;
+      margin:20px 0;
+      border:1px solid #ddd;
+      text-align:center;
+      line-height:2;">
+
+      <strong style="color:#2b579a;">
+        電気あり → 1
+      </strong>
+
+      <br>
+
+      <strong style="color:#666;">
+        電気なし → 0
+      </strong>
+
+    </div>
+
+    <p>
+      しかし、
+      電気は自然に漏れてしまうため、
+      定期的な再充電が必要です。
+    </p>
+
+  </section>
+
+  <!-- ===== リフレッシュ ===== -->
+
+  <section class="card">
+
+    <h2>リフレッシュとは？</h2>
+
+    <p>
+      DRAMでは、
+      保存データを維持するために、
+      定期的に電気を書き直します。
+    </p>
+
+    <div class="example">
+
+      <p>
+        この動作を
+        「リフレッシュ」
+        と呼びます。
+      </p>
+
+    </div>
+
+    <p style="margin-top:15px;">
+
+      リフレッシュ中は、
+      一部メモリへアクセスできず、
+      わずかな遅延が発生します。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        DDR5では、
+        必要部分だけを個別に
+        リフレッシュする技術も使われています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== SSDとの違い ===== -->
+
+  <section class="card">
+
+    <h2>SSDとDRAMの違い</h2>
+
+    <p>
+      DRAMとSSDは、
+      役割や構造が大きく異なります。
+    </p>
+
+    <div style="
+      overflow-x:auto;
+      margin-top:20px;">
+
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        text-align:left;">
+
+        <thead>
+
+          <tr style="
+            background:#f2f2f2;">
+
+            <th style="
+              padding:12px;
+              border:1px solid #ddd;">
+              項目
+            </th>
+
+            <th style="
+              padding:12px;
+              border:1px solid #ddd;">
+              DRAM
+            </th>
+
+            <th style="
+              padding:12px;
+              border:1px solid #ddd;">
+              SSD
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              font-weight:bold;">
+              速度
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              color:#2b579a;
+              font-weight:bold;">
+              非常に高速
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              DRAMより遅い
+            </td>
+
           </tr>
 
           <tr>
-            <td>イメージ</td>
-            <td>少人数の超優秀な社員</td>
-            <td>大人数で一気に作業するチーム</td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              font-weight:bold;">
+              保存
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              電源OFFで消える
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              font-weight:bold;">
+              保存される
+            </td>
+
           </tr>
 
-        </table>
+          <tr>
 
-      </div>
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              font-weight:bold;">
+              耐久性
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              非常に高い
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              color:#d9534f;">
+              書換え寿命あり
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;
+              font-weight:bold;">
+              得意分野
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              作業用
+            </td>
+
+            <td style="
+              padding:12px;
+              border:1px solid #ddd;">
+              長期保存
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
 
     </div>
 
-    <!-- ===== なぜGPUが必要か ===== -->
+  </section>
 
-    <div class="card">
+  <!-- ===== メモリ階層 ===== -->
 
-      <h2>なぜGPUが必要なのか</h2>
+  <section class="card">
+
+    <h2>コンピュータのメモリ階層</h2>
+
+    <p>
+      コンピュータは、
+      速度と容量の違う記憶装置を
+      組み合わせて使っています。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      padding:18px;
+      border-radius:10px;
+      margin:20px 0;
+      border:1px solid #ddd;
+      text-align:center;
+      line-height:2;">
+
+      CPUキャッシュ
+      →
+      <strong style="color:#2b579a;">
+        DRAM
+      </strong>
+      →
+      SSD
+      →
+      HDD
+
+    </div>
+
+    <div class="point-box">
 
       <p>
-        ゲーム画面は、
-        無数の
-        <span class="highlight">ピクセル</span>
-        で作られています。
+        高速なものほど容量が小さく、
+        大容量なものほど速度は遅くなります。
       </p>
-
-      <p style="margin-top:15px;">
-        フルHD画面だけでも
-        約207万個のピクセルが存在し、
-        GPUはそれぞれに対して
-        色や明るさ、光や影などを
-        毎秒何十回も計算しています。
-      </p>
-
-      <div class="example">
-
-        <p>
-          もしCPUだけで処理しようとすると、
-          計算量が多すぎてゲームが重くなってしまいます。
-        </p>
-
-      </div>
 
     </div>
 
-    <!-- ===== GPUの内部構造 ===== -->
+  </section>
 
-    <div class="card">
+  <!-- ===== 次世代メモリ ===== -->
 
-      <h2>GPUの内部構造</h2>
+  <section class="card">
+
+    <h2>次世代メモリ</h2>
+
+    <p>
+      現在は、
+      DRAMとSSDの特徴を
+      両立する次世代メモリも研究されています。
+    </p>
+
+    <div class="example">
+
+      <ul style="
+        margin:0;
+        padding-left:20px;
+        line-height:2;">
+
+        <li><strong>MRAM：</strong> 磁気で保存</li>
+
+        <li><strong>ReRAM：</strong> 抵抗変化を利用</li>
+
+        <li><strong>PCM：</strong> 物質状態変化を利用</li>
+
+      </ul>
+
+    </div>
+
+    <div class="point-box">
 
       <p>
-        GPUの中には、
-        小さな計算用コアが大量に入っています。
+        将来的には、
+        「メモリ」と「ストレージ」
+        の境界が変化する可能性があります。
       </p>
-
-      <div class="flow">
-
-        <div class="flow-box">
-          大量の計算コア
-        </div>
-
-        <div class="flow-box">
-          並列処理
-        </div>
-
-        <div class="flow-box">
-          高速演算
-        </div>
-
-        <div class="flow-box">
-          映像生成
-        </div>
-
-      </div>
-
-      <div class="point-box">
-
-        <p>
-          CPUが数個〜十数個程度のコアなのに対して、
-          GPUは数千個規模のコアを持つこともあります。
-        </p>
-
-      </div>
 
     </div>
 
-    <!-- ===== VRAM ===== -->
+  </section>
 
-    <div class="card">
+  <!-- ===== まとめ ===== -->
 
-      <h2>VRAMとは？</h2>
+  <section class="card"
+    style="border-left:6px solid #2b579a;">
 
-      <p>
-        GPUには、
-        <span class="highlight">VRAM</span>
-        という専用メモリがあります。
-      </p>
+    <h2>まとめ</h2>
 
-      <p style="margin-top:15px;">
-        VRAMには、
-        画像データやテクスチャ、
-        3Dモデルなどが保存されます。
-      </p>
+    <p>
+      DRAMは、
+      CPUが高速に処理するために必要な
+      「一時保存用の高速メモリ」
+      です。
+    </p>
 
-      <div class="structure">
+    <p style="margin-top:15px;">
 
-        <span>VRAM</span><br>
-        ↓<br>
+      コンピュータの快適性は、
+      CPUだけではなく、
+      DRAM性能にも大きく依存しています。
 
-        <span>画像データ保存</span><br>
-        ↓<br>
+    </p>
 
-        <span>GPUで高速処理</span><br>
-        ↓<br>
+  </section>
 
-        <span>モニターへ表示</span>
+  <!-- ===== 戻る ===== -->
 
-      </div>
+  <div class="back">
 
-    </div>
-
-    <!-- ===== シェーダ ===== -->
-
-    <div class="card">
-
-      <h2>シェーダとは？</h2>
-
-      <p>
-        ゲームでは、
-        光の反射、水面の揺れ、
-        影の形など、
-        非常に多くの計算が行われています。
-      </p>
-
-      <p style="margin-top:15px;">
-        これらは
-        <span class="highlight">
-          シェーダ
-        </span>
-        と呼ばれる小さなプログラムによって処理されています。
-      </p>
-
-      <div class="flow">
-
-        <div class="flow-box">
-          光の計算
-        </div>
-
-        <div class="flow-box">
-          影の生成
-        </div>
-
-        <div class="flow-box">
-          水面表現
-        </div>
-
-        <div class="flow-box">
-          3D描画
-        </div>
-
-      </div>
-
-      <div class="example">
-
-        <p>
-          GPUはシェーダを大量並列で実行することで、
-          美しい3D映像をリアルタイム表示しています。
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- ===== AIとGPU ===== -->
-
-    <div class="card">
-
-      <h2>AIとGPU</h2>
-
-      <p>
-        近年GPUが特に注目されている理由の一つが
-        <span class="highlight">AI</span>
-        です。
-      </p>
-
-      <p style="margin-top:15px;">
-        AIでは、
-        大量の掛け算や足し算を繰り返します。
-      </p>
-
-      <div class="point-box">
-
-        <p>
-          GPUは大量の計算を同時に処理できるため、
-          AIや機械学習と非常に相性が良いのです。
-        </p>
-
-      </div>
-
-      <div class="flow">
-
-        <div class="flow-box">
-          画像生成AI
-        </div>
-
-        <div class="flow-box">
-          機械学習
-        </div>
-
-        <div class="flow-box">
-          動画生成
-        </div>
-
-        <div class="flow-box">
-          音声認識
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===== 発熱 ===== -->
-
-    <div class="card">
-
-      <h2>GPUの発熱と冷却</h2>
-
-      <p>
-        GPUは非常に大きな計算を高速で行うため、
-        多くの電力を消費し、
-        大量の熱を発生させます。
-      </p>
-
-      <div class="flow">
-
-        <div class="flow-box">
-          高負荷計算
-        </div>
-
-        <div class="flow-box">
-          電力消費
-        </div>
-
-        <div class="flow-box">
-          発熱
-        </div>
-
-        <div class="flow-box">
-          冷却装置
-        </div>
-
-      </div>
-
-      <div class="example">
-
-        <p>
-          高性能GPUには、
-          大型ファン、
-          ヒートシンク、
-          水冷装置などが搭載されることがあります。
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- ===== 活躍分野 ===== -->
-
-    <div class="card">
-
-      <h2>GPUが使われる分野</h2>
-
-      <div class="parts">
-
-        <div class="part-box">
-          <h3>ゲーム</h3>
-          高画質3D描画
-        </div>
-
-        <div class="part-box">
-          <h3>AI</h3>
-          機械学習・生成AI
-        </div>
-
-        <div class="part-box">
-          <h3>動画編集</h3>
-          エンコード高速化
-        </div>
-
-        <div class="part-box">
-          <h3>科学研究</h3>
-          シミュレーション計算
-        </div>
-
-        <div class="part-box">
-          <h3>天気予報</h3>
-          大規模計算
-        </div>
-
-        <div class="part-box">
-          <h3>スーパーコンピュータ</h3>
-          超高速演算
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===== まとめ ===== -->
-
-    <div class="card">
-
-      <h2>まとめ</h2>
-
-      <p>
-        GPUは、
-        <span class="highlight">
-          大量の計算を同時に高速処理するための装置
-        </span>
-        です。
-      </p>
-
-      <p style="margin-top:15px;">
-        もともとはゲーム向け技術でしたが、
-        現在ではAI、動画編集、科学研究など、
-        幅広い分野で重要な役割を持っています。
-      </p>
-
-      <div class="point-box">
-
-        <p>
-          現代のコンピューター技術において、
-          GPUは欠かせない存在になっています。
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- ===== 戻る ===== -->
-
-    <div class="back">
-      <a href="index.html">← 用語一覧へ戻る</a>
-    </div>
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
 
   </div>
 
-  <!-- ===== フッター ===== -->
+</div>
 
-  <footer>
-    IT学習用サイト
-  </footer>
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
 
 </body>
 </html>
