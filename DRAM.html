@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DRAM（Dynamic Random Access Memory）</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+
+  <header>
+
+    <h1>
+      DRAM<br>
+
+      <span style="
+        font-size:0.6em;
+        font-weight:normal;">
+        （Dynamic Random Access Memory）
+      </span>
+
+    </h1>
+
+    <p>
+      コンピュータの高速な作業用メモリ
+    </p>
+
+  </header>
+
+  <!-- ===== メイン ===== -->
+
+  <div class="container">
+
+    <!-- ===== DRAMとは ===== -->
+
+    <div class="card">
+
+      <h2>DRAMとは？</h2>
+
+      <p>
+        <span class="highlight">
+          DRAM（Dynamic Random Access Memory）
+        </span>
+        とは、
+        コンピュータが
+        一時的にデータを保存するための
+        高速メモリです。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        CPUが現在使用している
+        プログラムやデータを
+        一時的に置いておくことで、
+        高速な処理を実現しています。
+
+      </p>
+
+      <div class="point-box">
+
+        <p>
+          一般的に
+          「メモリ」
+          と呼ばれている部品の多くは、
+          DRAMです。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== なぜ必要か ===== -->
+
+    <div class="card">
+
+      <h2>なぜDRAMが必要なのか</h2>
+
+      <p>
+        CPUは非常に高速ですが、
+        作業中のデータを
+        一時的に置いておく場所が必要です。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        SSDやHDDから
+        毎回直接データを読むと、
+        遅延が大きすぎて
+        CPUの速度についていけません。
+
+      </p>
+
+      <div class="example">
+
+        <p>
+          DRAMは
+          「作業机」、
+          SSDは
+          「倉庫」
+          のような役割をしています。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== DRAMの仕組み ===== -->
+
+    <div class="card">
+
+      <h2>DRAMの仕組み</h2>
+
+      <p>
+        DRAMは、
+        コンデンサに電気をためることで
+        「0」と「1」を記録しています。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        しかし、
+        電気は少しずつ漏れてしまうため、
+        定期的に
+        データを書き直す必要があります。
+
+      </p>
+
+      <div class="point-box">
+
+        <p>
+          この動作を
+          「リフレッシュ」
+          と呼びます。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== リフレッシュ問題 ===== -->
+
+    <div class="card">
+
+      <h2>リフレッシュの影響</h2>
+
+      <p>
+        DRAMは
+        リフレッシュ中、
+        一部の領域へアクセスできなくなります。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        現代のDDR4やDDR5では、
+        バンク分割や並列動作によって、
+        性能低下を目立たなくしています。
+
+      </p>
+
+      <div class="example">
+
+        <p>
+          DDR5では、
+          必要な部分だけを
+          個別にリフレッシュする技術も使われています。
+        </p>
+
+      </div>
+
+      <div class="point-box">
+
+        <p>
+          ただし、
+          制御は複雑化しており、
+          最悪遅延の予測が難しくなる問題もあります。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== SSDとの違い ===== -->
+
+    <div class="card">
+
+      <h2>SSDとの違い</h2>
+
+      <p>
+        SSDも高速ですが、
+        DRAMとは構造が大きく異なります。
+      </p>
+
+      <div class="parts">
+
+        <div class="part-box">
+          <h3>DRAM</h3>
+          超高速な書換え
+        </div>
+
+        <div class="part-box">
+          <h3>DRAM</h3>
+          ランダムアクセスが得意
+        </div>
+
+        <div class="part-box">
+          <h3>SSD</h3>
+          長期保存が得意
+        </div>
+
+        <div class="part-box">
+          <h3>SSD</h3>
+          書換え寿命が存在
+        </div>
+
+      </div>
+
+      <div class="point-box">
+
+        <p>
+          CPUはナノ秒単位で
+          メモリを書き換えるため、
+          SSDでは耐久性と遅延の両面で対応が困難です。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== メモリ階層 ===== -->
+
+    <div class="card">
+
+      <h2>メモリ階層とは</h2>
+
+      <p>
+        コンピュータは、
+        速度と容量の違う
+        複数の記憶装置を
+        階層構造で使っています。
+      </p>
+
+      <div class="flow">
+
+        <div class="flow-box">
+          CPUキャッシュ
+        </div>
+
+        <div class="flow-box">
+          DRAM
+        </div>
+
+        <div class="flow-box">
+          SSD
+        </div>
+
+        <div class="flow-box">
+          HDD
+        </div>
+
+      </div>
+
+      <div class="example">
+
+        <p>
+          高速なものほど容量が小さく、
+          大容量なものほど速度は遅くなります。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== DDR5と課題 ===== -->
+
+    <div class="card">
+
+      <h2>DDR5と現代の課題</h2>
+
+      <p>
+        現代では、
+        AIやゲームによって
+        メモリ使用量が急増しています。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        そのため、
+        DDR5では大容量化・高速化が進められています。
+
+      </p>
+
+      <div class="parts">
+
+        <div class="part-box">
+          <h3>高速化</h3>
+          帯域向上
+        </div>
+
+        <div class="part-box">
+          <h3>大容量化</h3>
+          セル増加
+        </div>
+
+        <div class="part-box">
+          <h3>複雑化</h3>
+          制御難易度上昇
+        </div>
+
+        <div class="part-box">
+          <h3>発熱</h3>
+          電力問題
+        </div>
+
+      </div>
+
+      <div class="point-box">
+
+        <p>
+          平均性能は向上していますが、
+          システム全体の予測可能性は
+          難しくなっています。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== 次世代メモリ ===== -->
+
+    <div class="card">
+
+      <h2>次世代メモリ</h2>
+
+      <p>
+        現在は、
+        DRAMの弱点を改善する
+        次世代メモリも研究されています。
+      </p>
+
+      <div class="parts">
+
+        <div class="part-box">
+          <h3>MRAM</h3>
+          磁気で保存
+        </div>
+
+        <div class="part-box">
+          <h3>ReRAM</h3>
+          抵抗変化を利用
+        </div>
+
+        <div class="part-box">
+          <h3>PCM</h3>
+          物質状態変化
+        </div>
+
+      </div>
+
+      <div class="example">
+
+        <p>
+          将来的には、
+          DRAMとSSDの境界が
+          消える可能性もあります。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== 将来のコンピュータ ===== -->
+
+    <div class="card">
+
+      <h2>将来のコンピュータ設計</h2>
+
+      <p>
+        AI時代では、
+        「大量データ処理」
+        と
+        「リアルタイム制御」
+        の両立が重要になっています。
+      </p>
+
+      <div class="flow">
+
+        <div class="flow-box">
+          CPU
+        </div>
+
+        <div class="flow-box">
+          GPU
+        </div>
+
+        <div class="flow-box">
+          NPU
+        </div>
+
+        <div class="flow-box">
+          専用制御回路
+        </div>
+
+      </div>
+
+      <div class="point-box">
+
+        <p>
+          現代のコンピュータは、
+          1つの万能CPUではなく、
+          複数の専用回路を組み合わせる方向へ進んでいます。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== まとめ ===== -->
+
+    <div class="card">
+
+      <h2>まとめ</h2>
+
+      <p>
+        DRAMは、
+        <span class="highlight">
+          CPUが高速に作業するために必要な
+          一時保存用メモリ
+        </span>
+        です。
+      </p>
+
+      <p style="margin-top:15px;">
+
+        SSDより高速ですが、
+        リフレッシュや発熱、
+        制御複雑化などの課題もあります。
+
+      </p>
+
+      <div class="point-box">
+
+        <p>
+          今後は、
+          DDR5や次世代メモリによって、
+          コンピュータの設計そのものが
+          大きく変化していく可能性があります。
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===== 戻る ===== -->
+
+    <div class="back">
+
+      <a href="index.html">
+        ← 用語一覧へ戻る
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- ===== フッター ===== -->
+
+  <footer>
+    IT学習用サイト
+  </footer>
+
+</body>
+</html>
