@@ -66,5 +66,9 @@
   {
     "term": "CPU",
    "link": "CPU.html"
+  },
+  {
+    "term": "DRAM",
+   "link": "DRAM.html"
   }
 ]
