@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,13 +23,15 @@
     <span style="
       font-size:0.55em;
       font-weight:normal;">
+
       （Dynamic Random Access Memory）
+
     </span>
 
   </h1>
 
   <p>
-    コンピュータの「高速な作業机」
+    コンピュータを高速に動かす「作業用メモリ」
   </p>
 
 </header>
@@ -37,87 +40,129 @@
 
 <div class="container">
 
-  <!-- ===== まず結論 ===== -->
+  <!-- ===== DRAMとは ===== -->
 
-  <div class="card">
+  <section class="card">
 
-    <h2>まず簡単に言うと</h2>
+    <h2>DRAMとは？</h2>
 
     <p>
       DRAMとは、
-      CPUが今使っているデータを
-      一時的に置いておくための
+      CPUが現在使用しているデータを
+      一時的に保存するための
       高速メモリです。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      パソコンで一般的に
+      「メモリ」
+      と呼ばれている部品の多くが
+      DRAMです。
+
     </p>
 
     <div class="point-box">
 
       <p>
-        一般的に
-        「メモリ」
-        と呼ばれている部品の多くが
-        DRAMです。
+        CPUは非常に高速ですが、
+        データをすぐ取り出せる場所がないと、
+        本来の性能を発揮できません。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== なぜ必要か ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>なぜDRAMが必要なのか</h2>
 
     <p>
-      CPUは非常に高速ですが、
-      作業するためには
-      データをすぐ取り出せる場所が必要です。
+      CPUは毎秒大量の計算を行っています。
     </p>
 
-    <div class="flow">
+    <p style="margin-top:15px;">
 
-      <div class="flow-box">
-        SSD
-        <br>
-        倉庫
-      </div>
+      しかし、
+      SSDやHDDから毎回直接データを読むと、
+      CPUとの速度差が大きすぎて、
+      処理が止まりやすくなります。
 
-      <div class="flow-box">
-        DRAM
-        <br>
-        作業机
-      </div>
+    </p>
 
-      <div class="flow-box">
-        CPU
-        <br>
-        作業する人
-      </div>
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:20px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      <strong style="font-size:1.05em;">
+        データの流れ
+      </strong>
+
+      <br><br>
+
+      SSD・HDD（倉庫）
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="
+        color:#2b579a;
+        font-size:1.1em;">
+
+        DRAM（作業机）
+
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      CPU（処理する人）
 
     </div>
 
-    <p style="margin-top:20px;">
+    <div class="example">
 
-      SSDから毎回直接データを読むと、
-      CPUの速度についていけず、
-      動作が重くなります。
+      <p>
+        必要なデータを
+        DRAMへ一時的に置いておくことで、
+        CPUは高速に作業できます。
+      </p>
 
-    </p>
+    </div>
 
-  </div>
+  </section>
 
   <!-- ===== DRAMの役割 ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>DRAMが行っていること</h2>
+
+    <p>
+      DRAMは、
+      現在使用中のデータを
+      一時的に保持しています。
+    </p>
 
     <div class="parts">
 
       <div class="part-box">
         <h3>ゲーム</h3>
-        マップや画像を一時保存
+        マップや画像を保存
       </div>
 
       <div class="part-box">
@@ -131,26 +176,26 @@
       </div>
 
       <div class="part-box">
-        <h3>AI処理</h3>
+        <h3>AI</h3>
         巨大データを一時展開
       </div>
 
     </div>
 
-    <div class="example">
+    <div class="point-box">
 
       <p>
-        アプリを同時にたくさん開けるのは、
-        DRAMが一時的に情報を保持しているからです。
+        多くのアプリを同時に開けるのは、
+        DRAMがデータを一時保持しているからです。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
-  <!-- ===== GBの意味 ===== -->
+  <!-- ===== メモリ容量 ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>メモリ容量（GB）が大きいと何が良い？</h2>
 
@@ -159,27 +204,46 @@
       同時に置いておけるデータ量が増えます。
     </p>
 
-    <div class="parts">
+    <div class="table-wrap">
 
-      <div class="part-box">
-        <h3>4GB</h3>
-        最低限
-      </div>
+      <table>
 
-      <div class="part-box">
-        <h3>8GB</h3>
-        普通用途
-      </div>
+        <thead>
 
-      <div class="part-box">
-        <h3>16GB</h3>
-        快適
-      </div>
+          <tr>
 
-      <div class="part-box">
-        <h3>32GB+</h3>
-        AI・動画編集向け
-      </div>
+            <th>容量</th>
+            <th>用途イメージ</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>4GB</td>
+            <td>最低限の用途</td>
+          </tr>
+
+          <tr>
+            <td>8GB</td>
+            <td>一般的な用途</td>
+          </tr>
+
+          <tr>
+            <td>16GB</td>
+            <td>快適・ゲーム向け</td>
+          </tr>
+
+          <tr>
+            <td>32GB以上</td>
+            <td>AI・動画編集・重作業</td>
+          </tr>
+
+        </tbody>
+
+      </table>
 
     </div>
 
@@ -187,81 +251,128 @@
 
       <p>
         メモリ不足になると、
-        SSDを代わりに使うため、
-        動作が大きく遅くなります。
+        SSDを代わりに使う
+        「仮想メモリ」
+        が増え、
+        動作が重くなる原因になります。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== DRAMの仕組み ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>DRAMの仕組み</h2>
 
     <p>
       DRAMは、
-      小さなコンデンサへ
-      電気をためることで
+      コンデンサへ電気をためることで
       「0」と「1」を保存しています。
     </p>
 
-    <div class="flow">
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:20px;
+      margin:20px 0;">
 
-      <div class="flow-box">
-        電気あり
+      <!-- 電気あり -->
+
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:12px;
+        flex-wrap:wrap;
+        margin-bottom:14px;">
+
+        <span style="
+          color:#2b579a;
+          font-weight:bold;
+          font-size:1.05em;">
+
+          電気あり
+
+        </span>
+
+        <span style="
+          font-weight:bold;
+          color:#444;">
+
+          →
+
+        </span>
+
+        <span style="
+          font-weight:bold;
+          font-size:1.1em;">
+
+          1
+
+        </span>
+
       </div>
 
-      <div class="flow-box">
-        =
-      </div>
+      <!-- 電気なし -->
 
-      <div class="flow-box">
-        1
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:12px;
+        flex-wrap:wrap;">
+
+        <span style="
+          color:#666;
+          font-weight:bold;
+          font-size:1.05em;">
+
+          電気なし
+
+        </span>
+
+        <span style="
+          font-weight:bold;
+          color:#444;">
+
+          →
+
+        </span>
+
+        <span style="
+          font-weight:bold;
+          font-size:1.1em;">
+
+          0
+
+        </span>
+
       </div>
 
     </div>
 
-    <div class="flow">
+    <p>
+      しかし、
+      電気は少しずつ漏れてしまうため、
+      定期的な再充電が必要です。
+    </p>
 
-      <div class="flow-box">
-        電気なし
-      </div>
-
-      <div class="flow-box">
-        =
-      </div>
-
-      <div class="flow-box">
-        0
-      </div>
-
-    </div>
-
-    <div class="point-box">
-
-      <p>
-        ただし、
-        電気は自然に漏れるため、
-        定期的に再充電する必要があります。
-      </p>
-
-    </div>
-
-  </div>
+  </section>
 
   <!-- ===== リフレッシュ ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>リフレッシュとは？</h2>
 
     <p>
       DRAMでは、
       データを維持するために、
-      定期的に電気を書き直します。
+      定期的に電気を書き直しています。
     </p>
 
     <div class="example">
@@ -274,10 +385,11 @@
 
     </div>
 
-    <p style="margin-top:20px;">
+    <p style="margin-top:15px;">
 
       リフレッシュ中は、
-      一部のメモリへアクセスできなくなります。
+      一部メモリへのアクセスが制限されるため、
+      わずかな遅延が発生します。
 
     </p>
 
@@ -285,53 +397,105 @@
 
       <p>
         DDR5では、
-        必要な部分だけを個別に
-        リフレッシュする技術も使われています。
+        必要部分だけを個別に
+        リフレッシュする技術も導入されています。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== SSDとの違い ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>SSDとDRAMの違い</h2>
+
+    <p>
+      DRAMとSSDは、
+      見た目は似ていても、
+      役割や構造が大きく異なります。
+    </p>
 
     <div class="table-wrap">
 
       <table>
 
-        <tr>
-          <th>項目</th>
-          <th>DRAM</th>
-          <th>SSD</th>
-        </tr>
+        <thead>
 
-        <tr>
-          <td>速度</td>
-          <td>非常に高速</td>
-          <td>遅い</td>
-        </tr>
+          <tr>
 
-        <tr>
-          <td>保存</td>
-          <td>電源OFFで消える</td>
-          <td>保持される</td>
-        </tr>
+            <th>項目</th>
+            <th>DRAM</th>
+            <th>SSD</th>
 
-        <tr>
-          <td>書換え耐久</td>
-          <td>非常に高い</td>
-          <td>寿命あり</td>
-        </tr>
+          </tr>
 
-        <tr>
-          <td>得意分野</td>
-          <td>作業用</td>
-          <td>保存用</td>
-        </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>速度</td>
+
+            <td style="
+              color:#2b579a;
+              font-weight:bold;">
+
+              非常に高速
+
+            </td>
+
+            <td>
+              DRAMより遅い
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>保存</td>
+
+            <td>
+              電源OFFで消える
+            </td>
+
+            <td style="font-weight:bold;">
+              データ保持
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>耐久性</td>
+
+            <td>
+              非常に高い
+            </td>
+
+            <td style="color:#d9534f;">
+              書換え寿命あり
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>得意分野</td>
+
+            <td>
+              作業用
+            </td>
+
+            <td>
+              長期保存
+            </td>
+
+          </tr>
+
+        </tbody>
 
       </table>
 
@@ -341,111 +505,89 @@
 
       <p>
         SSDは保存には強いですが、
-        CPUの超高速な書換えには向いていません。
+        CPUの超高速な書換え処理には向いていません。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== メモリ階層 ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>コンピュータのメモリ階層</h2>
 
     <p>
       コンピュータでは、
       速度と容量の違う記憶装置を
-      組み合わせて使っています。
+      階層構造で使っています。
     </p>
 
-    <div class="flow">
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:20px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
 
-      <div class="flow-box">
-        CPUキャッシュ
-        <br>
-        超高速
-      </div>
+      CPUキャッシュ
 
-      <div class="flow-box">
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="
+        color:#2b579a;
+        font-size:1.1em;">
+
         DRAM
-        <br>
-        高速
-      </div>
 
-      <div class="flow-box">
-        SSD
-        <br>
-        大容量
-      </div>
+      </strong>
 
-      <div class="flow-box">
-        HDD
-        <br>
-        超大容量
-      </div>
+      <br>
 
-    </div>
+      ↓
 
-  </div>
+      <br>
 
-  <!-- ===== DDR5 ===== -->
+      SSD
 
-  <div class="card">
+      <br>
 
-    <h2>DDR5と現代の課題</h2>
+      ↓
 
-    <p>
-      AIやゲームによって、
-      メモリ使用量は急増しています。
-    </p>
+      <br>
 
-    <div class="parts">
-
-      <div class="part-box">
-        <h3>高速化</h3>
-        帯域向上
-      </div>
-
-      <div class="part-box">
-        <h3>大容量化</h3>
-        セル増加
-      </div>
-
-      <div class="part-box">
-        <h3>複雑化</h3>
-        制御難化
-      </div>
-
-      <div class="part-box">
-        <h3>発熱</h3>
-        消費電力増加
-      </div>
+      HDD
 
     </div>
 
-    <div class="example">
+    <div class="point-box">
 
       <p>
-        平均性能は向上していますが、
-        最悪遅延の予測は難しくなっています。
+        高速なものほど容量は小さく、
+        大容量なものほど速度は遅くなります。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== 次世代メモリ ===== -->
 
-  <div class="card">
+  <section class="card">
 
     <h2>次世代メモリ</h2>
 
     <p>
       現在は、
-      DRAMとSSDの特徴を
-      両立する新型メモリも研究されています。
+      DRAMとSSDの特徴を両立する
+      新型メモリも研究されています。
     </p>
 
     <div class="parts">
@@ -457,12 +599,12 @@
 
       <div class="part-box">
         <h3>ReRAM</h3>
-        抵抗変化
+        抵抗変化を利用
       </div>
 
       <div class="part-box">
         <h3>PCM</h3>
-        物質変化
+        物質状態変化を利用
       </div>
 
     </div>
@@ -472,36 +614,48 @@
       <p>
         将来的には、
         「メモリ」と「ストレージ」
-        の境界が変化する可能性があります。
+        の境界が変化し、
+        コンピュータ設計そのものが
+        大きく変わる可能性があります。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== まとめ ===== -->
 
-  <div class="card">
+  <section class="card"
+    style="border-left:6px solid #2b579a;">
 
     <h2>まとめ</h2>
 
     <p>
       DRAMは、
-      CPUが高速に作業するために必要な
-      一時保存用メモリです。
+      CPUが高速に処理するために必要な
+      「一時保存用の高速メモリ」
+      です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      コンピュータの快適性は、
+      CPUだけではなく、
+      DRAM性能にも大きく依存しています。
+
     </p>
 
     <div class="point-box">
 
       <p>
-        現代のコンピュータ性能は、
-        CPUだけではなく、
-        DRAM性能にも大きく依存しています。
+        AI時代では、
+        DRAMの性能や設計が、
+        コンピュータ全体の進化を左右する重要な要素になっています。
       </p>
 
     </div>
 
-  </div>
+  </section>
 
   <!-- ===== 戻る ===== -->
 
