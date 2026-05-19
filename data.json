@@ -78,5 +78,9 @@
   {
     "term": "HTML",
    "link": "HTML.html"
+  },
+  {
+    "term": "NFC（Near Field Communication）",
+   "link": "NFC（Near Field Communication）.html"
   }
 ]
