@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NFC（Near Field Communication）</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f3f6fb;
+  color:#222;
+  font-family:
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  line-height:1.9;
+}
+
+header{
+  background:
+    linear-gradient(
+      135deg,
+      #174ea6,
+      #2b579a
+    );
+  color:white;
+  padding:70px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:clamp(2rem,6vw,3.5rem);
+  line-height:1.3;
+}
+
+header p{
+  margin-top:20px;
+  font-size:1.05rem;
+  opacity:0.95;
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:40px auto;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:35px 28px;
+  margin-bottom:30px;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.06);
+}
+
+.card h2{
+  margin-top:0;
+  color:#174ea6;
+  font-size:1.7rem;
+  line-height:1.4;
+}
+
+.point-box{
+  background:#eef5ff;
+  border-left:6px solid #2b579a;
+  padding:18px;
+  border-radius:10px;
+  margin-top:22px;
+}
+
+.example{
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:18px;
+  margin-top:22px;
+}
+
+.parts{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+
+.part-box{
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:22px;
+  text-align:center;
+}
+
+.part-box h3{
+  margin-top:0;
+  color:#2b579a;
+}
+
+.table-wrap{
+  overflow-x:auto;
+  margin-top:25px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:520px;
+}
+
+th{
+  background:#2b579a;
+  color:white;
+  padding:14px;
+  font-weight:bold;
+}
+
+td{
+  border:1px solid #ddd;
+  padding:14px;
+  background:white;
+}
+
+.flow{
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:25px;
+  margin:25px 0;
+  text-align:center;
+  line-height:2.1;
+}
+
+.big{
+  color:#174ea6;
+  font-size:1.15rem;
+  font-weight:bold;
+}
+
+.compare{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:25px;
+}
+
+.compare-box{
+  flex:1 1 260px;
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:24px;
+}
+
+.compare-box h3{
+  margin-top:0;
+  color:#174ea6;
+}
+
+.tag-demo{
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:20px;
+  margin-top:25px;
+}
+
+.back{
+  text-align:center;
+  margin:40px 0;
+}
+
+.back a{
+  display:inline-block;
+  background:#174ea6;
+  color:white;
+  text-decoration:none;
+  padding:14px 24px;
+  border-radius:999px;
+  transition:0.2s;
+}
+
+.back a:hover{
+  opacity:0.9;
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+  color:#666;
+  font-size:0.95rem;
+}
+
+@media(max-width:700px){
+
+  .card{
+    padding:28px 20px;
+  }
+
+  header{
+    padding:55px 18px;
+  }
+
+  .flow{
+    font-size:0.95rem;
+    line-height:2;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+
+    NFC<br>
+
+    <span style="
+      font-size:0.5em;
+      font-weight:normal;">
+
+      （Near Field Communication）
+
+    </span>
+
+  </h1>
+
+  <p>
+
+    スマホやカードを「かざすだけ」で通信する近距離無線技術
+
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== NFCとは ===== -->
+
+  <section class="card">
+
+    <h2>NFCとは？</h2>
+
+    <p>
+
+      NFCとは、
+      数cmほどの近距離で
+      無線通信を行う技術です。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      スマホを改札や決済端末へ
+      「ピッ」とかざす仕組みの多くに
+      NFCが利用されています。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+
+        NFCは
+        「Near Field Communication」
+        の略で、
+        日本語では
+        「近距離無線通信」
+        と呼ばれます。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 何に使われる？ ===== -->
+
+  <section class="card">
+
+    <h2>NFCは何に使われている？</h2>
+
+    <p>
+
+      NFCは、
+      認証や決済、
+      機器接続など、
+      さまざまな用途で利用されています。
+
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+
+        <h3>交通系IC</h3>
+
+        Suica・PASMOなど
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>タッチ決済</h3>
+
+        クレジット決済
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>本人確認</h3>
+
+        マイナンバーカード読取
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>NFCタグ</h3>
+
+        自動化・ショートカット
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+
+        最近では、
+        ドアの電子キー、
+        ホテルチェックイン、
+        スマート家電連携などにも
+        NFCが使われています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== なぜ近距離？ ===== -->
+
+  <section class="card">
+
+    <h2>なぜ「近距離」なのか</h2>
+
+    <p>
+
+      NFCは、
+      あえて通信距離を
+      数cm程度に制限しています。
+
+    </p>
+
+    <div class="flow">
+
+      遠距離通信<br>
+
+      ↓<br>
+
+      誤接続・盗聴リスク増加<br>
+
+      ↓<br>
+
+      <span class="big">
+
+        超近距離だけ通信
+
+      </span>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        NFCは、
+        「意図的に近づけた時だけ通信する」
+        ことで、
+        セキュリティと使いやすさを
+        両立しています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 通信の流れ ===== -->
+
+  <section class="card">
+
+    <h2>NFC通信の流れ</h2>
+
+    <p>
+
+      例えば改札では、
+      以下のような流れで通信しています。
+
+    </p>
+
+    <div class="flow">
+
+      スマホ・ICカード<br>
+
+      ↓<br>
+
+      NFC通信開始<br>
+
+      ↓<br>
+
+      残高・認証確認<br>
+
+      ↓<br>
+
+      改札通過
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        通信は非常に高速で、
+        多くの場合
+        0.1秒以下で処理されています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Type A/B/F ===== -->
+
+  <section class="card">
+
+    <h2>NFCには複数の規格がある</h2>
+
+    <p>
+
+      NFCには、
+      実は複数の通信方式があります。
+
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>規格</th>
+            <th>主な用途</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>NFC Type A</td>
+            <td>海外決済・ICカード</td>
+
+          </tr>
+
+          <tr>
+
+            <td>NFC Type B</td>
+            <td>本人確認・政府系カード</td>
+
+          </tr>
+
+          <tr>
+
+            <td>NFC-F（FeliCa）</td>
+            <td>Suica・PASMOなど</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        日本では、
+        FeliCa方式が特に広く普及しています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== FeliCa ===== -->
+
+  <section class="card">
+
+    <h2>FeliCaとは？</h2>
+
+    <p>
+
+      FeliCaは、
+      ソニーが開発した
+      非接触IC技術です。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      日本では、
+      交通系ICカードや電子マネーで
+      長年利用されてきました。
+
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+
+        <h3>Suica</h3>
+
+        交通・決済
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>PASMO</h3>
+
+        私鉄・地下鉄
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>iD</h3>
+
+        電子マネー
+
+      </div>
+
+      <div class="part-box">
+
+        <h3>QUICPay</h3>
+
+        タッチ決済
+
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        FeliCaは
+        NFCファミリーの一種ですが、
+        海外主流のType A/Bとは
+        別系統の技術文化として発展しました。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== グローバル対応 ===== -->
+
+  <section class="card">
+
+    <h2>海外スマホでもSuicaは使える？</h2>
+
+    <p>
+
+      最近のスマホは、
+      Type A/B/Fをまとめて読める
+      「マルチNFC」に対応する機種が増えています。
+
+    </p>
+
+    <div class="compare">
+
+      <div class="compare-box">
+
+        <h3>ハードウェア</h3>
+
+        NFCチップ自体は、
+        複数規格へ対応している場合が多い。
+
+      </div>
+
+      <div class="compare-box">
+
+        <h3>サービス側</h3>
+
+        OS・地域設定・Wallet対応により、
+        実際に利用可能か決まる。
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+
+        つまり、
+
+        <br><br>
+
+        「読める」
+
+        と
+
+        「サービス利用できる」
+
+        は別問題です。
+
+      </p>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        現在のiPhoneやAndroidでは、
+        海外購入端末でも
+        Suica利用可能なケースが増えています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== iPhoneとAndroid ===== -->
+
+  <section class="card">
+
+    <h2>iPhoneとAndroidの違い</h2>
+
+    <p>
+
+      NFC機能は、
+      iPhoneとAndroidで
+      自由度が少し異なります。
+
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>機能</th>
+            <th>Android</th>
+            <th>iPhone</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>自由なNFC通信</td>
+            <td style="font-weight:bold;">柔軟</td>
+            <td>制限あり</td>
+
+          </tr>
+
+          <tr>
+
+            <td>NFCタグ書込</td>
+            <td>広く対応</td>
+            <td>条件付き</td>
+
+          </tr>
+
+          <tr>
+
+            <td>独自アプリ制御</td>
+            <td>比較的自由</td>
+            <td>制約多め</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        iPhoneはセキュリティ重視のため、
+        Appleが許可した範囲で
+        NFC機能を利用する設計になっています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== マイナンバー ===== -->
+
+  <section class="card">
+
+    <h2>マイナンバーカード読み取り</h2>
+
+    <p>
+
+      マイナンバーカードでは、
+      NFC Type B系技術が利用されています。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      現在では、
+      iPhone・Androidともに
+      OSレベルで深く対応しており、
+      公的認証用途では大きな差は減っています。
+
+    </p>
+
+    <div class="flow">
+
+      マイナンバーカード<br>
+
+      ↓<br>
+
+      NFC読取<br>
+
+      ↓<br>
+
+      本人確認・認証
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        銀行口座開設や
+        eKYC（オンライン本人確認）でも、
+        NFC読取が広く利用されています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== NFCタグ ===== -->
+
+  <section class="card">
+
+    <h2>NFCタグとは？</h2>
+
+    <p>
+
+      NFCタグは、
+      小型ICチップ入りのタグです。
+
+    </p>
+
+    <div class="tag-demo">
+
+      スマホをかざす<br>
+
+      ↓<br>
+
+      自動で動作開始<br>
+
+      ↓<br>
+
+      Wi-Fi接続・サイト表示・音楽再生など
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+
+        NFCタグは、
+        「物理ショートカットボタン」
+        のような使い方ができます。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Bluetooth比較 ===== -->
+
+  <section class="card">
+
+    <h2>Bluetoothとの違い</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>項目</th>
+            <th>NFC</th>
+            <th>Bluetooth</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>距離</td>
+            <td style="font-weight:bold;">数cm</td>
+            <td>数m〜数十m</td>
+
+          </tr>
+
+          <tr>
+
+            <td>用途</td>
+            <td>認証・決済</td>
+            <td>継続通信</td>
+
+          </tr>
+
+          <tr>
+
+            <td>接続</td>
+            <td>瞬時</td>
+            <td>ペアリング必要</td>
+
+          </tr>
+
+          <tr>
+
+            <td>得意分野</td>
+            <td>安全なタッチ</td>
+            <td>音楽・通信</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #174ea6;">
+
+    <h2>まとめ</h2>
+
+    <p>
+
+      NFCは、
+      スマホやICカードを
+      「かざすだけ」で通信できる
+      近距離無線技術です。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      現在では、
+      決済・本人確認・交通・自動化など、
+      社会インフラの重要技術として
+      広く利用されています。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+
+        AI・デジタルID・スマートシティ時代では、
+        NFCは「現実世界とデジタル世界をつなぐ入口」
+        としてさらに重要性が増しています。
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+
+      ← 用語一覧へ戻る
+
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+
+  IT学習用サイト
+
+</footer>
+
+</body>
+
+</html>
