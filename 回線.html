@@ -19,28 +19,49 @@
 
 <header>
 
-  <h1>
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;">
 
-    回線
+    <div>
 
-    <br>
+      <h1>
 
-    <span style="
-      font-size:0.52em;
-      font-weight:normal;">
+        回線
 
-      （通信の道）
+        <br>
 
-    </span>
+        <span style="
+          font-size:0.52em;
+          font-weight:normal;">
 
-  </h1>
+          （通信の道）
 
-  <p>
+        </span>
 
-    データを運ぶための
-    「インターネットの通り道」
+      </h1>
 
-  </p>
+      <p>
+
+        データを運ぶための
+        「インターネットの通り道」
+
+      </p>
+
+    </div>
+
+    <div style="
+      font-size:4em;
+      line-height:1;">
+
+      🌐
+
+    </div>
+
+  </div>
 
 </header>
 
@@ -52,7 +73,11 @@
 
   <section class="card">
 
-    <h2>回線とは？</h2>
+    <h2>
+
+      1. 回線とは？
+
+    </h2>
 
     <p>
 
@@ -67,7 +92,6 @@
 
       動画を見る、
       LINEを送る、
-      ゲームをする、
       Webサイトを開くなど、
       すべての通信は回線を通っています。
 
@@ -80,7 +104,7 @@
         回線は
         「データが通る道」、
         インターネットは
-        「世界中につながったネットワーク」
+        「世界中のネットワーク」
         です。
 
       </p>
@@ -89,11 +113,15 @@
 
   </section>
 
-  <!-- ===== 水道イメージ ===== -->
+  <!-- ===== 水道 ===== -->
 
   <section class="card">
 
-    <h2>水道に例えると分かりやすい</h2>
+    <h2>
+
+      2. 水道に例えると分かりやすい
+
+    </h2>
 
     <p>
 
@@ -103,96 +131,116 @@
     </p>
 
     <div style="
-      background:#f8f9fa;
-      border:1px solid #ddd;
-      border-radius:14px;
-      padding:28px 18px;
-      margin:24px 0;">
+      display:flex;
+      gap:18px;
+      align-items:stretch;
+      flex-wrap:wrap;
+      margin-top:24px;">
+
+      <!-- 左 -->
 
       <div style="
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        gap:14px;
-        flex-wrap:wrap;
+        flex:1;
+        min-width:240px;
+        background:#f8fbff;
+        border:1px solid #d7e6ff;
+        border-radius:14px;
+        padding:24px;
         text-align:center;">
 
-        <div>
+        <div style="
+          font-size:0.9em;
+          color:#666;
+          margin-bottom:18px;">
 
-          <div style="
-            font-size:0.95em;
-            color:#666;
-            margin-bottom:8px;">
-
-            水道の世界
-
-          </div>
-
-          <div style="
-            font-weight:bold;
-            font-size:1.08em;">
-
-            水道管
-
-          </div>
-
-          <div style="
-            margin:10px 0;
-            color:#999;">
-
-            ↓
-
-          </div>
-
-          <div>
-
-            水
-
-          </div>
+          水道の世界
 
         </div>
 
         <div style="
-          font-size:1.4em;
-          color:#bbb;">
+          font-size:1.1em;
+          font-weight:bold;
+          color:#2b579a;">
 
-          →
+          水道管
 
         </div>
 
-        <div>
+        <div style="
+          font-size:1.8em;
+          margin:14px 0;
+          color:#7da2d6;">
 
-          <div style="
-            font-size:0.95em;
-            color:#666;
-            margin-bottom:8px;">
+          ↓
 
-            通信の世界
+        </div>
 
-          </div>
+        <div style="
+          font-size:1.05em;">
 
-          <div style="
-            font-weight:bold;
-            font-size:1.08em;
-            color:#2b579a;">
+          水
 
-            回線
+        </div>
 
-          </div>
+      </div>
 
-          <div style="
-            margin:10px 0;
-            color:#999;">
+      <!-- 真ん中 -->
 
-            ↓
+      <div style="
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        min-width:50px;
+        font-size:2.2em;
+        color:#2b579a;
+        font-weight:bold;">
 
-          </div>
+        ≒
 
-          <div>
+      </div>
 
-            データ
+      <!-- 右 -->
 
-          </div>
+      <div style="
+        flex:1;
+        min-width:240px;
+        background:#f8fbff;
+        border:1px solid #d7e6ff;
+        border-radius:14px;
+        padding:24px;
+        text-align:center;">
+
+        <div style="
+          font-size:0.9em;
+          color:#666;
+          margin-bottom:18px;">
+
+          通信の世界
+
+        </div>
+
+        <div style="
+          font-size:1.1em;
+          font-weight:bold;
+          color:#2b579a;">
+
+          回線
+
+        </div>
+
+        <div style="
+          font-size:1.8em;
+          margin:14px 0;
+          color:#7da2d6;">
+
+          ↓
+
+        </div>
+
+        <div style="
+          font-size:1.05em;">
+
+          データ
 
         </div>
 
@@ -205,8 +253,7 @@
       <p>
 
         太い水道管ほど大量の水を流せるように、
-        高速な回線ほど、
-        大量のデータを送れます。
+        高速な回線ほど大量のデータを送れます。
 
       </p>
 
@@ -218,7 +265,11 @@
 
   <section class="card">
 
-    <h2>通信には「外の道」と「家の中の道」がある</h2>
+    <h2>
+
+      3. 通信には「外の道」と「家の中の道」がある
+
+    </h2>
 
     <p>
 
@@ -230,37 +281,57 @@
     <div style="
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:20px;
       margin-top:24px;">
 
       <!-- 外 -->
 
       <div style="
-        border:1px solid #ddd;
-        border-radius:14px;
-        padding:22px;
-        background:#f8f9fa;">
+        border:1px solid #dbe7ff;
+        background:#f8fbff;
+        border-radius:16px;
+        padding:24px;">
 
         <div style="
-          font-size:0.9em;
-          color:#666;
-          margin-bottom:8px;">
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:16px;
+          flex-wrap:wrap;">
 
-          外へつながる通信
+          <div>
+
+            <div style="
+              font-size:0.88em;
+              color:#666;
+              margin-bottom:6px;">
+
+              インターネットへ接続する通信
+
+            </div>
+
+            <h3 style="
+              margin:0;
+              color:#2b579a;">
+
+              外の回線
+
+            </h3>
+
+          </div>
+
+          <div style="
+            font-size:2em;">
+
+            🌍
+
+          </div>
 
         </div>
 
-        <h3 style="
-          margin-top:0;
-          color:#2b579a;">
+        <p style="margin-top:18px;">
 
-          外の回線
-
-        </h3>
-
-        <p>
-
-          インターネットへ接続するための
+          家からインターネットへ出るための
           「外へ出る道路」
           です。
 
@@ -270,19 +341,25 @@
 
           <div class="part-box">
 
-            光回線
+            <strong>光回線</strong>
+            <br>
+            光ファイバー通信
 
           </div>
 
           <div class="part-box">
 
-            4G / 5G
+            <strong>4G / 5G</strong>
+            <br>
+            モバイル通信
 
           </div>
 
           <div class="part-box">
 
-            CATV
+            <strong>CATV</strong>
+            <br>
+            ケーブル回線
 
           </div>
 
@@ -293,32 +370,52 @@
       <!-- 内 -->
 
       <div style="
-        border:1px solid #ddd;
-        border-radius:14px;
-        padding:22px;
-        background:#f8f9fa;">
+        border:1px solid #dbe7ff;
+        background:#f8fbff;
+        border-radius:16px;
+        padding:24px;">
 
         <div style="
-          font-size:0.9em;
-          color:#666;
-          margin-bottom:8px;">
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:16px;
+          flex-wrap:wrap;">
 
-          家の中の通信
+          <div>
+
+            <div style="
+              font-size:0.88em;
+              color:#666;
+              margin-bottom:6px;">
+
+              家の中で使う通信
+
+            </div>
+
+            <h3 style="
+              margin:0;
+              color:#2b579a;">
+
+              Wi-Fi・LAN通信
+
+            </h3>
+
+          </div>
+
+          <div style="
+            font-size:2em;">
+
+            📶
+
+          </div>
 
         </div>
 
-        <h3 style="
-          margin-top:0;
-          color:#2b579a;">
-
-          Wi-Fi・LAN通信
-
-        </h3>
-
-        <p>
+        <p style="margin-top:18px;">
 
           家の中や会社の中で、
-          機器同士をつなぐための
+          機器同士をつなぐ
           「内部の通路」
           です。
 
@@ -328,13 +425,17 @@
 
           <div class="part-box">
 
-            Wi-Fi
+            <strong>Wi-Fi</strong>
+            <br>
+            無線通信
 
           </div>
 
           <div class="part-box">
 
-            LANケーブル
+            <strong>LANケーブル</strong>
+            <br>
+            有線通信
 
           </div>
 
@@ -363,7 +464,11 @@
 
   <section class="card">
 
-    <h2>通信の流れ</h2>
+    <h2>
+
+      4. 通信の流れ
+
+    </h2>
 
     <p>
 
@@ -374,62 +479,135 @@
     </p>
 
     <div style="
-      background:#f8f9fa;
-      border:1px solid #ddd;
-      border-radius:14px;
-      padding:30px 18px;
-      margin:26px 0;">
+      background:#f8fbff;
+      border:1px solid #dbe7ff;
+      border-radius:16px;
+      padding:28px 16px;
+      margin-top:24px;">
 
       <div style="
         display:flex;
-        flex-direction:column;
+        justify-content:center;
         align-items:center;
-        gap:12px;
+        gap:10px;
+        flex-wrap:wrap;
         text-align:center;">
 
-        <div style="
-          font-weight:bold;">
+        <!-- internet -->
 
-          インターネット
+        <div style="
+          min-width:110px;">
+
+          <div style="
+            font-size:2.2em;
+            margin-bottom:10px;">
+
+            🌐
+
+          </div>
+
+          <div>
+
+            インターネット
+
+          </div>
 
         </div>
 
-        <div style="color:#999;">↓</div>
+        <!-- arrow -->
 
         <div style="
-          background:white;
-          border-radius:10px;
-          padding:12px 18px;
-          width:100%;
-          max-width:320px;">
+          font-size:1.8em;
+          color:#7da2d6;
+          padding:0 4px;">
 
-          光回線・モバイル回線
+          ➜
 
         </div>
 
-        <div style="color:#999;">↓</div>
+        <!-- 回線 -->
 
         <div style="
-          background:white;
-          border-radius:10px;
-          padding:12px 18px;
-          width:100%;
-          max-width:320px;">
+          min-width:140px;">
 
-          Wi-Fiルーター
+          <div style="
+            font-size:2.2em;
+            margin-bottom:10px;">
+
+            🛣️
+
+          </div>
+
+          <div>
+
+            光回線・
+            モバイル回線
+
+          </div>
 
         </div>
 
-        <div style="color:#999;">↓</div>
+        <!-- arrow -->
 
         <div style="
-          background:white;
-          border-radius:10px;
-          padding:12px 18px;
-          width:100%;
-          max-width:320px;">
+          font-size:1.8em;
+          color:#7da2d6;
+          padding:0 4px;">
 
-          スマホ・PC
+          ➜
+
+        </div>
+
+        <!-- wifi -->
+
+        <div style="
+          min-width:110px;">
+
+          <div style="
+            font-size:2.2em;
+            margin-bottom:10px;">
+
+            📡
+
+          </div>
+
+          <div>
+
+            Wi-Fiルーター
+
+          </div>
+
+        </div>
+
+        <!-- arrow -->
+
+        <div style="
+          font-size:1.8em;
+          color:#7da2d6;
+          padding:0 4px;">
+
+          ➜
+
+        </div>
+
+        <!-- pc -->
+
+        <div style="
+          min-width:110px;">
+
+          <div style="
+            font-size:2.2em;
+            margin-bottom:10px;">
+
+            💻
+
+          </div>
+
+          <div>
+
+            スマホ・PC
+
+          </div>
 
         </div>
 
@@ -439,11 +617,15 @@
 
   </section>
 
-  <!-- ===== 遅くなる理由 ===== -->
+  <!-- ===== 遅い理由 ===== -->
 
   <section class="card">
 
-    <h2>なぜ回線は遅くなる？</h2>
+    <h2>
+
+      5. なぜ回線は遅くなる？
+
+    </h2>
 
     <p>
 
@@ -465,19 +647,36 @@
       <!-- 外 -->
 
       <div style="
-        border-left:5px solid #2b579a;
-        background:#f8f9fa;
-        border-radius:12px;
-        padding:22px;">
+        background:#f8fbff;
+        border:1px solid #dbe7ff;
+        border-radius:16px;
+        padding:24px;">
 
-        <h3 style="
-          margin-top:0;">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:16px;
+          flex-wrap:wrap;">
 
-          外の回線が混雑している
+          <h3 style="
+            margin:0;
+            color:#2b579a;">
 
-        </h3>
+            外の回線が混雑している
 
-        <p>
+          </h3>
+
+          <div style="
+            font-size:2em;">
+
+            🚗
+
+          </div>
+
+        </div>
+
+        <p style="margin-top:16px;">
 
           ・利用者が多い
           <br>
@@ -487,32 +686,52 @@
 
         </p>
 
-        <p style="margin-top:16px;">
+        <div class="example">
 
-          これは、
-          「外へ出る道路」
-          が渋滞している状態です。
+          <p>
 
-        </p>
+            「外へ出る道路」
+            が渋滞している状態です。
+
+          </p>
+
+        </div>
 
       </div>
 
-      <!-- 内 -->
+      <!-- wifi -->
 
       <div style="
-        border-left:5px solid #2b579a;
-        background:#f8f9fa;
-        border-radius:12px;
-        padding:22px;">
+        background:#f8fbff;
+        border:1px solid #dbe7ff;
+        border-radius:16px;
+        padding:24px;">
 
-        <h3 style="
-          margin-top:0;">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:16px;
+          flex-wrap:wrap;">
 
-          Wi-Fiが弱い
+          <h3 style="
+            margin:0;
+            color:#2b579a;">
 
-        </h3>
+            Wi-Fiが弱い
 
-        <p>
+          </h3>
+
+          <div style="
+            font-size:2em;">
+
+            📶
+
+          </div>
+
+        </div>
+
+        <p style="margin-top:16px;">
 
           ・ルーターが遠い
           <br>
@@ -524,13 +743,16 @@
 
         </p>
 
-        <p style="margin-top:16px;">
+        <div class="example">
 
-          これは、
-          「家の中の通路」
-          が詰まっている状態です。
+          <p>
 
-        </p>
+            「家の中の通路」
+            が詰まっている状態です。
+
+          </p>
+
+        </div>
 
       </div>
 
@@ -550,11 +772,15 @@
 
   </section>
 
-  <!-- ===== 回線速度 ===== -->
+  <!-- ===== 速度 ===== -->
 
   <section class="card">
 
-    <h2>回線速度とは？</h2>
+    <h2>
+
+      6. 回線速度とは？
+
+    </h2>
 
     <p>
 
@@ -629,10 +855,13 @@
   <!-- ===== まとめ ===== -->
 
   <section class="card"
-    style="
-      border-left:6px solid #2b579a;">
+    style="border-left:6px solid #2b579a;">
 
-    <h2>まとめ</h2>
+    <h2>
+
+      7. まとめ
+
+    </h2>
 
     <p>
 
