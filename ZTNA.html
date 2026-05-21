@@ -334,49 +334,59 @@
       VPNとZTNAが混在する期間があります。
     </p>
 
+<div style="
+  background:#f8f9fa;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:25px;
+  margin:25px 0;">
+
+  <div style="
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    align-items:center;">
+
     <div style="
-      background:#f8f9fa;
-      border:1px solid #ddd;
-      border-radius:10px;
-      padding:20px;
-      margin:20px 0;">
+      background:#ffeaea;
+      color:#d9534f;
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:bold;
+      width:100%;
+      max-width:500px;
+      text-align:center;">
 
-      <div style="
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        gap:12px;
-        flex-wrap:wrap;
-        margin-bottom:14px;">
-
-        <span style="
-          color:#d9534f;
-          font-weight:bold;
-          font-size:1.05em;">
-
-          VPN側の緩い権限
-
-        </span>
-
-        <span style="
-          font-weight:bold;
-          color:#444;">
-
-          ＋
-
-        </span>
-
-        <span style="
-          font-weight:bold;
-          font-size:1.1em;">
-
-          ZTNA側の厳格制御
-
-        </span>
-
-      </div>
+      VPN側：広いアクセス権
 
     </div>
+
+    <div style="
+      font-size:1.5em;
+      font-weight:bold;
+      color:#666;">
+
+      ＋
+
+    </div>
+
+    <div style="
+      background:#eef4ff;
+      color:#2b579a;
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:bold;
+      width:100%;
+      max-width:500px;
+      text-align:center;">
+
+      ZTNA側：細かいアクセス制御
+
+    </div>
+
+  </div>
+
+</div>
 
     <p>
       この状態では、
