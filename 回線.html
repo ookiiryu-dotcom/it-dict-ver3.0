@@ -111,24 +111,27 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        gap:22px;
+        gap:20px;
         flex-wrap:wrap;
         text-align:center;">
 
         <!-- 左 -->
 
-        <div style="min-width:120px;">
+        <div style="
+          flex:1;
+          min-width:120px;">
 
           <div style="
             font-size:0.9em;
-            color:#666;
-            margin-bottom:12px;">
+            color:#777;
+            margin-bottom:10px;">
 
             水道
 
           </div>
 
           <div style="
+            font-size:1.05em;
             font-weight:bold;
             color:#2b579a;">
 
@@ -139,7 +142,7 @@
           <div style="
             margin:10px 0;
             color:#999;
-            font-size:1.3em;">
+            font-size:1.2em;">
 
             ↓
 
@@ -156,8 +159,9 @@
         <!-- 真ん中 -->
 
         <div style="
-          font-size:1.8em;
-          color:#999;">
+          font-size:1.6em;
+          color:#bbb;
+          font-weight:bold;">
 
           ≒
 
@@ -165,18 +169,21 @@
 
         <!-- 右 -->
 
-        <div style="min-width:120px;">
+        <div style="
+          flex:1;
+          min-width:120px;">
 
           <div style="
             font-size:0.9em;
-            color:#666;
-            margin-bottom:12px;">
+            color:#777;
+            margin-bottom:10px;">
 
             通信
 
           </div>
 
           <div style="
+            font-size:1.05em;
             font-weight:bold;
             color:#2b579a;">
 
@@ -187,7 +194,7 @@
           <div style="
             margin:10px 0;
             color:#999;
-            font-size:1.3em;">
+            font-size:1.2em;">
 
             ↓
 
@@ -227,11 +234,7 @@
     <p>
 
       通信は、
-      大きく
-      「外へつながる回線」
-      と
-      「家の中の通信」
-      に分かれています。
+      大きく2種類に分かれています。
 
     </p>
 
@@ -241,7 +244,7 @@
       background:#f8f9fa;
       border:1px solid #ddd;
       border-radius:10px;
-      padding:20px;
+      padding:22px;
       margin:25px 0;">
 
       <h3 style="
@@ -290,13 +293,13 @@
 
     </div>
 
-    <!-- 家の中 -->
+    <!-- 内 -->
 
     <div style="
       background:#f8f9fa;
       border:1px solid #ddd;
       border-radius:10px;
-      padding:20px;
+      padding:22px;
       margin:25px 0;">
 
       <h3 style="
@@ -371,7 +374,7 @@
       background:#f8f9fa;
       border:1px solid #ddd;
       border-radius:10px;
-      padding:24px;
+      padding:25px;
       margin:25px 0;
       text-align:center;">
 
@@ -383,26 +386,22 @@
 
       </strong>
 
-      <div style="
-        margin-top:22px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:10px;">
+      <div style="margin-top:20px;">
 
         <div style="
           background:white;
           border-radius:8px;
-          padding:10px 16px;
-          width:100%;
-          max-width:260px;">
+          padding:12px;
+          max-width:260px;
+          margin:0 auto;">
 
           インターネット
 
         </div>
 
         <div style="
-          color:#7d7d7d;
+          margin:10px 0;
+          color:#999;
           font-size:1.2em;">
 
           ↓
@@ -412,16 +411,17 @@
         <div style="
           background:white;
           border-radius:8px;
-          padding:10px 16px;
-          width:100%;
-          max-width:260px;">
+          padding:12px;
+          max-width:260px;
+          margin:0 auto;">
 
           光回線・モバイル回線
 
         </div>
 
         <div style="
-          color:#7d7d7d;
+          margin:10px 0;
+          color:#999;
           font-size:1.2em;">
 
           ↓
@@ -431,16 +431,17 @@
         <div style="
           background:white;
           border-radius:8px;
-          padding:10px 16px;
-          width:100%;
-          max-width:260px;">
+          padding:12px;
+          max-width:260px;
+          margin:0 auto;">
 
           Wi-Fiルーター
 
         </div>
 
         <div style="
-          color:#7d7d7d;
+          margin:10px 0;
+          color:#999;
           font-size:1.2em;">
 
           ↓
@@ -450,9 +451,9 @@
         <div style="
           background:white;
           border-radius:8px;
-          padding:10px 16px;
-          width:100%;
-          max-width:260px;">
+          padding:12px;
+          max-width:260px;
+          margin:0 auto;">
 
           スマホ・PC
 
@@ -531,7 +532,7 @@
 
     </div>
 
-    <!-- Wi-Fi -->
+    <!-- 内 -->
 
     <div style="
       background:#f8f9fa;
@@ -720,5 +721,4 @@
 </footer>
 
 </body>
-
 </html>
