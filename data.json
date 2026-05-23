@@ -106,5 +106,13 @@
   {
    "term": "DMZ",
    "link": "DMZ.html"
+  },
+  {
+   "term": "SLA",
+   "link": "SLA.html"
+  },
+  {
+   "term": "SLO",
+   "link": "SLO.html"
   } 
 ]
