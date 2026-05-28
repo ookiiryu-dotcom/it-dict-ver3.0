@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EDRとは？</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+
+    EDR<br>
+
+    <span style="
+      font-size:0.55em;
+      font-weight:normal;">
+
+      （Endpoint Detection and Response）
+
+    </span>
+
+  </h1>
+
+  <p>
+    端末を監視し、攻撃を検知・調査・対応する
+    <br>
+    セキュリティ技術
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== EDRとは ===== -->
+
+  <section class="card">
+
+    <h2>EDRとは？</h2>
+
+    <p>
+      EDRとは、
+      「Endpoint Detection and Response」
+      の略で、
+      PCやサーバーなどの端末（エンドポイント）を監視し、
+      サイバー攻撃を検知・調査・対応するための仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      従来のアンチウイルスでは見つけにくい、
+      未知のマルウェアやランサムウェアなどの攻撃に対応するため、
+      現在の企業セキュリティで非常に重要視されています。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        EDRは、
+        「侵入されないようにする」
+        だけではなく、
+        「侵入された後に素早く検知・対応する」
+        ことを重視した技術です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Endpoint ===== -->
+
+  <section class="card">
+
+    <h2>まず「エンドポイント」とは？</h2>
+
+    <p>
+      エンドポイント（Endpoint）とは、
+      ネットワークにつながる末端機器のことです。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>PC</h3>
+        社員PCなど
+      </div>
+
+      <div class="part-box">
+        <h3>サーバー</h3>
+        業務サーバー
+      </div>
+
+      <div class="part-box">
+        <h3>ノートPC</h3>
+        テレワーク端末
+      </div>
+
+      <div class="part-box">
+        <h3>仮想マシン</h3>
+        クラウド環境
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        EDRは、
+        「端末の中で怪しい動きが起きていないか」
+        を監視する仕組みです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== なぜ必要 ===== -->
+
+  <section class="card">
+
+    <h2>なぜEDRが必要なの？</h2>
+
+    <p>
+      昔のセキュリティ対策は、
+      「既知ウイルスを防ぐ」
+      ことが中心でした。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      しかし現在は、
+      未知マルウェアやランサムウェア、
+      正規ツール悪用など、
+      従来型アンチウイルスだけでは防ぎにくい攻撃が増えています。
+
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;
+      text-align:center;">
+
+      従来
+
+      <br>
+
+      ↓
+
+      <br>
+
+      「侵入を防ぐ」
+
+      <br><br>
+
+      現在
+
+      <br>
+
+      ↓
+
+      <br>
+
+      「侵入後も素早く検知・対応する」
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        現在は、
+        「完全防御は難しい」
+        という前提で、
+        被害拡大を防ぐ考え方が重要になっています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>EDRのイメージ</h2>
+
+    <p>
+      EDRは、
+      端末上で起きる動作を常に監視しています。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;">
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          攻撃メール受信
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          添付ファイル実行
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#eaf4ff;
+          border:1px solid #9fc5f8;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;
+          font-weight:bold;">
+
+          EDRが異常検知
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#fff4e5;
+          border:1px solid #f0c36d;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          管理者へ通知・端末隔離
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        EDRは、
+        「攻撃が始まった後の怪しい動き」
+        を検知することに強みがあります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 何を監視 ===== -->
+
+  <section class="card">
+
+    <h2>EDRは何を監視している？</h2>
+
+    <p>
+      EDRは、
+      端末内部のさまざまな動作を監視しています。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>プロセス</h3>
+        アプリ起動監視
+      </div>
+
+      <div class="part-box">
+        <h3>通信</h3>
+        外部通信確認
+      </div>
+
+      <div class="part-box">
+        <h3>ファイル変更</h3>
+        暗号化など検知
+      </div>
+
+      <div class="part-box">
+        <h3>ログイン</h3>
+        不審操作監視
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        「Wordが突然PowerShellを起動した」
+        など、
+        通常と異なる動きを検知します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== できること ===== -->
+
+  <section class="card">
+
+    <h2>EDRでできること</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>検知</h3>
+        怪しい動作発見
+      </div>
+
+      <div class="part-box">
+        <h3>調査</h3>
+        攻撃経路追跡
+      </div>
+
+      <div class="part-box">
+        <h3>隔離</h3>
+        感染端末切断
+      </div>
+
+      <div class="part-box">
+        <h3>分析</h3>
+        攻撃内容確認
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        EDRは、
+        「何が起きたか」
+        を後から調査しやすいのも特徴です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 攻撃調査 ===== -->
+
+  <section class="card">
+
+    <h2>攻撃の流れを追跡できる</h2>
+
+    <p>
+      EDRでは、
+      攻撃の流れを時系列で追跡できます。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;">
+
+      メール受信
+
+      <br>
+
+      ↓
+
+      <br>
+
+      添付ファイル実行
+
+      <br>
+
+      ↓
+
+      <br>
+
+      不審プログラム起動
+
+      <br>
+
+      ↓
+
+      <br>
+
+      外部サーバー通信
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        このような追跡情報は、
+        「攻撃チェーン」
+        や
+        「プロセスツリー」
+        と呼ばれることがあります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 用語 ===== -->
+
+  <section class="card">
+
+    <h2>よく出るセキュリティ用語</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>用語</th>
+            <th>意味</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>シグネチャ</td>
+
+            <td>
+              既知マルウェアの特徴パターン
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>C2通信</td>
+
+            <td>
+              攻撃者サーバーとの通信
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>権限昇格</td>
+
+            <td>
+              管理者権限を奪うこと
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>横展開</td>
+
+            <td>
+              他PCへ感染拡大すること
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== AV違い ===== -->
+
+  <section class="card">
+
+    <h2>アンチウイルスとの違い</h2>
+
+    <p>
+      EDRとアンチウイルスは、
+      役割が少し異なります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>項目</th>
+            <th>アンチウイルス</th>
+            <th>EDR</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>主目的</td>
+
+            <td>
+              侵入防止
+            </td>
+
+            <td>
+              検知・対応
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>未知攻撃</td>
+
+            <td>
+              苦手
+            </td>
+
+            <td>
+              比較的強い
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>攻撃後調査</td>
+
+            <td>
+              限定的
+            </td>
+
+            <td>
+              得意
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>振る舞い分析</td>
+
+            <td>
+              少ない
+            </td>
+
+            <td>
+              多い
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        EDRは、
+        「侵入後の被害拡大防止」
+        に強みがあります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== EPP ===== -->
+
+  <section class="card">
+
+    <h2>EPPとの違い</h2>
+
+    <p>
+      EPP（Endpoint Protection Platform）は、
+      主に
+      「侵入を防ぐ」
+      ための仕組みです。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;
+      text-align:center;">
+
+      EPP
+
+      <br>
+
+      ↓
+
+      <br>
+
+      侵入前防御
+
+      <br><br>
+
+      EDR
+
+      <br>
+
+      ↓
+
+      <br>
+
+      侵入後対応
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        最近は、
+        EPPとEDRが一体化した製品も増えています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== XDR ===== -->
+
+  <section class="card">
+
+    <h2>XDRとは？</h2>
+
+    <p>
+      XDRは、
+      EDRをさらに拡張した考え方です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      EDRは主に
+      「端末」
+      を監視しますが、
+      XDRは、
+      メール・クラウド・ネットワークなども含めて
+      横断分析します。
+
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;
+      text-align:center;">
+
+      PC
+
+      <br>
+
+      ＋
+
+      <br>
+
+      メール
+
+      <br>
+
+      ＋
+
+      <br>
+
+      クラウド
+
+      <br>
+
+      ＋
+
+      <br>
+
+      ネットワーク
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        XDRは、
+        複数領域をまとめて分析する仕組みです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 技術軸 ===== -->
+
+  <section class="card">
+
+    <h2>セキュリティ技術の進化</h2>
+
+    <p>
+      セキュリティ技術は、
+      徐々に監視範囲や分析能力を広げて進化してきました。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;
+      text-align:center;">
+
+      EPP
+
+      <br>
+
+      ↓
+
+      <br>
+
+      EDR
+
+      <br>
+
+      ↓
+
+      <br>
+
+      XDR
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        「防御」
+        から、
+        「検知・分析」
+        へ進化してきたイメージです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== デメリット ===== -->
+
+  <section class="card">
+
+    <h2>EDRの課題・デメリット</h2>
+
+    <p>
+      EDRは非常に強力ですが、
+      運用負荷が高いという課題があります。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>アラート多い</h3>
+        大量通知発生
+      </div>
+
+      <div class="part-box">
+        <h3>専門知識必要</h3>
+        分析スキル必要
+      </div>
+
+      <div class="part-box">
+        <h3>監視負荷</h3>
+        継続確認必要
+      </div>
+
+      <div class="part-box">
+        <h3>コスト高め</h3>
+        運用費も必要
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        EDRは、
+        「導入するだけ」
+        ではなく、
+        継続監視・分析が重要です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== MDR ===== -->
+
+  <section class="card">
+
+    <h2>MDRとは？</h2>
+
+    <p>
+      MDR（Managed Detection and Response）は、
+      EDRの監視や分析を、
+      外部専門企業が代行してくれるサービスです。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>24時間監視</h3>
+        SOC運用代行
+      </div>
+
+      <div class="part-box">
+        <h3>分析支援</h3>
+        攻撃解析
+      </div>
+
+      <div class="part-box">
+        <h3>初動対応</h3>
+        被害拡大防止
+      </div>
+
+      <div class="part-box">
+        <h3>専門家対応</h3>
+        セキュリティ支援
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        MDRは、
+        「EDRを自社だけで運用するのが難しい」
+        企業で多く利用されています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 軸分離 ===== -->
+
+  <section class="card">
+
+    <h2>「技術」と「運用」は別の軸</h2>
+
+    <p>
+      EDR・XDRは
+      「どんな技術か」
+      の違いですが、
+      MDRは
+      「誰が運用するか」
+      の違いです。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>分類</th>
+            <th>内容</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>技術軸</td>
+
+            <td>
+              EPP → EDR → XDR
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>運用軸</td>
+
+            <td>
+              自社SOC / MDR
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        MDRは、
+        「製品」
+        ではなく、
+        「運用サービス」
+        に近い存在です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== SOC ===== -->
+
+  <section class="card">
+
+    <h2>SOCとの関係</h2>
+
+    <p>
+      SOC（Security Operation Center）は、
+      セキュリティ監視を行う専門組織です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      EDRのアラート分析や、
+      インシデント対応などを担当します。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;
+      text-align:center;">
+
+      EDR
+
+      <br>
+
+      ↓
+
+      <br>
+
+      アラート発生
+
+      <br>
+
+      ↓
+
+      <br>
+
+      SOCが分析・対応
+
+    </div>
+
+  </section>
+
+  <!-- ===== なぜ重要 ===== -->
+
+  <section class="card">
+
+    <h2>なぜ現在の企業で重要なの？</h2>
+
+    <p>
+      テレワークやクラウド利用増加により、
+      端末が社外へ広がっています。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      そのため、
+      端末単位での監視や、
+      ランサムウェア対策の重要性が高まっています。
+
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>テレワーク</h3>
+        社外端末増加
+      </div>
+
+      <div class="part-box">
+        <h3>クラウド化</h3>
+        境界曖昧化
+      </div>
+
+      <div class="part-box">
+        <h3>ランサムウェア</h3>
+        被害拡大
+      </div>
+
+      <div class="part-box">
+        <h3>ゼロトラスト</h3>
+        常時監視重視
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 製品例 ===== -->
+
+  <section class="card">
+
+    <h2>代表的なEDR製品</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>CrowdStrike</h3>
+        Falcon
+      </div>
+
+      <div class="part-box">
+        <h3>Microsoft</h3>
+        Defender for Endpoint
+      </div>
+
+      <div class="part-box">
+        <h3>SentinelOne</h3>
+        AI型EDR
+      </div>
+
+      <div class="part-box">
+        <h3>Trend Micro</h3>
+        Vision One
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      EDRとは、
+      端末を監視し、
+      攻撃を検知・調査・対応するためのセキュリティ技術です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      現在は、
+      「侵入を完全に防ぐ」
+      だけではなく、
+      「侵入後に素早く検知して被害を広げない」
+      考え方が重要になっています。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      EDRは、
+      ランサムウェア対策や、
+      テレワーク時代のセキュリティで
+      非常に重要な存在になっています。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        EDRを理解すると、
+        現代セキュリティの
+        「侵入後対策」
+        の考え方が非常に理解しやすくなります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
