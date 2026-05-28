@@ -146,5 +146,9 @@
   {
    "term": "SOC",
    "link": "SOC.html"
+  },
+  {
+   "term": "EDR",
+   "link": "EDR.html"
   }
 ]
