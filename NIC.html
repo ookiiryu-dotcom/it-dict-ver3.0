@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NIC（Network Interface Card）とは？</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+
+    NIC<br>
+
+    <span style="
+      font-size:0.55em;
+      font-weight:normal;">
+
+      （Network Interface Card）
+
+    </span>
+
+  </h1>
+
+  <p>
+    コンピュータをネットワークへ接続する通信インターフェース
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== NICとは ===== -->
+
+  <section class="card">
+
+    <h2>NICとは？</h2>
+
+    <p>
+      NICとは、
+      パソコンやサーバーなどのコンピュータを、
+      ネットワークへ接続するための通信部品です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      日本語では、
+      「ネットワークインターフェースカード」
+      「LANカード」
+      「ネットワークアダプタ」
+      などと呼ばれます。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        NICは、
+        コンピュータがLANやインターネットと通信するための
+        「通信担当の窓口」
+        のような存在です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      パソコンは、
+      そのままではネットワーク通信を行えません。
+      NICがあることで、
+      LANケーブルやWi-Fiを通じて通信できるようになります。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;">
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          パソコン・サーバー
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#eaf4ff;
+          border:1px solid #9fc5f8;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;
+          font-weight:bold;">
+
+          NIC<br>
+          <span style="font-size:0.9em; font-weight:normal;">
+            通信担当の窓口
+          </span>
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          LAN・Wi-Fi・インターネット
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        NICは、
+        「コンピュータの中のデータ」
+        と
+        「ネットワーク上を流れる信号」
+        をつなぐ役割を持っています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 名前 ===== -->
+
+  <section class="card">
+
+    <h2>NICという名前の意味</h2>
+
+    <p>
+      NICは、
+      Network Interface Card の略です。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      line-height:2;">
+
+      <strong>Network</strong>
+      ：ネットワーク
+
+      <br>
+
+      <strong>Interface</strong>
+      ：接続口・橋渡し部分
+
+      <br>
+
+      <strong>Card</strong>
+      ：カード型の部品
+
+    </div>
+
+    <p>
+      昔は拡張カードとして増設することが多かったため、
+      「Card」という名前が残っています。
+      現在ではマザーボードやノートPCに内蔵されていることも多いです。
+    </p>
+
+  </section>
+
+  <!-- ===== 主な役割 ===== -->
+
+  <section class="card">
+
+    <h2>NICの主な役割</h2>
+
+    <p>
+      NICは、
+      単なる差し込み口ではありません。
+      ネットワーク通信に必要な処理も担当します。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>接続</h3>
+        LANやWi-Fiへ接続
+      </div>
+
+      <div class="part-box">
+        <h3>送受信</h3>
+        データを送る・受け取る
+      </div>
+
+      <div class="part-box">
+        <h3>識別</h3>
+        MACアドレスを使う
+      </div>
+
+      <div class="part-box">
+        <h3>変換</h3>
+        データを信号に変換
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        NICは、
+        コンピュータとネットワークの間で、
+        データを通信できる形に整える部品です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 有線と無線 ===== -->
+
+  <section class="card">
+
+    <h2>有線NICと無線NIC</h2>
+
+    <p>
+      NICには、
+      LANケーブルを使う有線タイプと、
+      Wi-Fiを使う無線タイプがあります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>種類</th>
+            <th>接続方法</th>
+            <th>特徴</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>有線NIC</td>
+            <td>LANケーブル</td>
+            <td>安定しやすい</td>
+          </tr>
+
+          <tr>
+            <td>無線NIC</td>
+            <td>Wi-Fi</td>
+            <td>ケーブルなしで通信できる</td>
+          </tr>
+
+          <tr>
+            <td>USB型NIC</td>
+            <td>USB接続</td>
+            <td>後から増設しやすい</td>
+          </tr>
+
+          <tr>
+            <td>内蔵NIC</td>
+            <td>PC内部</td>
+            <td>最初から搭載されていることが多い</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        ノートPCやスマートフォンでは、
+        Wi-Fi用の無線NICが内部に組み込まれています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== OSI ===== -->
+
+  <section class="card">
+
+    <h2>NICはOSI参照モデルのどこを担当する？</h2>
+
+    <p>
+      NICは主に、
+      OSI参照モデルの
+      物理層とデータリンク層に関係します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      L4：トランスポート層
+
+      <br>
+
+      TCPによる再送制御・順序保証
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">
+        L2：データリンク層
+      </strong>
+
+      <br>
+
+      MACアドレス・フレーム・FCS
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">
+        L1：物理層
+      </strong>
+
+      <br>
+
+      電気信号・光信号・無線信号
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        NICは、
+        ネットワーク通信の土台となる
+        L1・L2の処理に深く関わります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 物理層 ===== -->
+
+  <section class="card">
+
+    <h2>物理層での役割</h2>
+
+    <p>
+      物理層では、
+      データを実際に通信媒体へ流せる形にします。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>電気信号</h3>
+        LANケーブルで通信
+      </div>
+
+      <div class="part-box">
+        <h3>光信号</h3>
+        光ファイバーで通信
+      </div>
+
+      <div class="part-box">
+        <h3>無線信号</h3>
+        Wi-Fiで通信
+      </div>
+
+      <div class="part-box">
+        <h3>速度制御</h3>
+        通信速度を調整
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        物理層は、
+        「データを実際に流すための信号の世界」
+        と考えると分かりやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== データリンク層 ===== -->
+
+  <section class="card">
+
+    <h2>データリンク層での役割</h2>
+
+    <p>
+      データリンク層では、
+      同じネットワーク内で通信するための制御を行います。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      宛先MACアドレス
+
+      <br>
+
+      ↓
+
+      <br>
+
+      送信元MACアドレス
+
+      <br>
+
+      ↓
+
+      <br>
+
+      データ本体
+
+      <br>
+
+      ↓
+
+      <br>
+
+      FCS・CRC
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        データリンク層では、
+        データを
+        「フレーム」
+        という単位にまとめて通信します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== MACアドレス ===== -->
+
+  <section class="card">
+
+    <h2>MACアドレスとは？</h2>
+
+    <p>
+      MACアドレスとは、
+      ネットワーク機器を識別するための番号です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      EthernetやWi-Fiなどでは、
+      NICにMACアドレスが割り当てられ、
+      同じLAN内で通信相手を識別するために使われます。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      PC A
+
+      <br>
+
+      MAC：AA-AA-AA-AA-AA-AA
+
+      <br>
+
+      ↓
+
+      <br>
+
+      スイッチ
+
+      <br>
+
+      ↓
+
+      <br>
+
+      PC B
+
+      <br>
+
+      MAC：BB-BB-BB-BB-BB-BB
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        MACアドレスは、
+        LAN内で相手を見分けるための
+        「機器の名前札」
+        のようなものです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== フレーム ===== -->
+
+  <section class="card">
+
+    <h2>フレームとは？</h2>
+
+    <p>
+      NICは、
+      データをそのまま送るのではなく、
+      通信に必要な情報を付けて送ります。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      宛先情報
+
+      <br>
+
+      ＋
+
+      <br>
+
+      送信元情報
+
+      <br>
+
+      ＋
+
+      <br>
+
+      データ本体
+
+      <br>
+
+      ＋
+
+      <br>
+
+      エラーチェック情報
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        このようにまとめられた通信単位を
+        Ethernetでは
+        「フレーム」
+        と呼びます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== エラー検知 ===== -->
+
+  <section class="card">
+
+    <h2>NICのエラー検知</h2>
+
+    <p>
+      Ethernetでは、
+      フレームの末尾に
+      FCS（Frame Check Sequence）
+      というエラーチェック情報が付けられます。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      FCSでは、
+      CRCという計算方法がよく使われます。
+      受信側のNICは、
+      受け取ったデータを再計算し、
+      フレームが壊れていないか確認します。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      受信したフレーム
+
+      <br>
+
+      ↓
+
+      <br>
+
+      CRCを再計算
+
+      <br>
+
+      ↓
+
+      <br>
+
+      FCSと比較
+
+      <br>
+
+      ↓
+
+      <br>
+
+      一致しない場合は破棄
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        NICは主に、
+        「壊れたフレームを検知して捨てる」
+        ところまでを担当します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== TCPとの違い ===== -->
+
+  <section class="card">
+
+    <h2>NICとTCPの役割の違い</h2>
+
+    <p>
+      NICのエラー検知と、
+      TCPの再送制御は役割が異なります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>項目</th>
+            <th>NIC</th>
+            <th>TCP</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>主な層</td>
+            <td>L1・L2</td>
+            <td>L4</td>
+          </tr>
+
+          <tr>
+            <td>見る単位</td>
+            <td>フレーム</td>
+            <td>通信の流れ</td>
+          </tr>
+
+          <tr>
+            <td>エラー時</td>
+            <td>壊れたフレームを破棄</td>
+            <td>必要に応じて再送</td>
+          </tr>
+
+          <tr>
+            <td>主な役割</td>
+            <td>通信の土台</td>
+            <td>信頼性の確保</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        NICは
+        「壊れているものを通さない」、
+        TCPは
+        「届かなかった分を再送して整える」
+        役割です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Bluetooth ===== -->
+
+  <section class="card">
+
+    <h2>BluetoothはNICなの？</h2>
+
+    <p>
+      Bluetoothも通信機能を持つため、
+      広い意味ではネットワークインターフェース的な性質を持ちます。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      ただし、
+      一般的なNICの説明では、
+      EthernetやWi-Fiのように、
+      LANへ参加する通信インターフェースを中心に扱うことが多いです。
+
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>項目</th>
+            <th>Ethernet・Wi-Fi NIC</th>
+            <th>Bluetooth</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>主用途</td>
+            <td>LAN接続</td>
+            <td>機器間接続</td>
+          </tr>
+
+          <tr>
+            <td>通信の考え方</td>
+            <td>ネットワーク中心</td>
+            <td>デバイス中心</td>
+          </tr>
+
+          <tr>
+            <td>IP通信</td>
+            <td>前提になりやすい</td>
+            <td>必須ではない</td>
+          </tr>
+
+          <tr>
+            <td>初心者向け説明</td>
+            <td>NICの代表例</td>
+            <td>別枠で補足が無難</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        BluetoothをNICに含めるかは定義次第ですが、
+        初心者向けには
+        「NICの代表例は有線LANとWi-Fi」
+        と整理すると分かりやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 形状 ===== -->
+
+  <section class="card">
+
+    <h2>NICの形はいろいろある</h2>
+
+    <p>
+      NICは、
+      必ずしも大きなカード型の部品とは限りません。
+      現在はさまざまな形で利用されています。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>内蔵型</h3>
+        PCに最初から搭載
+      </div>
+
+      <div class="part-box">
+        <h3>拡張カード型</h3>
+        PCIeなどで増設
+      </div>
+
+      <div class="part-box">
+        <h3>USB型</h3>
+        USBポートに接続
+      </div>
+
+      <div class="part-box">
+        <h3>サーバー用</h3>
+        高速・多ポート対応
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        「カード」という名前でも、
+        現代ではチップとして内蔵されているNICも多くあります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 最近のNIC ===== -->
+
+  <section class="card">
+
+    <h2>最近のNICは高性能</h2>
+
+    <p>
+      現代のNICは、
+      単に通信するだけでなく、
+      CPUの負荷を減らすための処理も行います。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>Checksum<br>Offload</h3>
+        チェックサム処理を<br>肩代わり
+      </div>
+
+      <div class="part-box">
+        <h3>Segmentation<br>Offload</h3>
+        大きなデータ分割を補助
+      </div>
+
+      <div class="part-box">
+        <h3>DMA</h3>
+        メモリ転送を効率化
+      </div>
+
+      <div class="part-box">
+        <h3>RSS</h3>
+        複数CPUへ処理分散
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        最近のNICは、
+        「通信処理アクセラレータ」
+        としての性格も強くなっています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== SmartNIC ===== -->
+
+  <section class="card">
+
+    <h2>SmartNIC・DPUとは？</h2>
+
+    <p>
+      サーバーやクラウド環境では、
+      SmartNICやDPUと呼ばれる高機能なNICも使われます。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      これらは、
+      通信処理だけでなく、
+      セキュリティ処理、
+      仮想化処理、
+      ストレージ処理などを一部担当することがあります。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      通常のNIC
+
+      <br>
+
+      ↓
+
+      <br>
+
+      通信処理を補助
+
+      <br>
+
+      ↓
+
+      <br>
+
+      SmartNIC・DPU
+
+      <br>
+
+      ↓
+
+      <br>
+
+      通信・仮想化・セキュリティ処理も補助
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        これは主にデータセンターやクラウド向けの話であり、
+        一般的な家庭用PCでは通常のNIC理解で十分です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ルーターとの違い ===== -->
+
+  <section class="card">
+
+    <h2>NICとルーターの違い</h2>
+
+    <p>
+      NICとルーターは、
+      どちらもネットワーク通信に関係しますが、
+      役割は異なります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>項目</th>
+            <th>NIC</th>
+            <th>ルーター</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>役割</td>
+            <td>機器をネットワークへ接続</td>
+            <td>ネットワーク同士を接続</td>
+          </tr>
+
+          <tr>
+            <td>主な対象</td>
+            <td>PC・サーバー・スマホ</td>
+            <td>家庭LAN・社内LAN・インターネット</td>
+          </tr>
+
+          <tr>
+            <td>見る情報</td>
+            <td>MACアドレスなど</td>
+            <td>IPアドレスなど</td>
+          </tr>
+
+          <tr>
+            <td>イメージ</td>
+            <td>通信の窓口</td>
+            <td>通信の交通整理役</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== スイッチとの関係 ===== -->
+
+  <section class="card">
+
+    <h2>NICとスイッチの関係</h2>
+
+    <p>
+      有線LANでは、
+      PCのNICとスイッチがLANケーブルで接続されます。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      PCのNIC
+
+      <br>
+
+      ↓
+
+      <br>
+
+      LANケーブル
+
+      <br>
+
+      ↓
+
+      <br>
+
+      スイッチ
+
+      <br>
+
+      ↓
+
+      <br>
+
+      他のPC・サーバー・ルーター
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        NICは端末側の通信口、
+        スイッチはLAN内の通信を振り分ける機器です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== トラブル ===== -->
+
+  <section class="card">
+
+    <h2>NICに関係するトラブル例</h2>
+
+    <p>
+      ネットワークにつながらない時、
+      NICやその設定が原因になることがあります。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>無効化</h3>
+        NICがOFFになっている
+      </div>
+
+      <div class="part-box">
+        <h3>ドライバ</h3>
+        認識に必要なソフト不具合
+      </div>
+
+      <div class="part-box">
+        <h3>速度不一致</h3>
+        通信速度の交渉失敗
+      </div>
+
+      <div class="part-box">
+        <h3>ケーブル不良</h3>
+        物理接続の問題
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        「Wi-Fiは見えるのに有線LANだけ使えない」
+        という場合は、
+        有線NICやLANケーブル側を確認します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== メリット ===== -->
+
+  <section class="card">
+
+    <h2>NICを理解するメリット</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>LAN理解</h3>
+        通信の入口が分かる
+      </div>
+
+      <div class="part-box">
+        <h3>MAC理解</h3>
+        L2通信が分かる
+      </div>
+
+      <div class="part-box">
+        <h3>障害対応</h3>
+        切り分けしやすい
+      </div>
+
+      <div class="part-box">
+        <h3>速度理解</h3>
+        通信性能を考えやすい
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 注意点 ===== -->
+
+  <section class="card">
+
+    <h2>NICだけで通信速度は決まらない</h2>
+
+    <p>
+      NICが高速でも、
+      実際の通信速度はNICだけでは決まりません。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>回線速度</h3>
+        契約や回線品質
+      </div>
+
+      <div class="part-box">
+        <h3>ルーター</h3>
+        機器性能の影響
+      </div>
+
+      <div class="part-box">
+        <h3>ケーブル</h3>
+        規格や品質
+      </div>
+
+      <div class="part-box">
+        <h3>相手側</h3>
+        サーバー性能
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        1Gbps対応NICを使っていても、
+        回線やルーター、ケーブルが遅ければ、
+        実際の速度は制限されます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      NICとは、
+      コンピュータをネットワークへ接続するための
+      通信インターフェースです。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      初心者向けには、
+      「パソコンの通信担当の窓口」
+      と考えると分かりやすいです。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      もう少し正確に言うと、
+      NICは主にOSI参照モデルの
+      物理層とデータリンク層に関わり、
+      MACアドレス、
+      フレーム送受信、
+      FCS・CRCによるエラー検知などを担当します。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      ただし、
+      再送制御や順序保証などは、
+      TCPなどの上位プロトコルが担当します。
+      そのため、
+      NICは通信の土台、
+      TCPは通信品質の管理役、
+      と分けて理解すると分かりやすいです。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        NICを理解すると、
+        LAN、
+        Wi-Fi、
+        MACアドレス、
+        Ethernet、
+        TCP/IPの役割分担が
+        まとめて理解しやすくなります。
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
