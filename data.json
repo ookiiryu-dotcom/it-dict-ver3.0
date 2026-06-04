@@ -186,5 +186,9 @@
   {
    "term": "イーサネット(Ethernet)",
    "link": "イーサネット(Ethernet).html"
+  },
+  {
+   "term": "NIC",
+   "link": "NIC.html"
   }
 ]
