@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ホスティング（Hosting）とは？</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    ホスティング<br>
+    <span style="font-size:0.55em;font-weight:normal;">
+      （Hosting）
+    </span>
+  </h1>
+
+  <p>
+    サーバーや公開環境を借りて<br>
+    Webサイトやシステムを運用するサービス
+  </p>
+
+</header>
+
+<div class="container">
+
+  <section class="card">
+
+    <h2>ホスティングとは？</h2>
+
+    <p>
+      ホスティングとは、
+      サーバーやネットワーク環境を事業者から借りて、
+      Webサイト・メール・アプリ・データベースなどを
+      インターネット上で公開・運用するサービスです。
+    </p>
+
+    <p style="margin-top:15px;">
+      自分でサーバー本体、電源、回線、空調、セキュリティを
+      すべて用意するのではなく、
+      事業者が用意した環境を利用します。
+    </p>
+
+    <div class="point-box">
+      <p>
+        ホスティングの本質は、
+        「サーバーを自分で全部用意する代わりに、
+        事業者の環境を借りてサービスを動かす」
+        ことです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      Webサイトを公開するには、
+      サーバー、回線、電源、空調、監視、セキュリティなどが必要です。
+      ホスティングでは、
+      これらの環境を事業者から借りて利用します。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>利用者</h3>
+        Webサイトやアプリを公開したい人
+      </div><br>
+
+      <div class="part-box">
+        <h3>ホスティング事業者</h3>
+        サーバー環境や公開環境を提供する会社
+      </div><br>
+
+      <div class="part-box">
+        <h3>インターネット</h3>
+        公開されたサイトやサービスに利用者がアクセス
+      </div><br>
+
+    </div>
+
+    <div class="example">
+      <p>
+        「自分でサーバー設備を全部持つ」のではなく、
+        「公開するための土台を借りる」
+        と考えると分かりやすいです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>何を借りるサービスなのか</h2>
+
+    <p>
+      ホスティングでは、
+      単にサーバーだけを借りるのではなく、
+      サービスを安定して公開するための環境を利用します。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>借りるもの</th>
+            <th>役割</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>サーバー環境</td>
+            <td>Webサイト、アプリ、データベースなどを動かす</td>
+          </tr>
+          <tr>
+            <td>ネットワーク</td>
+            <td>インターネットからアクセスできるようにする</td>
+          </tr>
+          <tr>
+            <td>電源設備</td>
+            <td>サーバーを継続して稼働させる</td>
+          </tr>
+          <tr>
+            <td>空調設備</td>
+            <td>サーバーの熱を抑えて安定稼働させる</td>
+          </tr>
+          <tr>
+            <td>監視環境</td>
+            <td>障害や異常を検知しやすくする</td>
+          </tr>
+          <tr>
+            <td>セキュリティ環境</td>
+            <td>不正アクセスや物理的な侵入リスクを下げる</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ホスティングでできること</h2>
+
+    <p>
+      ホスティングを利用すると、
+      インターネット上でさまざまなサービスを公開できます。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>Webサイト</h3>
+        企業サイトや個人サイトを公開
+      </div><br>
+
+      <div class="part-box">
+        <h3>ブログ</h3>
+        WordPressなどを使った情報発信
+      </div><br>
+
+      <div class="part-box">
+        <h3>メール</h3>
+        独自ドメインのメールを利用
+      </div><br>
+
+      <div class="part-box">
+        <h3>Webアプリ</h3>
+        アプリケーションやAPIを公開
+      </div><br>
+
+      <div class="part-box">
+        <h3>データベース</h3>
+        MySQLなどのデータ保存基盤を利用
+      </div><br>
+
+      <div class="part-box">
+        <h3>ファイル管理</h3>
+        データ保存や共有に利用
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>なぜホスティングを使うのか</h2>
+
+    <p>
+      自宅や自社オフィスでもサーバーを置くことはできます。
+      しかし、24時間安定して公開し続けるには多くの負担があります。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>停電対策</h3>
+        電源障害への備えが必要
+      </div>
+
+      <div class="part-box">
+        <h3>回線対策</h3>
+        通信障害や速度低下への<br>対応が必要
+      </div>
+
+      <div class="part-box">
+        <h3>熱対策</h3>
+        サーバーの冷却が必要
+      </div>
+
+      <div class="part-box">
+        <h3>保守対応</h3>
+        故障時の調査や交換が必要
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        ホスティングを使うことで、
+        サーバー公開に必要な設備管理や運用負担の一部を
+        事業者に任せることができます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ホスティングの主な種類</h2>
+
+    <p>
+      ホスティングには複数の種類があります。
+      手軽さ、自由度、性能、運用負荷によって選び方が変わります。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>共有レンタルサーバー</h3>
+        1台のサーバーを複数人で共有する方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>VPS</h3>
+        物理サーバーを仮想的に分割して使う方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>専用サーバー</h3>
+        1台のサーバーを専有して使う方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>クラウドホスティング</h3>
+        必要に応じてリソースを柔軟に使う方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>メールホスティング</h3>
+        メール機能を中心に提供する方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>マネージドホスティング</h3>
+        管理作業を事業者に広く任せる方式
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>種類ごとの違い</h2>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>種類</th>
+            <th>特徴</th>
+            <th>向いている用途</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>共有レンタルサーバー</td>
+            <td>安価で始めやすいが、細かい設定自由度は低め</td>
+            <td>個人ブログ、小規模サイト</td>
+          </tr>
+          <tr>
+            <td>VPS</td>
+            <td>仮想サーバーを比較的自由に操作できる</td>
+            <td>学習用サーバー、Webアプリ、検証環境</td>
+          </tr>
+          <tr>
+            <td>専用サーバー</td>
+            <td>物理サーバーを専有できる</td>
+            <td>高負荷サイト、独自要件のあるシステム</td>
+          </tr>
+          <tr>
+            <td>クラウドホスティング</td>
+            <td>CPU、メモリ、ストレージなどを柔軟に増減しやすい</td>
+            <td>拡張性が必要なサービス、企業システム</td>
+          </tr>
+          <tr>
+            <td>メールホスティング</td>
+            <td>メール機能を中心に利用する</td>
+            <td>独自ドメインメール、企業メール</td>
+          </tr>
+          <tr>
+            <td>マネージドホスティング</td>
+            <td>OS更新、監視、保守などを事業者に任せやすい</td>
+            <td>運用負荷を下げたい企業サイト</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>クラウドとホスティングの関係</h2>
+
+    <p>
+      クラウドは、
+      ホスティングとまったく別のものではありません。
+      広い意味では、
+      クラウドもホスティングの一種として整理できます。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>ホスティング</h3>
+        サーバーや公開環境を借りる大きな概念
+      </div><br>
+
+      <div class="part-box">
+        <h3>クラウド</h3>
+        仮想化されたリソースを柔軟に利用する方式
+      </div><br>
+
+      <div class="part-box">
+        <h3>関係性</h3>
+        クラウドはホスティングの中の一形態
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        ホスティングという大きな枠組みの中に、
+        共有レンタルサーバー、VPS、専用サーバー、
+        クラウドホスティングなどが含まれます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>クラウドホスティングとは？</h2>
+
+    <p>
+      クラウドホスティングは、
+      仮想化されたサーバー、ストレージ、ネットワークなどのリソースを
+      必要に応じて利用する方式です。
+    </p>
+
+    <p style="margin-top:15px;">
+      物理サーバーを1台借りるというより、
+      必要な計算資源を柔軟に使う考え方に近いです。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>AWS</h3>
+        Amazon Web Services
+      </div>
+
+      <div class="part-box">
+        <h3>Azure</h3>
+        Microsoft Azure
+      </div>
+
+      <div class="part-box">
+        <h3>Google Cloud</h3>
+        Google Cloud
+      </div>
+
+      <div class="part-box">
+        <h3>国内クラウド</h3>
+        国内事業者の<br>クラウドサービス
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ホスティングとハウジングの違い</h2>
+
+    <p>
+      ホスティングとよく比較される言葉に、
+      ハウジングがあります。
+      大きな違いは、
+      サーバーを誰が所有するかです。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>ホスティング</th>
+            <th>ハウジング</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>サーバー所有</td>
+            <td>事業者</td>
+            <td>利用者</td>
+          </tr>
+          <tr>
+            <td>借りるもの</td>
+            <td>サーバーや公開環境</td>
+            <td>設置場所、電源、空調、回線など</td>
+          </tr>
+          <tr>
+            <td>自由度</td>
+            <td>サービス内容に依存</td>
+            <td>高い</td>
+          </tr>
+          <tr>
+            <td>運用負荷</td>
+            <td>比較的低い</td>
+            <td>高い</td>
+          </tr>
+          <tr>
+            <td>物理作業</td>
+            <td>基本的に事業者側</td>
+            <td>利用者側で必要になる場合がある</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        ホスティングは「事業者のサーバー環境を借りる」、
+        ハウジングは「自分の機器をデータセンターに置く」
+        という違いがあります。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ハウジングを選ぶ理由</h2>
+
+    <p>
+      ハウジングは手間がかかりますが、
+      ホスティングより自由に物理構成を組めるため、
+      特殊な要件がある場合に選ばれることがあります。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>機器の自由度</h3>
+        好きなサーバーや<br>機器を使える
+      </div>
+
+      <div class="part-box">
+        <h3>独自構成</h3>
+        ネットワークを<br>細かく設計できる
+      </div>
+
+      <div class="part-box">
+        <h3>実機管理</h3>
+        物理機器を自分で<br>管理できる
+      </div>
+
+      <div class="part-box">
+        <h3>専用用途</h3>
+        <div style=" font-size:0.9em;"> GPUや<br>専用アプライアンスに向く</div>
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        Cisco機器、専用Firewall、特殊なストレージ、
+        GPUサーバーなどを使いたい場合は、
+        ハウジングが選択肢になることがあります。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ハウジングの注意点</h2>
+
+    <p>
+      ハウジングは自由度が高い一方で、
+      運用責任も大きくなります。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>機器購入費</h3>
+        サーバーやネットワーク機器を自分で用意
+      </div><br>
+
+      <div class="part-box">
+        <h3>障害対応</h3>
+        故障時の調査や交換対応が必要
+      </div><br>
+
+      <div class="part-box">
+        <h3>現地対応</h3>
+        データセンターへ駆けつける場合がある
+      </div><br>
+
+      <div class="part-box">
+        <h3>入館申請</h3>
+        作業前に申請や本人確認が必要な場合がある
+      </div><br>
+
+      <div class="part-box">
+        <h3>専門知識</h3>
+        サーバー・ネットワークの知識が必要
+      </div><br>
+
+      <div class="part-box">
+        <h3>時間的コスト</h3>
+        移動や作業予約の手間が発生する
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        ハウジングは、
+        「自由度」と引き換えに、
+        物理機器の管理責任や現地対応の負担も持つサービスです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ホスティングのメリット</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>始めやすい</h3>
+        <div style=" font-size:0.9em;"> 機器購入なしで利用しやすい</div>
+      </div>
+
+      <div class="part-box">
+        <h3>管理負担が軽い</h3>
+        <div style=" font-size:0.9em;"> 設備管理を<br>事業者に任せられる</div>
+      </div>
+
+      <div class="part-box">
+        <h3>安定しやすい</h3>
+        <div style=" font-size:0.9em;"> 専門設備を利用できる</div>
+      </div>
+
+      <div class="part-box">
+        <h3>拡張しやすい</h3>
+        <div style=" font-size:0.9em;"> プラン変更やクラウドで<br>対応しやすい</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>ホスティングのデメリット</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>自由度の制限</h3>
+        <div style=" font-size:0.8em;"> サービス仕様に従う必要がある</div>
+      </div>
+
+      <div class="part-box">
+        <h3>共有影響</h3>
+        <div style=" font-size:0.9em;"> 共有型では他利用者の影響を<br>受ける場合がある</div>
+      </div>
+
+      <div class="part-box">
+        <h3>設定制限</h3>
+        OSや機器構成を自由に<br>選べない場合がある
+      </div>
+
+      <div class="part-box">
+        <h3>月額費用</h3>
+        継続利用には利用料が<br>発生する
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        手軽さを優先するならホスティング、
+        物理機器や構成の自由度を優先するならハウジング、
+        という考え方ができます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>GitHub Pagesもホスティングの一種</h2>
+
+    <p>
+      GitHub Pagesのように、
+      HTMLやCSSなどのファイルを置くだけで
+      Webサイトを公開できるサービスも、
+      広い意味ではホスティングの一種です。
+    </p>
+
+    <p style="margin-top:15px;">
+      利用者はサーバー本体や回線を意識せず、
+      ファイルをアップロードしてサイトを公開できます。
+    </p>
+
+    <div class="point-box">
+      <p>
+        「自分のファイルを、
+        事業者の公開環境に置いて見られるようにする」
+        という点で、
+        GitHub Pagesもホスティング的な役割を持ちます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>どれを選べばいい？</h2>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>目的</th>
+            <th>向いている選択肢</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>個人サイトやブログを公開したい</td>
+            <td>共有レンタルサーバー、GitHub Pages</td>
+          </tr>
+          <tr>
+            <td>Linuxやサーバー運用を学びたい</td>
+            <td>VPS</td>
+          </tr>
+          <tr>
+            <td>大きなWebサービスを運用したい</td>
+            <td>クラウドホスティング</td>
+          </tr>
+          <tr>
+            <td>物理機器やCisco機器を使いたい</td>
+            <td>ハウジング、自宅ラボ</td>
+          </tr>
+          <tr>
+            <td>専用性能が必要</td>
+            <td>専用サーバー、クラウド、ハウジング</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>初心者向けの理解</h2>
+
+    <p>
+      最初は、
+      ホスティングを次のように理解すると分かりやすいです。
+    </p><br>
+
+<div class="parts-grid">
+
+  <div class="part-box">
+    <h3>自前運用</h3>
+    サーバー公開環境を
+    自分で維持する必要がある
+  </div><br>
+
+  <div class="part-box">
+    <h3>ホスティング利用</h3>
+    事業者の環境を借りて
+    サービスを公開する
+  </div><br>
+
+  <div class="part-box">
+    <h3>公開・運用</h3>
+    Webサイトやシステムを
+    インターネット上で利用可能にする
+  </div>
+
+</div>
+
+  </section>
+
+
+
+  <section class="card" style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      ホスティングとは、
+      サーバーや公開環境を借りて、
+      Webサイトやシステムを運用する仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+      共有レンタルサーバー、VPS、専用サーバー、
+      クラウドホスティングなどは、
+      いずれもホスティングの一種です。
+    </p>
+
+    <p style="margin-top:15px;">
+      一方でハウジングは、
+      事業者のサーバーを借りるのではなく、
+      自分の機器をデータセンターへ持ち込む方式です。
+    </p>
+
+    <div class="point-box">
+      <p>
+        ホスティングは、
+        「事業者の環境を借りて、サービスを公開・運用する仕組み」
+        です。
+        手軽さと運用負担の軽さが大きな特徴です。
+      </p>
+    </div>
+
+  </section>
+
+  <div class="back">
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
