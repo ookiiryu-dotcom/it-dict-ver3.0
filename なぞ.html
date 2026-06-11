@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UNKNOWN ANOMALY MONITOR</title>
+ 
+<style>
+ 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+ 
+body{
+background:#000;
+color:#fff;
+font-family:Consolas,monospace;
+overflow:hidden;
+transition:background-color .3s;
+}
+ 
+body.invert{
+filter:invert(1);
+}
+ 
+body.shake{
+animation:shake .08s infinite;
+}
+ 
+@keyframes shake{
+0%{transform:translate(5px,2px);}
+25%{transform:translate(-4px,-2px);}
+50%{transform:translate(3px,-5px);}
+75%{transform:translate(-5px,3px);}
+100%{transform:translate(2px,4px);}
+}
+ 
+#matrix{
+position:fixed;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:70vw;
+height:55vh;
+overflow:hidden;
+pointer-events:none;
+z-index:1;
+opacity:.35;
+}
+ 
+.codeLine{
+color:#00ff66;
+font-size:24px;
+white-space:nowrap;
+text-shadow:
+0 0 5px #00ff66,
+0 0 15px #00ff66;
+animation:scrollCode 8s linear forwards;
+}
+ 
+@keyframes scrollCode{
+from{
+transform:translateY(600px);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+to{
+transform:translateY(-800px);
+opacity:0;
+}
+}
+ 
+#container{
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding-top:20px;
+gap:10px;
+}
+ 
+#percent{
+font-size:120px;
+font-weight:bold;
+text-shadow:
+0 0 20px #fff,
+0 0 40px red;
+}
+ 
+#status{
+font-size:30px;
+color:#ff5555;
+animation:blink .7s infinite;
+}
+ 
+@keyframes blink{
+50%{
+opacity:.2;
+}
+}
+ 
+.info{
+display:flex;
+gap:30px;
+font-size:18px;
+}
+ 
+canvas{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.15);
+border-radius:10px;
+}
+ 
+#topRow{
+display:flex;
+gap:20px;
+}
+ 
+#glitch{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:5;
+}
+ 
+.noise{
+position:absolute;
+inset:0;
+opacity:.05;
+background-image:
+repeating-linear-gradient(
+0deg,
+transparent,
+transparent 3px,
+white 4px
+);
+}
+ 
+.scanline{
+position:absolute;
+width:100%;
+height:2px;
+background:rgba(255,255,255,.1);
+animation:scan 4s linear infinite;
+}
+ 
+@keyframes scan{
+from{top:-10px;}
+to{top:100%;}
+}
+ 
+.glitchBar{
+position:absolute;
+left:0;
+width:100%;
+background:rgba(255,255,255,.15);
+}
+ 
+.header{
+position:fixed;
+top:10px;
+right:20px;
+color:#ff6666;
+font-size:18px;
+z-index:10;
+}
+ 
+#gaugeContainer{
+position:relative;
+width:320px;
+height:180px;
+}
+ 
+#gaugeValue{
+position:absolute;
+bottom:15px;
+width:100%;
+text-align:center;
+font-size:30px;
+}
+ 
+</style>
+</head>
+<body>
+ 
+<div class="header">
+UNDEFINED ANOMALY DETECTION SYSTEM
+</div>
+ 
+<div id="matrix"></div>
+ 
+<div id="glitch">
+<div class="noise"></div>
+<div class="scanline"></div>
+</div>
+ 
+<div id="container">
+ 
+<div id="percent">0%</div>
+ 
+<div id="status">
+解析中...
+</div>
+ 
+<div class="info">
+<div id="target">接続先: ???</div>
+<div id="gps">GPS: 0.0000 , 0.0000</div>
+<div id="distance">距離: 0 km</div>
+</div>
+ 
+<canvas id="ecg" width="900" height="180"></canvas>
+ 
+<div id="topRow">
+ 
+<div id="gaugeContainer">
+<canvas id="gauge" width="320" height="180"></canvas>
+<div id="gaugeValue">0</div>
+</div>
+ 
+<canvas id="radar" width="320" height="320"></canvas>
+ 
+<canvas id="map" width="420" height="320"></canvas>
+ 
+</div>
+ 
+</div>
+ 
+<script>
+ 
+const matrix=
+document.getElementById(
+"matrix"
+);
+ 
+function randomCode(){
+ 
+return (
+Math.random()
+.toString(36)
+.substring(2)
++
+Math.random()
+.toString(36)
+.substring(2)
++
+Math.random()
+.toString(36)
+.substring(2)
+)
+.toUpperCase();
+ 
+}
+ 
+function addCodeLine(){
+ 
+const div=
+document.createElement(
+"div"
+);
+ 
+div.className=
+"codeLine";
+ 
+div.textContent=
+randomCode()+
+" :: "+
+randomCode()+
+" :: "+
+randomCode();
+ 
+matrix.appendChild(div);
+ 
+setTimeout(()=>{
+div.remove();
+},8000);
+ 
+}
+ 
+setInterval(
+addCodeLine,
+120
+);
+ 
+const percentEl=
+document.getElementById(
+"percent"
+);
+ 
+const statusEl=
+document.getElementById(
+"status"
+);
+ 
+const gpsEl=
+document.getElementById(
+"gps"
+);
+ 
+const distanceEl=
+document.getElementById(
+"distance"
+);
+ 
+const targetEl=
+document.getElementById(
+"target"
+);
+ 
+let mystery=50;
+let gaugeTarget=50;
+let gaugeValue=50;
+ 
+const statuses=[
+"危険度上昇中",
+"解析不能",
+"対象未確認",
+"異常値検出",
+"未知の反応",
+"WARNING",
+"CRITICAL",
+"接続不安定"
+];
+ 
+const targets=[
+"NODE-7",
+"OBJECT-X",
+"VOID",
+"ALPHA",
+"BETA",
+"TARGET-01",
+"UNKNOWN",
+"ORIGIN"
+];
+ 
+function updateFakeData(){
+ 
+targetEl.textContent=
+"接続先: "+
+targets[
+Math.floor(
+Math.random()*
+targets.length
+)
+];
+ 
+gpsEl.textContent=
+"GPS: "+
+(
+Math.random()*180-90
+).toFixed(4)+
+", "+
+(
+Math.random()*360-180
+).toFixed(4);
+ 
+distanceEl.textContent=
+"距離: "+
+(
+Math.random()*50000
+).toFixed(1)+
+" km";
+ 
+statusEl.textContent=
+statuses[
+Math.floor(
+Math.random()*
+statuses.length
+)
+];
+ 
+}
+ 
+setInterval(
+updateFakeData,
+1200
+);
+ 
+function glitch(){
+ 
+if(Math.random()<0.02){
+ 
+document.body
+.classList.add(
+"invert"
+);
+ 
+setTimeout(()=>{
+document.body
+.classList.remove(
+"invert"
+);
+},100);
+ 
+}
+ 
+}
+ 
+setInterval(
+glitch,
+80
+);
+ 
+function beep(freq=600,duration=80){
+ 
+try{
+ 
+const ctx=
+new(
+window.AudioContext||
+window.webkitAudioContext
+)();
+ 
+const osc=
+ctx.createOscillator();
+ 
+const gain=
+ctx.createGain();
+ 
+osc.type="square";
+osc.frequency.value=freq;
+ 
+osc.connect(gain);
+gain.connect(ctx.destination);
+ 
+gain.gain.value=0.03;
+ 
+osc.start();
+ 
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+ctx.currentTime+
+duration/1000
+);
+ 
+osc.stop(
+ctx.currentTime+
+duration/1000
+);
+ 
+}catch(e){}
+ 
+}
+ 
+ 
+function criticalEvent(){
+ 
+mystery=999;
+ 
+percentEl.textContent=
+"999%";
+ 
+statusEl.textContent=
+"■■■■ CRITICAL EVENT ■■■■";
+ 
+document.body
+.classList.add(
+"shake"
+);
+ 
+beep(
+1800,
+500
+);
+ 
+for(
+let i=0;
+i<25;
+i++
+){
+ 
+setTimeout(()=>{
+ 
+document.body
+.classList.toggle(
+"invert"
+);
+ 
+},i*80);
+ 
+}
+ 
+setTimeout(()=>{
+ 
+document.body
+.classList.remove(
+"shake"
+);
+ 
+document.body
+.classList.remove(
+"invert"
+);
+ 
+},3000);
+ 
+}
+ 
+ 
+function updateMystery(){
+ 
+if(
+Math.random()<0.012
+){
+ 
+criticalEvent();
+ 
+}else{
+ 
+mystery+=
+(
+Math.random()-0.5
+)*20;
+ 
+mystery=
+Math.max(
+0,
+Math.min(
+100,
+mystery
+)
+);
+ 
+percentEl.textContent=
+mystery.toFixed(1)+
+"%";
+ 
+}
+ 
+let red=
+Math.min(
+255,
+mystery*2
+);
+ 
+document.body
+.style.backgroundColor=
+`rgb(${red},0,0)`;
+ 
+gaugeTarget+=
+(
+Math.random()-0.5
+)*30;
+ 
+if(
+Math.random()<0.08
+){
+gaugeTarget=
+Math.random()*100;
+}
+ 
+if(
+Math.random()<0.03
+){
+ 
+beep(
+300+
+Math.random()*1200,
+50
+);
+ 
+}
+ 
+}
+ 
+setInterval(
+updateMystery,
+120
+);
+ 
+ 
+const ecg=
+document
+.getElementById(
+"ecg"
+);
+ 
+const ectx=
+ecg.getContext(
+"2d"
+);
+ 
+const points=[];
+ 
+for(
+let i=0;
+i<ecg.width;
+i++
+){
+points.push(
+ecg.height/2
+);
+}
+ 
+function generateECG(){
+ 
+let y=
+ecg.height/2+
+(
+Math.random()-0.5
+)*8;
+ 
+if(
+Math.random()<0.03
+){
+ 
+points.push(y);
+points.push(y-20);
+points.push(y+10);
+points.push(y-90);
+points.push(y+60);
+points.push(y-20);
+ 
+}
+ 
+points.push(y);
+ 
+while(
+points.length>
+ecg.width
+){
+points.shift();
+}
+ 
+}
+ 
+ 
+function drawECG(){
+ 
+generateECG();
+ 
+ectx.clearRect(
+0,
+0,
+ecg.width,
+ecg.height
+);
+ 
+ectx.strokeStyle=
+"#00ff88";
+ 
+ectx.lineWidth=3;
+ 
+ectx.beginPath();
+ 
+for(
+let i=0;
+i<points.length;
+i++
+){
+ 
+if(i===0){
+ 
+ectx.moveTo(
+i,
+points[i]
+);
+ 
+}else{
+ 
+ectx.lineTo(
+i,
+points[i]
+);
+ 
+}
+ 
+}
+ 
+ectx.stroke();
+ 
+}
+ 
+ 
+const radar=
+document
+.getElementById(
+"radar"
+);
+ 
+const rctx=
+radar.getContext(
+"2d"
+);
+ 
+let radarAngle=0;
+ 
+function drawRadar(){
+ 
+const w=
+radar.width;
+ 
+const h=
+radar.height;
+ 
+const cx=w/2;
+const cy=h/2;
+ 
+rctx.clearRect(
+0,
+0,
+w,
+h
+);
+ 
+rctx.strokeStyle=
+"#00ff00";
+ 
+for(
+let r=40;
+r<160;
+r+=40
+){
+ 
+rctx.beginPath();
+ 
+rctx.arc(
+cx,
+cy,
+r,
+0,
+Math.PI*2
+);
+ 
+rctx.stroke();
+ 
+}
+ 
+rctx.beginPath();
+rctx.moveTo(cx,0);
+rctx.lineTo(cx,h);
+rctx.stroke();
+ 
+rctx.beginPath();
+rctx.moveTo(0,cy);
+rctx.lineTo(w,cy);
+rctx.stroke();
+ 
+radarAngle+=0.03;
+ 
+const x=
+cx+
+Math.cos(
+radarAngle
+)*150;
+ 
+const y=
+cy+
+Math.sin(
+radarAngle
+)*150;
+ 
+const grad=
+rctx.createLinearGradient(
+cx,
+cy,
+x,
+y
+);
+ 
+grad.addColorStop(
+0,
+"rgba(0,255,0,.9)"
+);
+ 
+grad.addColorStop(
+1,
+"rgba(0,255,0,0)"
+);
+ 
+rctx.strokeStyle=
+grad;
+ 
+rctx.lineWidth=4;
+ 
+rctx.beginPath();
+ 
+rctx.moveTo(
+cx,
+cy
+);
+ 
+rctx.lineTo(
+x,
+y
+);
+ 
+rctx.stroke();
+ 
+if(
+Math.random()<0.05
+){
+ 
+rctx.fillStyle=
+"#00ff00";
+ 
+rctx.beginPath();
+ 
+rctx.arc(
+Math.random()*w,
+Math.random()*h,
+3,
+0,
+Math.PI*2
+);
+ 
+rctx.fill();
+ 
+}
+ 
+}
+ 
+ 
+const map=
+document
+.getElementById(
+"map"
+);
+ 
+const mctx=
+map.getContext(
+"2d"
+);
+ 
+function drawMap(){
+ 
+mctx.clearRect(
+0,
+0,
+map.width,
+map.height
+);
+ 
+mctx.strokeStyle=
+"rgba(0,255,255,.5)";
+ 
+for(
+let i=0;
+i<20;
+i++
+){
+ 
+mctx.beginPath();
+ 
+mctx.moveTo(
+Math.random()*
+map.width,
+Math.random()*
+map.height
+);
+ 
+mctx.lineTo(
+Math.random()*
+map.width,
+Math.random()*
+map.height
+);
+ 
+mctx.stroke();
+ 
+}
+ 
+mctx.fillStyle=
+"rgba(0,255,255,.25)";
+ 
+for(
+let i=0;
+i<15;
+i++
+){
+ 
+mctx.beginPath();
+ 
+mctx.arc(
+Math.random()*
+map.width,
+Math.random()*
+map.height,
+10+
+Math.random()*40,
+0,
+Math.PI*2
+);
+ 
+mctx.fill();
+ 
+}
+ 
+}
+ 
+ 
+const gauge=
+document
+.getElementById(
+"gauge"
+);
+ 
+const gctx=
+gauge.getContext(
+"2d"
+);
+ 
+function drawGauge(){
+ 
+gaugeValue+=
+(
+gaugeTarget-
+gaugeValue
+)*0.08;
+ 
+document
+.getElementById(
+"gaugeValue"
+)
+.textContent=
+gaugeValue.toFixed(
+0
+);
+ 
+gctx.clearRect(
+0,
+0,
+320,
+180
+);
+ 
+gctx.strokeStyle=
+"#333";
+ 
+gctx.lineWidth=18;
+ 
+gctx.beginPath();
+ 
+gctx.arc(
+160,
+160,
+110,
+Math.PI,
+0
+);
+ 
+gctx.stroke();
+ 
+const angle=
+Math.PI+
+(
+gaugeValue/100
+)*Math.PI;
+ 
+gctx.strokeStyle=
+`hsl(${
+120-gaugeValue
+},100%,50%)`;
+ 
+gctx.beginPath();
+ 
+gctx.arc(
+160,
+160,
+110,
+Math.PI,
+angle
+);
+ 
+gctx.stroke();
+ 
+const nx=
+160+
+Math.cos(
+angle
+)*95;
+ 
+const ny=
+160+
+Math.sin(
+angle
+)*95;
+ 
+gctx.strokeStyle=
+"#fff";
+ 
+gctx.lineWidth=4;
+ 
+gctx.beginPath();
+ 
+gctx.moveTo(
+160,
+160
+);
+ 
+gctx.lineTo(
+nx,
+ny
+);
+ 
+gctx.stroke();
+ 
+gctx.beginPath();
+ 
+gctx.arc(
+160,
+160,
+8,
+0,
+Math.PI*2
+);
+ 
+gctx.fillStyle=
+"#fff";
+ 
+gctx.fill();
+ 
+}
+ 
+ 
+setInterval(
+drawMap,
+1000
+);
+ 
+ 
+function animate(){
+ 
+drawECG();
+drawRadar();
+drawGauge();
+ 
+requestAnimationFrame(
+animate
+);
+ 
+}
+ 
+animate();
+ 
+</script>
+ 
+</body>
+</html>
