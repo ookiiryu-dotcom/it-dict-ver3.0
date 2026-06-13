@@ -1,896 +1,884 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>UNKNOWN ANOMALY MONITOR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+<title>光クロスコネクト（Optical Cross Connect）とは？</title>
 
-html{
-  width:100%;
-  min-height:100%;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-  width:100%;
-  min-height:100vh;
-  background:#000;
-  color:#fff;
-  font-family:Consolas,"Courier New",monospace;
-  overflow-x:hidden;
-  overflow-y:auto;
-  transition:background-color .3s;
-}
-
-body.invert{
-  filter:invert(1);
-}
-
-body.shake{
-  animation:shake .08s infinite;
-}
-
-@keyframes shake{
-  0%{transform:translate(5px,2px);}
-  25%{transform:translate(-4px,-2px);}
-  50%{transform:translate(3px,-5px);}
-  75%{transform:translate(-5px,3px);}
-  100%{transform:translate(2px,4px);}
-}
-
-.header{
-  position:relative;
-  z-index:10;
-  width:100%;
-  padding:14px 12px 6px;
-  text-align:center;
-  color:#ff6666;
-  font-size:clamp(12px,3.6vw,18px);
-  letter-spacing:.08em;
-  text-shadow:0 0 12px #ff3333;
-}
-
-#matrix{
-  position:fixed;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:96vw;
-  height:82vh;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:1;
-  opacity:.28;
-}
-
-.codeLine{
-  color:#00ff66;
-  font-size:clamp(12px,4vw,24px);
-  white-space:nowrap;
-  text-shadow:
-    0 0 5px #00ff66,
-    0 0 15px #00ff66;
-  animation:scrollCode 8s linear forwards;
-}
-
-@keyframes scrollCode{
-  from{
-    transform:translateY(600px);
-    opacity:0;
-  }
-  10%{
-    opacity:1;
-  }
-  to{
-    transform:translateY(-800px);
-    opacity:0;
-  }
-}
-
-#container{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:1180px;
-  margin:0 auto;
-  padding:10px 12px 32px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
-
-#percent{
-  width:100%;
-  font-size:clamp(56px,18vw,120px);
-  line-height:1;
-  font-weight:bold;
-  text-align:center;
-  text-shadow:
-    0 0 20px #fff,
-    0 0 40px red;
-}
-
-#status{
-  width:100%;
-  font-size:clamp(18px,6vw,30px);
-  color:#ff5555;
-  text-align:center;
-  animation:blink .7s infinite;
-  text-shadow:0 0 12px #ff2222;
-}
-
-@keyframes blink{
-  50%{
-    opacity:.2;
-  }
-}
-
-.info{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  font-size:clamp(11px,3vw,18px);
-}
-
-.info div{
-  min-width:0;
-  padding:9px 8px;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:8px;
-  background:rgba(255,255,255,.045);
-  text-align:center;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  box-shadow:0 0 12px rgba(255,0,0,.15);
-}
-
-canvas{
-  display:block;
-  max-width:100%;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:10px;
-  box-shadow:
-    inset 0 0 18px rgba(255,255,255,.04),
-    0 0 18px rgba(255,0,0,.15);
-}
-
-#ecg{
-  width:100%;
-  height:180px;
-}
-
-#topRow{
-  width:100%;
-  display:grid;
-  grid-template-columns:320px 320px 1fr;
-  gap:14px;
-  align-items:start;
-}
-
-#gaugeContainer{
-  position:relative;
-  width:100%;
-  max-width:320px;
-  aspect-ratio:16/9;
-}
-
-#gauge{
-  width:100%;
-  height:100%;
-}
-
-#gaugeValue{
-  position:absolute;
-  left:0;
-  bottom:8%;
-  width:100%;
-  text-align:center;
-  font-size:clamp(20px,7vw,30px);
-  color:#fff;
-  text-shadow:0 0 12px #fff;
-}
-
-#radar{
-  width:100%;
-  max-width:320px;
-  aspect-ratio:1/1;
-}
-
-#map{
-  width:100%;
-  height:320px;
-}
-
-#glitch{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:5;
-}
-
-.noise{
-  position:absolute;
-  inset:0;
-  opacity:.05;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      white 4px
-    );
-}
-
-.scanline{
-  position:absolute;
-  width:100%;
-  height:2px;
-  background:rgba(255,255,255,.1);
-  animation:scan 4s linear infinite;
-}
-
-@keyframes scan{
-  from{top:-10px;}
-  to{top:100%;}
-}
-
-.glitchBar{
-  position:absolute;
-  left:0;
-  width:100%;
-  background:rgba(255,255,255,.15);
-}
-
-@media(max-width:900px){
-  #container{
-    max-width:520px;
-  }
-
-  #topRow{
-    grid-template-columns:1fr;
-    justify-items:center;
-  }
-
-  #gaugeContainer,
-  #radar,
-  #map{
-    max-width:420px;
-    width:100%;
-  }
-
-  #map{
-    height:260px;
-  }
-}
-
-@media(max-width:600px){
-  .header{
-    padding-top:12px;
-  }
-
-  #container{
-    padding:8px 10px 28px;
-    gap:10px;
-  }
-
-  .info{
-    grid-template-columns:1fr;
-  }
-
-  .info div{
-    padding:8px;
-  }
-
-  #ecg{
-    height:140px;
-  }
-
-  #map{
-    height:220px;
-  }
-
-  canvas{
-    border-radius:8px;
-  }
-}
-</style>
 </head>
 
 <body>
 
-<div class="header">
-UNDEFINED ANOMALY DETECTION SYSTEM
-</div>
+<!-- ===== ヘッダー ===== -->
 
-<div id="matrix"></div>
+<header>
 
-<div id="glitch">
-  <div class="noise"></div>
-  <div class="scanline"></div>
-</div>
+  <h1>
 
-<div id="container">
+    光クロスコネクト<br>
 
-  <div id="percent">0%</div>
+    <span style="
+      font-size:0.55em;
+      font-weight:normal;">
 
-  <div id="status">
-    解析中...
-  </div>
+      （Optical Cross Connect）
 
-  <div class="info">
-    <div id="target">接続先: ???</div>
-    <div id="gps">GPS: 0.0000 , 0.0000</div>
-    <div id="distance">距離: 0 km</div>
-  </div>
+    </span>
 
-  <canvas id="ecg" width="900" height="180"></canvas>
+  </h1>
 
-  <div id="topRow">
+  <p>
+    大量の光回線を自動でつなぎ替える装置
+  </p>
 
-    <div id="gaugeContainer">
-      <canvas id="gauge" width="320" height="180"></canvas>
-      <div id="gaugeValue">0</div>
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== 光クロスコネクトとは ===== -->
+
+  <section class="card">
+
+    <h2>光クロスコネクトとは？</h2>
+
+    <p>
+      光クロスコネクトとは、
+      データセンターや通信設備で使われる、
+      大量の光回線を整理し、
+      自動で接続先を切り替える装置です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      入力ポートと出力ポートを指定することで、
+      光ファイバー同士の接続を内部で切り替えられます。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        光クロスコネクトは、
+        「光回線用の自動配線装置」
+        のようなものです。
+      </p>
+
     </div>
 
-    <canvas id="radar" width="320" height="320"></canvas>
+  </section>
 
-    <canvas id="map" width="420" height="320"></canvas>
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      データセンターには、
+      外部から多くの光回線が集まります。
+      それらを直接ルーターへつなぐのではなく、
+      一度、光クロスコネクトで整理します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;">
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          外部光回線
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#eaf4ff;
+          border:1px solid #9fc5f8;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;
+          font-weight:bold;">
+
+          光クロスコネクト
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          ルーター・収束装置
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        「大量の光回線を、
+        必要な機器へ自動でつなぎ替える」
+        のが光クロスコネクトです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== なぜ必要か ===== -->
+
+  <section class="card">
+
+    <h2>なぜ必要なのか</h2>
+
+    <p>
+      データセンターには、
+      さまざまな種類の光回線が集まります。
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>通信キャリア</h3>
+        NTT / KDDI / SoftBank
+      </div>
+
+      <div class="part-box">
+        <h3>クラウド接続</h3>
+        AWS / Google / Azure
+      </div>
+
+      <div class="part-box">
+        <h3>国際回線</h3>
+        海外拠点との接続
+      </div>
+
+      <div class="part-box">
+        <h3>企業専用線</h3>
+        企業ネットワーク
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        データセンターは、
+        「インターネットの巨大ジャンクション」
+        のような場所です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 直接ルーターにつながない理由 ===== -->
+
+  <section class="card">
+
+    <h2>直接ルーターにつなげば終わりでは？</h2>
+
+    <p>
+      小規模な環境なら、
+      光回線を直接ルーターへ接続しても問題ない場合があります。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      しかし、
+      データセンター規模になると、
+      回線数が多すぎて直接接続だけでは管理が難しくなります。
+
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      回線追加
+
+      <br>
+
+      ↓
+
+      <br>
+
+      ルーター裏で作業
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong>
+        ケーブルが複雑化
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      障害時に追跡困難
+
+      <br>
+
+      ↓
+
+      <br>
+
+      変更のたび現地作業
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        そのため、
+        光回線を一度まとめて整理し、
+        必要な接続先へ切り替えられる仕組みが必要になります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 自動接続 ===== -->
+
+  <section class="card">
+
+    <h2>入力ポートと出力ポートを指定して接続する</h2>
+
+    <p>
+      光クロスコネクトでは、
+      「どの入力ポートを、どの出力ポートへつなぐか」
+      を指定します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      入力ポート 241
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="
+        color:#0d6efd;">
+
+        光クロスコネクト内部で接続
+
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      出力ポート 008
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        人間がケーブルを抜き差しする代わりに、
+        装置内部で物理的な光の通り道を切り替えます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 普通の配線盤との違い ===== -->
+
+  <section class="card">
+
+    <h2>普通の光配線盤との違い</h2>
+
+    <p>
+      光クロスコネクトは、
+      普通の光配線盤と似ていますが、
+      接続変更の方法が大きく異なります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>種類</th>
+            <th>接続変更の方法</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>普通の光配線盤</td>
+
+            <td>
+              人間がケーブルを抜き差し
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>光クロスコネクト</td>
+
+            <td>
+              入出力ポートを指定して自動接続
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        光クロスコネクトは、
+        「遠隔操作できる光配線盤」
+        と考えると理解しやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 特徴 ===== -->
+
+  <section class="card">
+
+    <h2>光クロスコネクトの特徴</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>自動切替</h3>
+        内部で接続変更
+      </div>
+
+      <div class="part-box">
+        <h3>遠隔操作</h3>
+        現地作業を削減
+      </div>
+
+      <div class="part-box">
+        <h3>大量収容</h3>
+        多数の光回線を管理
+      </div>
+
+      <div class="part-box">
+        <h3>柔軟運用</h3>
+        接続先変更が容易
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        光クロスコネクトは、
+        大量の光回線を人間が管理しやすい形に整理します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ルーターではない ===== -->
+
+  <section class="card">
+
+    <h2>この装置はルーターではない</h2>
+
+    <p>
+      光クロスコネクトは、
+      ルーターのように通信経路を判断する装置ではありません。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      多くの場合、
+      IPアドレスやTCP/IPの中身を見ず、
+      光の通り道だけを切り替えます。
+
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>IPアドレス</h3>
+        基本見ない
+      </div>
+
+      <div class="part-box">
+        <h3>TCP/IP</h3>
+        基本処理しない
+      </div>
+
+      <div class="part-box">
+        <h3>BGP / NAT</h3>
+        基本行わない
+      </div>
+
+      <div class="part-box">
+        <h3>光経路</h3>
+        ここを切り替える
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        「通信を考える」のがルーター、
+        「光の線をつなぎ替える」のが光クロスコネクトです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ルーターとの違い ===== -->
+
+  <section class="card">
+
+    <h2>ルーターとの違い</h2>
+
+    <p>
+      光クロスコネクトとルーターは、
+      どちらもネットワーク設備にありますが、
+      役割は大きく異なります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>項目</th>
+            <th>光クロスコネクト</th>
+            <th>ルーター</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>主な役割</td>
+
+            <td>
+              光回線の接続変更
+            </td>
+
+            <td>
+              通信経路判断
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>見る情報</td>
+
+            <td>
+              光の入出力ポート
+            </td>
+
+            <td>
+              IPアドレス
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>処理対象</td>
+
+            <td>
+              物理的な光経路
+            </td>
+
+            <td>
+              パケット
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>役割の層</td>
+
+            <td>
+              物理層寄り
+            </td>
+
+            <td>
+              L3寄り
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        光クロスコネクトは
+        「どの線をどこへつなぐか」、
+        ルーターは
+        「通信をどこへ送るか」
+        を担当します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 収束装置との関係 ===== -->
+
+  <section class="card">
+
+    <h2>収束装置やルーターとの関係</h2>
+
+    <p>
+      光クロスコネクトは、
+      収束装置とルーターの間に置かれることがあります。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      この場合、
+      収束装置側から来た光回線を、
+      どのルーターへ接続するかを切り替える役割を持ちます。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      収束装置
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="
+        color:#0d6efd;">
+
+        光クロスコネクト
+
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      ルーター群
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        ルーターと収束装置の間の配線変更を、
+        自動化するために使われるイメージです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 障害対応 ===== -->
+
+  <section class="card">
+
+    <h2>障害対応で便利</h2>
+
+    <p>
+      ルーターや回線に障害が起きた場合、
+      光クロスコネクトを使うことで、
+      別の機器や別経路へ切り替えやすくなります。
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      Router A 障害
+
+      <br>
+
+      ↓
+
+      <br>
+
+      光クロスコネクトで切替
+
+      <br>
+
+      ↓
+
+      <br>
+
+      Router B へ接続
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        現地でケーブルを差し替える手間を減らし、
+        復旧作業を速くできます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== メリット ===== -->
+
+  <section class="card">
+
+    <h2>光クロスコネクトのメリット</h2>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>省人化</h3>
+        人の作業を減らす
+      </div>
+
+      <div class="part-box">
+        <h3>遠隔対応</h3>
+        現地に行かず変更
+      </div>
+
+      <div class="part-box">
+        <h3>障害対応</h3>
+        切替がしやすい
+      </div>
+
+      <div class="part-box">
+        <h3>配線整理</h3>
+        大量回線を管理
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 注意点 ===== -->
+
+  <section class="card">
+
+    <h2>注意点</h2>
+
+    <p>
+      光クロスコネクトは便利ですが、
+      それ自体がインターネット通信を処理するわけではありません。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      あくまで、
+      光ファイバーの接続先を切り替えるための装置です。
+      通信の制御や経路判断は、
+      ルーターや上位のネットワーク機器が行います。
+
+    </p>
+
+    <div class="parts">
+
+      <div class="part-box">
+        <h3>ルーティング</h3>
+        しない
+      </div>
+
+      <div class="part-box">
+        <h3>通信制御</h3>
+        しない
+      </div>
+
+      <div class="part-box">
+        <h3>物理接続</h3>
+        ここが役割
+      </div>
+
+      <div class="part-box">
+        <h3>設計重要</h3>
+        接続管理が必要
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        光クロスコネクトは、
+        「通信装置」というより
+        「光配線を自動化する装置」
+        と考えると理解しやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      光クロスコネクトとは、
+      大量の光回線を整理し、
+      入力ポートと出力ポートを指定して、
+      自動で接続変更できる装置です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      データセンターや通信設備では、
+      回線数が非常に多いため、
+      人間が毎回ケーブルを抜き差しする運用では大変です。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      そこで光クロスコネクトを使うことで、
+      収束装置とルーターの間などの光配線を自動化し、
+      作業負担や障害対応の手間を減らせます。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        光クロスコネクトを理解すると、
+        データセンターで大量の光回線をどう整理し、
+        どうルーターへつないでいるのかが理解しやすくなります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
 
   </div>
 
 </div>
 
-<script>
-const matrix=document.getElementById("matrix");
-
-function randomCode(){
-  return (
-    Math.random().toString(36).substring(2)+
-    Math.random().toString(36).substring(2)+
-    Math.random().toString(36).substring(2)
-  ).toUpperCase();
-}
-
-function addCodeLine(){
-  const div=document.createElement("div");
-
-  div.className="codeLine";
-
-  div.textContent=
-    randomCode()+
-    " :: "+
-    randomCode()+
-    " :: "+
-    randomCode();
-
-  matrix.appendChild(div);
-
-  setTimeout(()=>{
-    div.remove();
-  },8000);
-}
-
-setInterval(addCodeLine,120);
-
-const percentEl=document.getElementById("percent");
-const statusEl=document.getElementById("status");
-const gpsEl=document.getElementById("gps");
-const distanceEl=document.getElementById("distance");
-const targetEl=document.getElementById("target");
-
-let mystery=50;
-let gaugeTarget=50;
-let gaugeValue=50;
-
-const statuses=[
-  "危険度上昇中",
-  "解析不能",
-  "対象未確認",
-  "異常値検出",
-  "未知の反応",
-  "WARNING",
-  "CRITICAL",
-  "接続不安定"
-];
-
-const targets=[
-  "NODE-7",
-  "OBJECT-X",
-  "VOID",
-  "ALPHA",
-  "BETA",
-  "TARGET-01",
-  "UNKNOWN",
-  "ORIGIN"
-];
-
-function updateFakeData(){
-  targetEl.textContent=
-    "接続先: "+
-    targets[
-      Math.floor(
-        Math.random()*targets.length
-      )
-    ];
-
-  gpsEl.textContent=
-    "GPS: "+
-    (
-      Math.random()*180-90
-    ).toFixed(4)+
-    ", "+
-    (
-      Math.random()*360-180
-    ).toFixed(4);
-
-  distanceEl.textContent=
-    "距離: "+
-    (
-      Math.random()*50000
-    ).toFixed(1)+
-    " km";
-
-  statusEl.textContent=
-    statuses[
-      Math.floor(
-        Math.random()*statuses.length
-      )
-    ];
-}
-
-setInterval(updateFakeData,1200);
-
-function glitch(){
-  if(Math.random()<0.02){
-    document.body.classList.add("invert");
-
-    setTimeout(()=>{
-      document.body.classList.remove("invert");
-    },100);
-  }
-}
-
-setInterval(glitch,80);
-
-function beep(freq=600,duration=80){
-  try{
-    const ctx=
-      new(
-        window.AudioContext||
-        window.webkitAudioContext
-      )();
-
-    const osc=ctx.createOscillator();
-    const gain=ctx.createGain();
-
-    osc.type="square";
-    osc.frequency.value=freq;
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    gain.gain.value=0.03;
-
-    osc.start();
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.0001,
-      ctx.currentTime+
-      duration/1000
-    );
-
-    osc.stop(
-      ctx.currentTime+
-      duration/1000
-    );
-  }catch(e){}
-}
-
-function criticalEvent(){
-  mystery=999;
-
-  percentEl.textContent="999%";
-
-  statusEl.textContent=
-    "■■■■ CRITICAL EVENT ■■■■";
-
-  document.body.classList.add("shake");
-
-  beep(1800,500);
-
-  for(let i=0;i<25;i++){
-    setTimeout(()=>{
-      document.body.classList.toggle("invert");
-    },i*80);
-  }
-
-  setTimeout(()=>{
-    document.body.classList.remove("shake");
-    document.body.classList.remove("invert");
-  },3000);
-}
-
-function updateMystery(){
-  if(Math.random()<0.012){
-    criticalEvent();
-  }else{
-    mystery+=
-      (
-        Math.random()-0.5
-      )*20;
-
-    mystery=
-      Math.max(
-        0,
-        Math.min(
-          100,
-          mystery
-        )
-      );
-
-    percentEl.textContent=
-      mystery.toFixed(1)+
-      "%";
-  }
-
-  let red=
-    Math.min(
-      255,
-      mystery*2
-    );
-
-  document.body.style.backgroundColor=
-    `rgb(${red},0,0)`;
-
-  gaugeTarget+=
-    (
-      Math.random()-0.5
-    )*30;
-
-  if(Math.random()<0.08){
-    gaugeTarget=
-      Math.random()*100;
-  }
-
-  if(Math.random()<0.03){
-    beep(
-      300+
-      Math.random()*1200,
-      50
-    );
-  }
-}
-
-setInterval(updateMystery,120);
-
-const ecg=document.getElementById("ecg");
-const ectx=ecg.getContext("2d");
-
-const points=[];
-
-for(let i=0;i<ecg.width;i++){
-  points.push(ecg.height/2);
-}
-
-function generateECG(){
-  let y=
-    ecg.height/2+
-    (
-      Math.random()-0.5
-    )*8;
-
-  if(Math.random()<0.03){
-    points.push(y);
-    points.push(y-20);
-    points.push(y+10);
-    points.push(y-90);
-    points.push(y+60);
-    points.push(y-20);
-  }
-
-  points.push(y);
-
-  while(points.length>ecg.width){
-    points.shift();
-  }
-}
-
-function drawECG(){
-  generateECG();
-
-  ectx.clearRect(
-    0,
-    0,
-    ecg.width,
-    ecg.height
-  );
-
-  ectx.strokeStyle="#00ff88";
-  ectx.lineWidth=3;
-  ectx.beginPath();
-
-  for(let i=0;i<points.length;i++){
-    if(i===0){
-      ectx.moveTo(
-        i,
-        points[i]
-      );
-    }else{
-      ectx.lineTo(
-        i,
-        points[i]
-      );
-    }
-  }
-
-  ectx.stroke();
-}
-
-const radar=document.getElementById("radar");
-const rctx=radar.getContext("2d");
-
-let radarAngle=0;
-
-function drawRadar(){
-  const w=radar.width;
-  const h=radar.height;
-
-  const cx=w/2;
-  const cy=h/2;
-
-  rctx.clearRect(
-    0,
-    0,
-    w,
-    h
-  );
-
-  rctx.strokeStyle="#00ff00";
-  rctx.lineWidth=1;
-
-  for(let r=40;r<160;r+=40){
-    rctx.beginPath();
-    rctx.arc(
-      cx,
-      cy,
-      r,
-      0,
-      Math.PI*2
-    );
-    rctx.stroke();
-  }
-
-  rctx.beginPath();
-  rctx.moveTo(cx,0);
-  rctx.lineTo(cx,h);
-  rctx.stroke();
-
-  rctx.beginPath();
-  rctx.moveTo(0,cy);
-  rctx.lineTo(w,cy);
-  rctx.stroke();
-
-  radarAngle+=0.03;
-
-  const x=
-    cx+
-    Math.cos(radarAngle)*150;
-
-  const y=
-    cy+
-    Math.sin(radarAngle)*150;
-
-  const grad=
-    rctx.createLinearGradient(
-      cx,
-      cy,
-      x,
-      y
-    );
-
-  grad.addColorStop(
-    0,
-    "rgba(0,255,0,.9)"
-  );
-
-  grad.addColorStop(
-    1,
-    "rgba(0,255,0,0)"
-  );
-
-  rctx.strokeStyle=grad;
-  rctx.lineWidth=4;
-
-  rctx.beginPath();
-  rctx.moveTo(cx,cy);
-  rctx.lineTo(x,y);
-  rctx.stroke();
-
-  if(Math.random()<0.05){
-    rctx.fillStyle="#00ff00";
-
-    rctx.beginPath();
-
-    rctx.arc(
-      Math.random()*w,
-      Math.random()*h,
-      3,
-      0,
-      Math.PI*2
-    );
-
-    rctx.fill();
-  }
-}
-
-const map=document.getElementById("map");
-const mctx=map.getContext("2d");
-
-function drawMap(){
-  mctx.clearRect(
-    0,
-    0,
-    map.width,
-    map.height
-  );
-
-  mctx.strokeStyle=
-    "rgba(0,255,255,.5)";
-
-  for(let i=0;i<20;i++){
-    mctx.beginPath();
-
-    mctx.moveTo(
-      Math.random()*map.width,
-      Math.random()*map.height
-    );
-
-    mctx.lineTo(
-      Math.random()*map.width,
-      Math.random()*map.height
-    );
-
-    mctx.stroke();
-  }
-
-  mctx.fillStyle=
-    "rgba(0,255,255,.25)";
-
-  for(let i=0;i<15;i++){
-    mctx.beginPath();
-
-    mctx.arc(
-      Math.random()*map.width,
-      Math.random()*map.height,
-      10+
-      Math.random()*40,
-      0,
-      Math.PI*2
-    );
-
-    mctx.fill();
-  }
-}
-
-const gauge=document.getElementById("gauge");
-const gctx=gauge.getContext("2d");
-
-function drawGauge(){
-  gaugeValue+=
-    (
-      gaugeTarget-
-      gaugeValue
-    )*0.08;
-
-  document
-    .getElementById("gaugeValue")
-    .textContent=
-      gaugeValue.toFixed(0);
-
-  gctx.clearRect(
-    0,
-    0,
-    320,
-    180
-  );
-
-  gctx.strokeStyle="#333";
-  gctx.lineWidth=18;
-
-  gctx.beginPath();
-
-  gctx.arc(
-    160,
-    160,
-    110,
-    Math.PI,
-    0
-  );
-
-  gctx.stroke();
-
-  const angle=
-    Math.PI+
-    (
-      gaugeValue/100
-    )*Math.PI;
-
-  gctx.strokeStyle=
-    `hsl(${120-gaugeValue},100%,50%)`;
-
-  gctx.beginPath();
-
-  gctx.arc(
-    160,
-    160,
-    110,
-    Math.PI,
-    angle
-  );
-
-  gctx.stroke();
-
-  const nx=
-    160+
-    Math.cos(angle)*95;
-
-  const ny=
-    160+
-    Math.sin(angle)*95;
-
-  gctx.strokeStyle="#fff";
-  gctx.lineWidth=4;
-
-  gctx.beginPath();
-
-  gctx.moveTo(
-    160,
-    160
-  );
-
-  gctx.lineTo(
-    nx,
-    ny
-  );
-
-  gctx.stroke();
-
-  gctx.beginPath();
-
-  gctx.arc(
-    160,
-    160,
-    8,
-    0,
-    Math.PI*2
-  );
-
-  gctx.fillStyle="#fff";
-  gctx.fill();
-}
-
-setInterval(drawMap,1000);
-
-function animate(){
-  drawECG();
-  drawRadar();
-  drawGauge();
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-</script>
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
 
 </body>
 </html>
