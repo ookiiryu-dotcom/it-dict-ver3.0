@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SIP（Session Initiation Protocol）とは？</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    SIP<br>
+    <span style="font-size:0.55em;font-weight:normal;">
+      （Session Initiation Protocol）
+    </span>
+  </h1>
+
+  <p>
+    IP電話やビデオ会議で<br>
+    通信の開始・管理・終了を行うプロトコル
+  </p>
+
+</header>
+
+<div class="container">
+
+  <section class="card">
+
+    <h2>SIPとは？</h2>
+
+    <p>
+      SIPとは、
+      Session Initiation Protocol
+      の略で、
+      IPネットワーク上で
+      音声通話やビデオ会議などの
+      通信セッションを開始・管理・終了するための
+      プロトコルです。
+    </p>
+
+    <p style="margin-top:15px;">
+      簡単に言うと、
+      SIPはIP電話における
+      「電話をかける」「相手を呼び出す」「通話を切る」
+      ための仕組みです。
+    </p>
+
+    <div class="point-box">
+      <p>
+        SIPは、
+        音声そのものを運ぶのではなく、
+        通話を成立させるための
+        「呼び出し係」です。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>まずは全体像で理解する</h2>
+
+    <p>
+      SIPは通話の制御を担当し、
+      実際の音声データは
+      RTPという別のプロトコルで運ばれます。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;">
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:520px;">
+          Aさんが電話をかける
+        </div>
+
+        <div style="font-size:1.4em;color:#666;">↓</div>
+
+        <div style="background:#eaf4ff;border:1px solid #9fc5f8;border-radius:10px;padding:14px 18px;width:100%;max-width:520px;font-weight:bold;">
+          SIP<br>
+          通話の開始・呼び出し・終了を制御
+        </div>
+
+        <div style="font-size:1.4em;color:#666;">↓</div>
+
+        <div style="background:#fff4e5;border:1px solid #f0c36d;border-radius:10px;padding:14px 18px;width:100%;max-width:520px;font-weight:bold;">
+          RTP<br>
+          実際の音声を運ぶ
+        </div>
+
+        <div style="font-size:1.4em;color:#666;">↓</div>
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:520px;">
+          通話終了時もSIPで切断
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        SIPは「電話をつなぐ担当」、
+        RTPは「声を運ぶ担当」と考えると分かりやすいです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIPが必要な理由</h2>
+
+    <p>
+      IPネットワークは本来、
+      データをIPアドレス宛に送る仕組みです。
+    </p>
+    <p>しかし、
+      それだけでは
+      「誰に電話をかけるのか」
+      「相手は応答できるのか」
+      「通話をいつ開始・終了するのか」
+      を管理できません。
+    </p>
+
+    <p style="margin-top:15px;">
+      そこでSIPが、
+      電話番号やユーザーIDに相当する情報を使って、
+      相手を探し、
+      呼び出し、
+      通話を成立させます。
+    </p>
+
+    <div class="point-box">
+      <p>
+        SIPは、
+        IPネットワークに
+        「電話らしい動き」を与えるための仕組みです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIPとRTPの違い</h2>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>SIP</th>
+            <th>RTP</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>役割</td>
+            <td>通話の制御</td>
+            <td>音声や映像の転送</td>
+          </tr>
+
+          <tr>
+            <td>電話をかける</td>
+            <td>行う</td>
+            <td>行わない</td>
+          </tr>
+
+          <tr>
+            <td>相手の呼び出し</td>
+            <td>行う</td>
+            <td>行わない</td>
+          </tr>
+
+          <tr>
+            <td>実際の音声</td>
+            <td>運ばない</td>
+            <td>運ぶ</td>
+          </tr>
+
+          <tr>
+            <td>通話終了</td>
+            <td>行う</td>
+            <td>行わない</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="example">
+      <p>
+        SIPだけでは声は届きません。
+        SIPで通話を開始し、
+        RTPで音声を流します。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIP通信の基本的な流れ</h2>
+
+    <p>
+      AさんがBさんに電話をかける場合、
+      SIPでは次のような流れになります。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ① INVITE<br>
+          <span style="font-size:0.9em;">Bさんと話したい</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#eaf4ff;border:1px solid #9fc5f8;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ② 100 Trying<br>
+          <span style="font-size:0.9em;">処理中です</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ③ 180 Ringing<br>
+          <span style="font-size:0.9em;">相手を呼び出し中</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#fff4e5;border:1px solid #f0c36d;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;font-weight:bold;">
+          ④ 200 OK<br>
+          <span style="font-size:0.9em;">相手が応答</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#eaf4ff;border:1px solid #9fc5f8;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ⑤ ACK<br>
+          <span style="font-size:0.9em;">了解しました</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ⑥ RTP<br>
+          <span style="font-size:0.9em;">音声通信開始</span>
+        </div>
+
+        <div style="font-size:1.3em;color:#666;">↓</div>
+
+        <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px 18px;width:100%;max-width:560px;">
+          ⑦ BYE<br>
+          <span style="font-size:0.9em;">通話終了</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>主なSIPメッセージ</h2>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>メッセージ</th>
+            <th>意味</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>INVITE</td>
+            <td>通話を開始したいという要求</td>
+          </tr>
+
+          <tr>
+            <td>100 Trying</td>
+            <td>要求を処理中であることを示す応答</td>
+          </tr>
+
+          <tr>
+            <td>180 Ringing</td>
+            <td>相手を呼び出し中であることを示す応答</td>
+          </tr>
+
+          <tr>
+            <td>183 Session Progress</td>
+            <td>通話成立前に音声などを流すための応答</td>
+          </tr>
+
+          <tr>
+            <td>200 OK</td>
+            <td>要求が成功したことを示す応答</td>
+          </tr>
+
+          <tr>
+            <td>ACK</td>
+            <td>200 OKを受け取ったことを確認する応答</td>
+          </tr>
+
+          <tr>
+            <td>BYE</td>
+            <td>通話を終了する要求</td>
+          </tr>
+
+          <tr>
+            <td>REGISTER</td>
+            <td>端末の現在位置をSIPサーバーに登録する要求</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>180 Ringingとは？</h2>
+
+    <p>
+      180 Ringingは、
+      相手端末が呼び出されていることを
+      発信者側に知らせるSIP応答です。
+    </p>
+
+    <p style="margin-top:15px;">
+      この応答を受け取ると、
+      発信者側の端末は
+      「相手を呼び出し中」と判断し、
+      呼び出し音を鳴らします。
+    </p>
+
+    <div class="point-box">
+      <p>
+        多くの場合、
+        「プルルル」という呼び出し音は、
+        相手側から流れているのではなく、
+        発信者側の端末が鳴らしています。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>183 Session ProgressとEarly Media</h2>
+
+    <p>
+      183 Session Progressは、
+      通話がまだ成立していない段階で、
+      音声を流すために使われることがあります。
+    </p>
+
+    <p style="margin-top:15px;">
+      例えば、
+      「おかけになった電話番号は現在使われておりません」
+      のようなガイダンス音声を
+      応答前に流す場合です。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;text-align:center;line-height:2;">
+
+      INVITE
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">
+        183 Session Progress
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      RTPで案内音声を流す
+
+      <br>
+
+      ↓
+
+      <br>
+
+      200 OKで通話成立
+
+    </div>
+
+    <div class="example">
+      <p>
+        200 OKの前に音声を流す仕組みを
+        Early Media
+        と呼びます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>Early Mediaの注意点</h2>
+
+    <p>
+      Early Mediaは便利ですが、
+      通話が成立する前に音声通信を扱うため、
+      設計が複雑になります。
+    </p>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>NAT越え</h3>
+        通話前にRTPが流れるため、<br>
+        NATやファイアウォールで片通話が起きることがある
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>課金制御</h3>
+        案内音声を流しているだけなのか、<br>
+        通話成立なのかを分けて管理する必要がある
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>リソース消費</h3>
+        応答前でもRTPポートや音声処理リソースを使う
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>セキュリティ</h3>
+        不正な音声や大量リクエストへの対策が必要になる
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIPはUDPとTCPのどちらを使う？</h2>
+
+    <p>
+      SIPは、
+      UDPでもTCPでも動作できます。
+      さらに現在では、
+      TLSを使ってSIP通信を暗号化する構成もよく使われます。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>方式</th>
+            <th>特徴</th>
+            <th>向いている場面</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>UDP</td>
+            <td>軽くて速いが、信頼性はSIP側で補う必要がある</td>
+            <td>昔ながらのIP電話、閉域網など</td>
+          </tr>
+
+          <tr>
+            <td>TCP</td>
+            <td>信頼性が高く、大きなSIPメッセージを扱いやすい</td>
+            <td>大規模構成、NAT配下、安定性重視</td>
+          </tr>
+
+          <tr>
+            <td>TLS</td>
+            <td>SIP制御信号を暗号化・認証できる</td>
+            <td>クラウドPBX、インターネット経由の通話基盤</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        SIP制御はTCP/TLS、
+        音声はRTP/UDP、
+        という構成が現代的なVoIPではよく使われます。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>なぜRTPはUDPを使うことが多いのか</h2>
+
+    <p>
+      音声通信では、
+      完璧にすべてのパケットを届けることよりも、
+      遅延を少なくすることが重要です。
+    </p>
+
+    <p style="margin-top:15px;">
+      TCPは欠けたデータを再送しますが、
+      音声では再送を待つと会話が遅れてしまいます。
+    </p>
+    <p> そのため、 音声を運ぶRTPではUDPが使われることが多いです。 </p>
+
+    <div class="example">
+      <p>
+        音声は少し欠けても会話できますが、
+        遅れると会話しづらくなります。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIP over TLSとは？</h2>
+
+    <p>
+      SIP over TLSとは、
+      SIPの制御通信をTLSで暗号化する方式です。
+    </p>
+
+    <p style="margin-top:15px;">
+      SIPには、
+      発信者、
+      着信者、
+      通話先、
+      認証情報、
+      通話条件など、
+      重要な情報が含まれます。
+    </p>
+    <p>そのため、
+      インターネット経由で利用する場合は、
+      暗号化が重要になります。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;text-align:center;line-height:2;">
+
+      SIP
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">TLS</strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      TCP
+
+      <br>
+
+      ↓
+
+      <br>
+
+      IP
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        TLSはSIPの制御信号を守ります。
+        音声そのものを守る場合は、
+        SRTPなどを使います。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SRTPとは？</h2>
+
+    <p>
+      SRTPは、
+      Secure Real-time Transport Protocol
+      の略で、
+      RTPで運ばれる音声や映像を
+      暗号化するための仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+      SIP/TLSが通話制御を守るのに対し、
+      SRTPは実際の音声データを守ります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>対象</th>
+            <th>守るもの</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>SIP/TLS</td>
+            <td>発信・着信・通話制御などの信号</td>
+          </tr>
+
+          <tr>
+            <td>SRTP</td>
+            <td>実際の音声・映像データ</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIPサーバーとは？</h2>
+
+    <p>
+      SIPサーバーは、
+      SIPによる通話制御を管理するサーバーです。
+    </p>
+
+    <p style="margin-top:15px;">
+      IP電話端末がどこにいるのかを管理したり、
+      発信・着信・転送・保留などの制御を行ったりします。
+    </p>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>利用者管理</h3>
+        誰がどの端末を使っているかを管理する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>内線管理</h3>
+        内線番号と端末を対応付ける
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>呼び出し制御</h3>
+        発信者と着信者の接続を制御する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>転送・保留</h3>
+        電話機能を実現するための制御を行う
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>PBXとは？</h2>
+
+    <p>
+      PBXとは、
+      企業などで使われる電話交換機です。
+      内線通話、
+      外線発信、
+      着信振り分けなどを行います。
+    </p>
+
+    <p style="margin-top:15px;">
+      従来は専用の電話交換機を使っていましたが、
+      現在ではIPネットワーク上で動作する
+      IP-PBXやクラウドPBXも広く使われています。
+    </p>
+
+    <div class="example">
+      <p>
+        SIPは、
+        IP-PBXやクラウドPBXで通話制御を行うための
+        重要なプロトコルです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SBCとは？</h2>
+
+    <p>
+      SBCとは、
+      Session Border Controller
+      の略で、
+      企業のVoIP環境と外部ネットワークの境界に置かれる
+      音声通信向けの制御装置です。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;text-align:center;line-height:2;">
+
+      IP電話
+
+      <br>
+
+      ↓
+
+      <br>
+
+      PBX
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">
+        SBC
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      キャリア・クラウドPBX・外部VoIP網
+
+    </div>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>NAT越え</h3>
+        音声通信がNATを越えられるように制御する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>セキュリティ</h3>
+        不正なSIP通信や攻撃を防ぐ
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>Early Media制御</h3>
+        183やRTPの扱いを整理する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>Codec変換</h3>
+        音声形式が異なる場合に変換する
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SBCの冗長化</h2>
+
+    <p>
+      SBCは重要な装置なので、
+      1台だけで構成すると単一障害点になります。
+    </p>
+
+    <p style="margin-top:15px;">
+      そのため実務では、
+      Active-Standby構成や
+      Active-Active構成で冗長化されることがあります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>構成</th>
+            <th>特徴</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Active-Standby</td>
+            <td>片方が稼働し、もう片方は待機する。構成は比較的分かりやすい</td>
+          </tr>
+
+          <tr>
+            <td>Active-Active</td>
+            <td>複数のSBCで同時に処理する。性能は上がるが設計は難しくなる</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        SBCは便利な反面、
+        通話制御と音声制御が集中するため、
+        障害やリソース枯渇への対策が重要です。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>SIPトランクとは？</h2>
+
+    <p>
+      SIPトランクとは、
+      企業のPBXと通信事業者の電話網を
+      IPネットワークで接続する仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+      昔はISDNなどの電話回線で接続していましたが、
+      現在ではSIPを使って電話網へ接続する構成が使われます。
+    </p>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;text-align:center;line-height:2;">
+
+      企業PBX
+
+      <br>
+
+      ↓
+
+      <br>
+
+      SBC
+
+      <br>
+
+      ↓
+
+      <br>
+
+      <strong style="color:#0d6efd;">
+        SIPトランク
+      </strong>
+
+      <br>
+
+      ↓
+
+      <br>
+
+      通信事業者の電話網
+
+    </div>
+
+    <div class="example">
+      <p>
+        SIPトランクは、
+        電話回線をIP化したものと考えると分かりやすいです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>閉域網とクラウドPBXの違い</h2>
+
+    <p>
+      SIPを使う構成でも、
+      閉域網で接続する場合と、
+      インターネット経由でクラウドPBXへ接続する場合では、
+      セキュリティ設計が変わります。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>構成</th>
+            <th>特徴</th>
+            <th>セキュリティ上の考え方</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>閉域網</td>
+            <td>通信事業者の専用網やVPNで接続</td>
+            <td>外部から直接届きにくいが、油断は禁物</td>
+          </tr>
+
+          <tr>
+            <td>クラウドPBX</td>
+            <td>インターネット経由でPBX機能を利用</td>
+            <td>SIP/TLSやSRTPなどの暗号化が特に重要</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>運用で重要なこと</h2>
+
+    <p>
+      SIPやVoIPは、
+      導入して終わりではありません。
+      安定して電話を使い続けるためには、
+      運用面の管理が非常に重要です。
+    </p>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>証明書管理</h3>
+        SIP/TLSで使う証明書の期限切れに注意する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>監視</h3>
+        発信失敗、着信失敗、片通話、遅延などを監視する
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>QoS</h3>
+        音声通信を優先し、遅延や音切れを減らす
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>DoS対策</h3>
+        大量のINVITEなどによるリソース枯渇を防ぐ
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        VoIPでは、
+        プロトコルの理解だけでなく、
+        証明書・監視・冗長化・QoSまで含めた運用設計が重要です。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>よくあるトラブル</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>片通話</h3>
+        片方の声だけ聞こえる状態<br>NATやRTP経路の問題で起きることがある
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>発信できない</h3>
+        SIP認証、ルーティング、SIPトランク設定の<br>問題が原因になることがある
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>着信できない</h3>
+        REGISTER、ファイアウォール、PBX設定の<br>問題が原因になることがある
+      </div><div style="line-height:1;"><br></div>
+
+      <div class="part-box">
+        <h3>音切れ・遅延</h3>
+        回線混雑、QoS不足、パケットロスが<br>原因になることがある
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>関連用語まとめ</h2>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>用語</th>
+            <th>意味</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>SIP</td>
+            <td>通話の開始・管理・終了を行うプロトコル</td>
+          </tr>
+
+          <tr>
+            <td>RTP</td>
+            <td>音声や映像をリアルタイムに運ぶプロトコル</td>
+          </tr>
+
+          <tr>
+            <td>SRTP</td>
+            <td>RTPを暗号化した安全な音声通信の仕組み</td>
+          </tr>
+
+          <tr>
+            <td>PBX</td>
+            <td>企業などで使われる電話交換機</td>
+          </tr>
+
+          <tr>
+            <td>SBC</td>
+            <td>VoIPネットワークの境界で通信を制御する装置</td>
+          </tr>
+
+          <tr>
+            <td>SIPトランク</td>
+            <td>PBXと電話会社の網をSIPで接続する仕組み</td>
+          </tr>
+
+          <tr>
+            <td>Early Media</td>
+            <td>通話成立前に音声を流す仕組み</td>
+          </tr>
+
+          <tr>
+            <td>QoS</td>
+            <td>音声など重要な通信を優先する制御</td>
+          </tr>
+
+          <tr>
+            <td>NAT</td>
+            <td>プライベートIPとグローバルIPを変換する仕組み</td>
+          </tr>
+
+          <tr>
+            <td>Codec</td>
+            <td>音声を圧縮・変換する方式</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+
+    <h2>初心者向けの覚え方</h2>
+
+    <div style="background:#f8f9fa;border:1px solid #ddd;border-radius:12px;padding:25px;margin:25px 0;text-align:center;line-height:2;">
+
+      <strong style="color:#0d6efd;">SIP</strong>
+
+      <br>
+
+      電話をかける・呼び出す・切る
+
+      <br><br>
+
+      <strong style="color:#0d6efd;">RTP</strong>
+
+      <br>
+
+      実際の声を運ぶ
+
+      <br><br>
+
+      <strong style="color:#0d6efd;">SBC</strong>
+
+      <br>
+
+      外部との境界で安全に整理する
+
+    </div>
+
+    <div class="example">
+      <p>
+        まずは、
+        SIPは通話制御、
+        RTPは音声転送、
+        SBCは境界制御、
+        と覚えると全体像がつかみやすいです。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="card" style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      SIPとは、
+      IP電話やビデオ会議などで、
+      通話の開始・管理・終了を行うための
+      プロトコルです。
+    </p>
+
+    <p style="margin-top:15px;">
+      SIPは音声そのものを運ぶのではなく、
+      相手を呼び出し、
+      通話を成立させ、
+      終了させるための制御を担当します。
+    </p>
+
+    <p style="margin-top:15px;">
+      実際の音声はRTPで運ばれ、
+      セキュリティが必要な場合は
+      SIP/TLSやSRTPが使われます。
+    </p>
+
+    <p style="margin-top:15px;">
+      実務では、
+      SIPやRTPだけでなく、
+      SBC、
+      NAT、
+      QoS、
+      証明書管理、
+      冗長化、
+      監視まで含めて考えることが重要です。
+    </p>
+
+    <div class="point-box">
+      <p>
+        SIPを理解すると、
+        IP電話は単なる電話ではなく、
+        ネットワーク上で制御・音声・セキュリティ・運用が
+        組み合わさったシステムだと分かります。
+      </p>
+    </div>
+
+  </section>
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
