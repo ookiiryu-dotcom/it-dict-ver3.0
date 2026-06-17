@@ -218,5 +218,9 @@
   {
    "term": "SSO",
    "link": "SSO.html"
+  },
+  {
+   "term": "WAF",
+   "link": "WAF.html"
   }
 ]
