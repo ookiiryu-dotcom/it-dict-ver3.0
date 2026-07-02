@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAIDとは？</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+
+    RAIDとは？<br>
+
+    <span style="
+      font-size:0.55em;
+      font-weight:normal;">
+
+      （レイド）
+
+    </span>
+
+  </h1>
+
+  <p>
+    複数のHDDやSSDを組み合わせて、容量・速度・故障対策を考える仕組み
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== RAIDとは ===== -->
+
+  <section class="card">
+
+    <h2>RAIDとは？</h2>
+
+    <p>
+      RAIDとは、
+      複数のHDDやSSDを組み合わせて、
+      1つの大きなストレージのように扱う仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      正式には、
+      <strong>Redundant Array of Independent Disks</strong>
+      と呼ばれます。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      NASやサーバーでは、
+      複数台のディスクをRAID構成にすることで、
+      保存容量をまとめたり、
+      読み書き速度を上げたり、
+      ディスク故障時にシステムを止めにくくしたりできます。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        RAIDは、
+        「複数のディスクをチームにして使う仕組み」
+        と考えると分かりやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      RAIDでは、
+      複数のディスクを組み合わせて、
+      パソコンやサーバーからは
+      1つの保存先のように見せます。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;">
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          HDD / SSD 1
+
+        </div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          HDD / SSD 2
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#eaf4ff;
+          border:1px solid #9fc5f8;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;
+          font-weight:bold;">
+
+          RAID構成
+
+        </div>
+
+        <div style="
+          font-size:1.4em;
+          color:#666;">
+          ↓
+        </div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:520px;">
+
+          1つの保存領域のように見える
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        RAIDは、
+        「複数台のディスクをまとめて、
+        用途に合わせて使いやすくする技術」
+        です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAIDの目的 ===== -->
+
+  <section class="card">
+
+    <h2>RAIDの主な目的</h2>
+
+    <p>
+      RAIDの目的は、
+      主に次の3つです。
+    </p><br>
+
+    <div class="parts-grid"> 
+
+      <div class="part-box">
+        <h3>容量をまとめる</h3>
+        複数のディスクをまとめて、
+        1つの保存領域のように扱う
+      </div><br>
+
+      <div class="part-box">
+        <h3>速度を上げる</h3>
+        データを分散して読み書きし、
+        処理を速くできる場合がある
+      </div><br>
+
+      <div class="part-box">
+        <h3>止めにくくする</h3>
+        ディスクが故障しても、
+        構成によっては利用を続けやすい
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        RAIDは、
+        「容量」
+        「速度」
+        「故障時の継続利用」
+        のバランスを考えて選びます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 基本の仕組み ===== -->
+
+  <section class="card">
+
+    <h2>RAIDの基本的な仕組み</h2>
+
+    <p>
+      RAIDを理解するうえで重要なのは、
+      次の3つです。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>仕組み</th>
+            <th>内容</th>
+            <th>主な目的</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>ストライピング</td>
+            <td>
+              データを複数のディスクに分けて保存する仕組みです。
+            </td>
+            <td>
+              読み書き速度の向上に役立ちます。
+            </td>
+          </tr>
+
+          <tr>
+            <td>ミラーリング</td>
+            <td>
+              同じデータを複数のディスクにコピーする仕組みです。
+            </td>
+            <td>
+              ディスク故障時の継続利用に役立ちます。
+            </td>
+          </tr>
+
+          <tr>
+            <td>パリティ</td>
+            <td>
+              データを復元するための情報を保存する仕組みです。
+            </td>
+            <td>
+              故障したディスクの内容を復旧するために使います。
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        RAIDの種類は、
+        この3つの仕組みをどのように組み合わせるかで変わります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAIDレベル ===== -->
+
+  <section class="card">
+
+    <h2>代表的なRAIDの種類</h2>
+
+    <p>
+      RAIDには複数の種類があります。
+      代表的なものは、
+      RAID 0、RAID 1、RAID 5、RAID 6、RAID 10です。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>RAIDレベル</th>
+            <th>内容</th>
+            <th>特徴</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>RAID 0</td>
+            <td>
+              複数ディスクにデータを分散して保存します。
+            </td>
+            <td>
+              速くなりやすいですが、<br>
+              1台壊れるとデータ消失リスクが高くなります。
+            </td>
+          </tr>
+
+          <tr>
+            <td>RAID 1</td>
+            <td>
+              同じデータを2台以上のディスクにコピーします。
+            </td>
+            <td>
+              1台壊れても使い続けやすいですが、<br>
+              容量効率は低くなります。
+            </td>
+          </tr>
+
+          <tr>
+            <td>RAID 5</td>
+            <td>
+              データ分散とパリティを使います。
+            </td>
+            <td>
+              1台故障に耐えられる構成が多く、<br>
+              容量効率も比較的良いです。
+            </td>
+          </tr>
+
+          <tr>
+            <td>RAID 6</td>
+            <td>
+              RAID 5より強いパリティ保護を行います。
+            </td>
+            <td>
+              2台故障に耐えられる構成が多いです。
+            </td>
+          </tr>
+
+          <tr>
+            <td>RAID 10</td>
+            <td>
+              RAID 1とRAID 0を組み合わせます。
+            </td>
+            <td>
+              速度と耐障害性のバランスが良い構成です。
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 0 ===== -->
+
+  <section class="card">
+
+    <h2>RAID 0とは？</h2>
+
+    <p>
+      RAID 0は、
+      複数のディスクにデータを分散して保存する構成です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      データを分けて読み書きするため、
+      速度が上がりやすいという特徴があります。
+
+    </p>
+
+    <div style="
+      background:#fff4e5;
+      border:1px solid #f0c36d;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      データA
+
+      <br>
+
+      ↓
+
+      <br>
+
+      ディスク1に一部保存
+
+      <br>
+
+      ディスク2に一部保存
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        RAID 0は速さを重視する構成ですが、
+        1台でも壊れるとデータ全体が使えなくなるリスクがあります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 1 ===== -->
+
+  <section class="card">
+
+    <h2>RAID 1とは？</h2>
+
+    <p>
+      RAID 1は、
+      同じデータを2台のディスクに保存する構成です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      片方のディスクが故障しても、
+      もう片方に同じデータが残っているため、
+      NASやサーバーを止めずに運用しやすくなります。
+
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      line-height:2;">
+
+      データA
+
+      <br>
+
+      ↓
+
+      <br>
+
+      ディスク1に保存
+
+      <br>
+
+      ディスク2にも同じ内容を保存
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        RAID 1は、
+        「同じデータを2台にコピーする」
+        という仕組みなので、
+        初心者にも理解しやすい構成です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 1のメリット・デメリット ===== -->
+
+  <section class="card">
+
+    <h2>RAID 1のメリットとデメリット</h2>
+
+    <div class="parts-grid"> 
+
+      <div class="part-box">
+        <h3>故障時に強い</h3>
+        1台壊れても、
+        もう1台で使い続けやすい
+      </div><br>
+
+      <div class="part-box">
+        <h3>理解しやすい</h3>
+        同じデータをコピーするため、
+        仕組みが直感的
+      </div><br>
+
+      <div class="part-box">
+        <h3>復旧が単純</h3>
+        パリティ計算よりも考え方が分かりやすい
+      </div><br>
+
+      <div class="part-box">
+        <h3>容量効率は低い</h3>
+        2台使っても、
+        実際に使える容量は基本的に1台分
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        たとえば、
+        4TBのHDDを2台使うと合計8TB分のディスクを購入しますが、
+        RAID 1では実際に使える容量は基本的に4TBになります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 5 / RAID 6 ===== -->
+
+  <section class="card">
+
+    <h2>RAID 5とRAID 6</h2>
+
+    <p>
+      RAID 5とRAID 6は、
+      データを複数のディスクに分散しつつ、
+      復元用の情報であるパリティも保存する構成です。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>項目</th>
+            <th>RAID 5</th>
+            <th>RAID 6</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>故障に耐えられる台数</td>
+            <td>
+              1台故障に耐えられる構成が多い
+            </td>
+            <td>
+              2台故障に耐えられる構成が多い
+            </td>
+          </tr>
+
+          <tr>
+            <td>容量効率</td>
+            <td>
+              RAID 1より良くなりやすい
+            </td>
+            <td>
+              RAID 5より容量効率は下がる
+            </td>
+          </tr>
+
+          <tr>
+            <td>復旧時の考え方</td>
+            <td>
+              パリティを使って復旧する
+            </td>
+            <td>
+              より強いパリティ保護を使う
+            </td>
+          </tr>
+
+          <tr>
+            <td>初心者目線</td>
+            <td>
+              RAID 1より仕組みは難しい
+            </td>
+            <td>
+              RAID 5よりさらに理解が必要
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        RAID 5やRAID 6は、
+        4ベイ以上のNASやサーバーで検討されやすい構成です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 10 ===== -->
+
+  <section class="card">
+
+    <h2>RAID 10とは？</h2>
+
+    <p>
+      RAID 10は、
+      RAID 1のミラーリングと、
+      RAID 0のストライピングを組み合わせた構成です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      同じデータをコピーして守りつつ、
+      複数ディスクに分散して読み書きするため、
+      速度と耐障害性のバランスが良い構成です。
+
+    </p>
+
+    <div class="example">
+
+      <p>
+        ただし、
+        RAID 10は複数台のディスクが必要になるため、
+        家庭用の2ベイNASではなく、
+        4ベイ以上の構成で検討されることが多いです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAIDはバックアップではない ===== -->
+
+  <section class="card">
+
+    <h2>RAIDはバックアップではない</h2>
+
+    <p>
+      RAIDで特に重要なのは、
+      <strong>RAIDはバックアップではない</strong>
+      という点です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      RAIDは、
+      ディスクが1台故障したときに、
+      システムを止めにくくするための仕組みです。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      しかし、
+      RAIDだけでは、
+      次のようなトラブルには対応できません。
+
+    </p><br>
+
+    <div class="parts-grid"> 
+
+      <div class="part-box">
+        <h3>誤削除</h3>
+        間違って消したデータは、<br>
+        RAID先にも反映される
+      </div><br>
+
+      <div class="part-box">
+        <h3>ランサムウェア</h3>
+        暗号化されたデータが、<br>
+        RAID構成内にも反映される
+      </div><br>
+
+      <div class="part-box">
+        <h3>NAS本体故障</h3>
+        ディスク以外の故障には弱い
+      </div><br>
+
+      <div class="part-box">
+        <h3>災害・盗難</h3>
+        火災・水没・盗難では、<br>
+        本体ごと失う可能性がある
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        RAIDは
+        「止めないための仕組み」、
+        バックアップは
+        「失わないための仕組み」
+        です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAID 1とバックアップの違い ===== -->
+
+  <section class="card">
+
+    <h2>RAID 1とバックアップの違い</h2>
+
+    <p>
+      RAID 1とバックアップは、
+      どちらもデータを守るために使われますが、
+      目的が違います。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>項目</th>
+            <th>RAID 1</th>
+            <th>バックアップ</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>主な目的</td>
+            <td>
+              システムを止めにくくする
+            </td>
+            <td>
+              データを失わないようにする
+            </td>
+          </tr>
+
+          <tr>
+            <td>ディスク1台故障</td>
+            <td>
+              強い
+            </td>
+            <td>
+              復元作業が必要
+            </td>
+          </tr>
+
+          <tr>
+            <td>誤削除</td>
+            <td>
+              弱い
+            </td>
+            <td>
+              世代管理があれば強い
+            </td>
+          </tr>
+
+          <tr>
+            <td>ランサムウェア</td>
+            <td>
+              弱い
+            </td>
+            <td>
+              オフライン保存や世代管理があれば強い
+            </td>
+          </tr>
+
+          <tr>
+            <td>NAS本体故障</td>
+            <td>
+              弱い
+            </td>
+            <td>
+              外部保存なら復元しやすい
+            </td>
+          </tr>
+
+          <tr>
+            <td>復旧時間</td>
+            <td>
+              短くしやすい
+            </td>
+            <td>
+              復元作業に時間がかかる
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        RAID 1は
+        「壊れても使い続けやすくする」、
+        バックアップは
+        「失ったデータを戻せるようにする」
+        ためのものです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 2ベイNAS ===== -->
+
+  <section class="card">
+
+    <h2>2ベイNASでの考え方</h2>
+
+    <p>
+      家庭用NASや小規模サーバーでは、
+      2台のHDDを入れられる
+      2ベイNASがよく使われます。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      2ベイNASでは、
+      主に次の2パターンで考えると分かりやすいです。<br>
+
+    </p><br>
+
+    <div class="parts-grid"> 
+
+      <div class="part-box">
+        <h3>毎日使うNAS</h3>
+        RAID 1＋外部バックアップが現実的
+      </div><br>
+
+      <div class="part-box">
+        <h3>保管庫用途</h3>
+        数日止まってもよいなら、<br>
+        RAIDなし＋外部バックアップも選択肢
+      </div><br>
+
+      <div class="part-box">
+        <h3>止めたくない</h3>
+        RAID 1を検討
+      </div><br>
+
+      <div class="part-box">
+        <h3>容量重視</h3>
+        RAIDなしも検討できるが、
+        復元作業が重要
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 毎日使うNAS ===== -->
+
+  <section class="card">
+
+    <h2>毎日使うNASならRAID 1＋外部バックアップ</h2>
+
+    <p>
+      仕事用ファイル、
+      家族共有フォルダ、
+      写真管理、
+      スキャンデータ保存など、
+      毎日使うNASなら、
+      <strong>RAID 1＋外部バックアップ</strong>
+      が現実的です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      RAID 1によって、
+      1台のディスクが壊れても使い続けやすくなります。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      さらに外部バックアップを取ることで、
+      誤削除、
+      ランサムウェア、
+      NAS本体故障にも備えやすくなります。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        毎日使うNASでは、
+        「データを守ること」
+        だけでなく、
+        「早く使える状態に戻せること」
+        も重要です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RAIDなし ===== -->
+
+  <section class="card">
+
+    <h2>数日止まってもよいならRAIDなしも選択肢</h2>
+
+    <p>
+      動画や古いデータの保管など、
+      数日使えなくても大きな問題がない場合は、
+      <strong>RAIDなし＋外部バックアップ</strong>
+      も選択肢になります。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      この構成では、
+      ディスク容量を無駄なく使いやすくなります。
+
+    </p>
+
+    <div class="example">
+
+      <p>
+        たとえば、
+        4TBのHDDを2台使う場合、
+        RAID 1では基本的に4TB分しか使えませんが、
+        RAIDなしで別々のボリュームとして使えば、
+        合計8TBを活用できます。
+      </p>
+
+    </div>
+
+    <p style="margin-top:15px;">
+
+      ただし、
+      ディスクが故障した場合は、
+      新しいディスクを用意し、
+      バックアップからデータを戻す必要があります。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        RAIDなしは容量効率が良い一方で、
+        障害時の復旧作業と復旧時間が長くなりやすいです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RTO ===== -->
+
+  <section class="card">
+
+    <h2>復旧時間も考える</h2>
+
+    <p>
+      RAIDを選ぶときは、
+      容量効率だけでなく、
+      <strong>故障したあと何時間・何日で使える状態に戻したいか</strong>
+      も重要です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      この考え方は、
+      RTO、
+      つまり
+      目標復旧時間と呼ばれます。
+
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>許容できる停止時間</th>
+            <th>考えやすい構成</th>
+            <th>理由</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>できるだけ止めたくない</td>
+            <td>
+              RAID 1＋外部バックアップ
+            </td>
+            <td>
+              1台故障時も使い続けやすく、<br>
+              復旧判断も比較的しやすい
+            </td>
+          </tr>
+
+          <tr>
+            <td>1日程度なら待てる</td>
+            <td>
+              RAID 1推奨、<br>
+              または復元手順を固めたバックアップ運用
+            </td>
+            <td>
+              復旧作業に迷わない準備が必要
+            </td>
+          </tr>
+
+          <tr>
+            <td>数日止まってもよい</td>
+            <td>
+              RAIDなし＋外部バックアップ
+            </td>
+            <td>
+              容量効率を優先しやすい
+            </td>
+          </tr>
+
+          <tr>
+            <td>データさえ残ればよい</td>
+            <td>
+              バックアップ重視
+            </td>
+            <td>
+              RAID方式よりも、<br>
+              復元できるバックアップが重要
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 初心者の注意点 ===== -->
+
+  <section class="card">
+
+    <h2>初心者が注意すべき点</h2>
+
+    <p>
+      初心者にとって大事なのは、
+      RAIDの種類だけではありません。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      壊れたときに、
+      自分で復旧作業を最後までできるかを考える必要があります。
+
+    </p><br>
+
+    <div class="parts-grid"> 
+
+      <div class="part-box">
+        <h3>停止時間</h3>
+        NASが何日止まってもよいか
+      </div><br>
+
+      <div class="part-box">
+        <h3>復旧範囲</h3>
+        データだけ戻ればよいか、<br>
+        設定も戻す必要があるか
+      </div><br>
+
+      <div class="part-box">
+        <h3>復元手順</h3>
+        バックアップから戻す手順を理解しているか
+      </div><br>
+
+      <div class="part-box">
+        <h3>鍵の管理</h3>
+        暗号化キーやパスワードを保管しているか
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        バックアップは、
+        「取っている」
+        だけでは不十分です。
+        実際に復元できることを確認して初めて意味があります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== よくある勘違い ===== -->
+
+  <section class="card">
+
+    <h2>よくある勘違い</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>勘違い</th>
+            <th>正しい考え方</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              RAIDにしていればバックアップはいらない
+            </td>
+            <td>
+              RAIDはバックアップではありません。<br>
+              誤削除やランサムウェアには別のバックアップが必要です。
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              RAID 0は安全
+            </td>
+            <td>
+              RAID 0は速度重視であり、<br>
+              1台壊れるとデータ消失リスクが高くなります。
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              RAID 1なら絶対にデータは失われない
+            </td>
+            <td>
+              NAS本体故障、
+              火災、
+              水没、
+              誤削除などには弱いため、<br>
+              外部バックアップが必要です。
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              バックアップを取れば安心
+            </td>
+            <td>
+              実際に復元できるかを確認しないと、<br>
+              障害時に戻せない可能性があります。
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 判断基準 ===== -->
+
+  <section class="card">
+
+    <h2>構成を選ぶときの判断基準</h2>
+
+    <p>
+      RAIDを選ぶときは、
+      次のように考えると分かりやすいです。
+    </p>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>状況</th>
+            <th>向いている考え方</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              2ベイNASで、
+              毎日使うデータを置きたい
+            </td>
+            <td>
+              RAID 1＋外部バックアップ
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              2ベイNASで、
+              とにかく容量を多く使いたい
+            </td>
+            <td>
+              RAIDなし＋外部バックアップも検討
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              4ベイ以上で、
+              容量効率も重視したい
+            </td>
+            <td>
+              RAID 5やSHR系を検討
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              4ベイ以上で、
+              2台故障まで見たい
+            </td>
+            <td>
+              RAID 6やSHR-2系を検討
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              速度と耐障害性のバランスを重視したい
+            </td>
+            <td>
+              RAID 10を検討
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              絶対に失いたくないデータがある
+            </td>
+            <td>
+              RAID方式よりも、
+              まずバックアップ設計を重視
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 推測 ===== -->
+
+  <section class="card">
+
+    <h2>初心者向けの考え方</h2>
+
+    <p>
+      推測ですが、
+      初心者が家庭用NASを使う場合、
+      最も無難なのは
+      <strong>RAID 1＋外部バックアップ</strong>
+      です。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      理由は、
+      RAID 1は仕組みが分かりやすく、
+      ディスク故障時に慌てにくいからです。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      ただし、
+      単なるデータ保管庫として使い、
+      数日止まっても問題ないなら、
+      RAIDなしで容量を多く使い、
+      外部バックアップをしっかり取る運用も合理的です。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        RAID 1は
+        「安く大容量を作る構成」
+        ではなく、
+        「小さく始めて、
+        壊れたときに慌てにくい構成」
+        です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      RAIDとは、
+      複数のHDDやSSDを組み合わせて、
+      速度・容量・耐障害性を高める仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+
+      ただし、
+      RAIDはバックアップではありません。
+
+    </p>
+
+    <p style="margin-top:15px;">
+
+      RAIDは、
+      「ディスクが壊れても止めにくくする仕組み」
+      であり、
+      バックアップは、
+      「データを失わないようにする仕組み」
+      です。
+
+    </p>
+
+    <div class="point-box">
+
+      <p>
+        毎日使うNASなら
+        「RAID 1＋外部バックアップ」、
+        数日止まってもよい保管庫なら
+        「RAIDなし＋外部バックアップ」
+        という考え方が分かりやすいです。
+      </p>
+
+    </div>
+
+    <p style="margin-top:15px;">
+
+      RAIDを選ぶときは、
+      容量効率だけでなく、
+      故障時にどれくらい早く使える状態へ戻したいかも考えることが重要です。
+
+    </p>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
