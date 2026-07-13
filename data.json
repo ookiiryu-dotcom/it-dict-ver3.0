@@ -290,5 +290,9 @@
   {
    "term": "HTTP",
    "link": "HTTP.html"
+  },
+  {
+   "term": "HTTPS",
+   "link": "HTTPS.html"
   }
 ]
