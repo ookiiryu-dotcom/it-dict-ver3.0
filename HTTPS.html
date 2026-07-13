@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTPS</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .mobile-break {
+    display:none;
+  }
+
+  @media screen and (max-width:420px) {
+    .mobile-break {
+      display:block;
+    }
+
+    header {
+      padding-left:16px;
+      padding-right:16px;
+    }
+
+    header h1 {
+      font-size:1.85em;
+      line-height:1.35;
+    }
+
+    header p {
+      font-size:0.95em;
+      line-height:1.8;
+    }
+
+    .container {
+      width:100%;
+      padding:12px;
+      box-sizing:border-box;
+    }
+
+    .card {
+      padding:22px 16px;
+      margin-bottom:18px;
+      border-radius:14px;
+      box-sizing:border-box;
+    }
+
+    .card h2 {
+      font-size:1.28em;
+      line-height:1.55;
+      margin-bottom:18px;
+      word-break:normal;
+      line-break:strict;
+      overflow-wrap:break-word;
+      text-wrap:balance;
+    }
+
+    .card h3,
+    .part-box h3 {
+      font-size:1.02em;
+      line-height:1.55;
+      margin-bottom:10px;
+      word-break:normal;
+      line-break:strict;
+      overflow-wrap:break-word;
+      text-wrap:balance;
+    }
+
+    .card p,
+    .part-box {
+      font-size:0.94em;
+      line-height:1.9;
+      line-break:strict;
+      text-wrap:pretty;
+    }
+
+    .parts-grid {
+      grid-template-columns:minmax(0, 1fr);
+    }
+
+    .part-box {
+      padding:18px 14px;
+      box-sizing:border-box;
+    }
+
+    .point-box,
+    .example {
+      padding:18px 14px;
+      margin:20px 0;
+      box-sizing:border-box;
+      line-break:strict;
+      text-wrap:pretty;
+    }
+
+    .card > div[style*="background:#f8f9fa"] {
+      padding:18px 14px !important;
+    }
+
+    .table-wrap {
+      margin:20px 0;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .table-wrap table {
+      font-size:0.84em;
+      line-height:1.7;
+    }
+
+    .table-wrap th,
+    .table-wrap td {
+      padding:12px 10px;
+      line-break:strict;
+    }
+
+    .back a {
+      font-size:0.95em;
+    }
+
+    footer {
+      font-size:0.85em;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- ===== ヘッダー ===== -->
+
+<header>
+  <h1>
+    HTTPS
+    <span style="display:block; font-size:0.55em; font-weight:normal; margin-top:8px;">
+      <div style="font-size:0.9em;"><br>
+      HTTP通信をTLSで<br>
+      安全に保護する仕組み</div>
+    </span>
+  </h1>
+  <p>
+    <span style="font-size:0.85em;">
+      WebページやAPIで送受信する情報を暗号化し、<br>
+      接続先の確認と通信途中の改ざん検知を行う技術
+    </span>
+  </p>
+
+</header>
+<!-- ===== メイン ===== -->
+
+<div class="container">
+  <!-- ===== HTTPSとは ===== -->
+
+  <section class="card">
+
+    <h2>HTTPSとは？</h2>
+    <p>
+      HTTPSは、ブラウザやスマートフォンアプリなどの
+      <strong>HTTPクライアント</strong>と、
+      <strong>HTTPサーバー</strong>の間で行う通信を、
+      TLSという技術で保護する仕組みです。
+    </p>
+
+    <p style="margin-top:15px;">
+      HTTPでは、Webページの取得、ログイン、検索、
+      ファイル送信などの要求と応答を行います。
+      HTTPSでは、そのHTTP通信をそのまま平文で運ぶのではなく、
+      TLSによって暗号化してから送受信します。
+    </p>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0; text-align:center; font-size:1.05em; line-height:2;">
+      <strong>
+        HTTPS<br>
+        <span style="display:inline-block;transform:rotate(90deg);line-height:1;">＝</span><br>
+        HTTP ＋ TLSによる通信保護
+      </strong>
+    </div>
+    <div class="point-box">
+      <p>
+        HTTPSは、Webサイトそのものを無条件に安全にする技術ではありません。
+        主に「通信している途中の盗聴・なりすまし・改ざん」から、
+        HTTPの情報を守るための仕組みです。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+    <p>
+      HTTPとHTTPSの違いは、手紙の運び方に例えると理解しやすくなります。
+      HTTPは内容が見える状態で手紙を運ぶイメージ、
+      HTTPSは鍵付きの箱に手紙を入れて運ぶイメージです。
+    </p>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center;">
+        <div style="background:#fff; border:1px solid #ddd; border-radius:10px; padding:14px 18px; width:100%; max-width:560px; line-height:1.8;">
+          ブラウザやアプリが、<br>
+          サーバーへ送りたいHTTP情報を用意する
+        </div>
+        <div style="font-size:1.4em; color:#666;">↓</div>
+        <div style="background:#eaf4ff; border:1px solid #9fc5f8; border-radius:10px; padding:14px 18px; width:100%; max-width:560px; font-weight:bold; line-height:1.8;">
+          TLSで暗号化し、<br>
+          鍵の掛かった状態にする
+        </div>
+        <div style="font-size:1.4em; color:#666;">↓</div>
+        <div style="background:#fff4e5; border:1px solid #f0c36d; border-radius:10px; padding:14px 18px; width:100%; max-width:560px; font-weight:bold; line-height:1.8;">
+          インターネットなどの通信経路を通る
+        </div>
+        <div style="font-size:1.4em; color:#666;">↓</div>
+        <div style="background:#fff; border:1px solid #ddd; border-radius:10px; padding:14px 18px; width:100%; max-width:560px; line-height:1.8;">
+          接続先が復号し、<br>
+          HTTPの要求や応答を処理する
+        </div>
+      </div>
+    </div>
+    <div class="example">
+      <p>
+        通信を途中で見られても、暗号鍵を持っていなければ
+        内容を簡単には読み取れません。
+        ただし、送り主の端末と受け取るサーバーでは、
+        処理のために情報が復号されます。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== なぜ必要 ===== -->
+
+  <section class="card">
+
+    <h2>なぜHTTPSが必要なのか</h2>
+    <p>
+      Web通信では、ログイン情報、Cookie、個人情報、検索内容、
+      業務データなど、第三者に見られたくない情報を扱います。
+      これらを平文のHTTPで送ると、通信経路上で盗み見られたり、
+      書き換えられたりする危険があります。
+    </p><br>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3>盗聴を防ぐ</h3>
+        ID、パスワード、Cookie、<br>
+        入力情報などを暗号化し、<br>
+        通信途中で内容を読まれにくくします。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>なりすましを防ぐ</h3>
+        サーバー証明書を検証し、<br>
+        接続しようとしているドメインの<br>
+        サーバーか確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>改ざんを検知する</h3>
+        通信途中でデータが変更されていないかを<br>
+        確認し、不正に書き換えられたデータの<br>
+        受け入れを防ぎます。
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ===== HTTPとの違い ===== -->
+
+  <section class="card">
+
+    <h2>HTTPとHTTPSの違い</h2>
+    <p>
+      HTTPとHTTPSは、Web上で要求と応答を行うという役割は共通しています。
+      大きな違いは、通信をTLSで保護するかどうかです。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>HTTP</th>
+            <th>HTTPS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>URLの先頭</td>
+            <td>http://</td>
+            <td>https://</td>
+          </tr>
+          <tr>
+            <td>通信内容</td>
+            <td>原則として暗号化されず、<br>平文で送受信されます。</td>
+            <td>TLSによって暗号化して<br>送受信されます。</td>
+          </tr>
+          <tr>
+            <td>接続先の確認</td>
+            <td>HTTPだけでは、接続先の身元を<br>証明書で確認しません。</td>
+            <td>通常はサーバー証明書を使って、<br>接続先を確認します。</td>
+          </tr>
+          <tr>
+            <td>改ざんへの対応</td>
+            <td>通信途中の書き換えを、<br>HTTPだけでは防げません。</td>
+            <td>TLSの完全性保護によって、<br>改ざんを検知します。</td>
+          </tr>
+          <tr>
+            <td>代表的なポート</td>
+            <td>TCP 80番</td>
+            <td>TCP 443番<br>HTTP/3ではUDP 443番が一般的です。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="point-box">
+      <p>
+        80番と443番は代表的なポート番号です。
+        HTTPやHTTPSは別のポートでも動かせるため、
+        ポート番号だけで安全性を判断することはできません。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 構成要素 ===== -->
+
+  <section class="card">
+
+    <h2>主な構成要素</h2>
+    <p>
+      HTTPS通信は、ブラウザやサーバーだけで成立するものではありません。
+      TLS、証明書、認証局、暗号鍵などが連携して通信を保護します。
+    </p><br>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3>HTTPクライアント</h3>
+        ブラウザ、スマートフォンアプリ、<br>
+        IoT機器、APIツールなど、<br>
+        HTTPリクエストを送る側です。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>HTTPサーバー</h3>
+        リクエストを受け取り、<br>
+        WebページやAPIの応答を返します。<br>
+        TLSを直接処理する場合もあります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>TLS</h3>
+        暗号方式の合意、相手の認証、<br>
+        セッション鍵の確立を行い、<br>
+        通信を暗号化・保護します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>サーバー証明書</h3>
+        ドメイン名と公開鍵などを結び付け、<br>
+        接続先を検証するために使われます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>認証局</h3>
+        証明書の発行や管理を行い、<br>
+        証明書を信頼するための仕組みを支えます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>公開鍵と秘密鍵</h3>
+        サーバーは秘密鍵を安全に保管し、<br>
+        証明書には対応する公開鍵の情報が<br>
+        含まれます。
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ===== 通信の流れ ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.92em;">HTTPS通信の基本的な流れ</div></h2>
+    <p>
+      HTTPSでは、すぐにHTTP情報を送るのではなく、
+      最初に安全な通信路を準備します。
+      この準備の中心となる処理がTLSハンドシェイクです。
+    </p>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0; font-size:0.9em; overflow-x:auto; line-height:2;">
+      <div style="min-width:680px; white-space:nowrap;">
+        1. クライアントがURLのドメイン名をDNSで調べる<br>
+        2. クライアントがサーバーへ接続を開始する<br>
+        3. 利用できるTLSの条件や暗号方式をやり取りする<br>
+        4. サーバーがサーバー証明書などを提示する<br>
+        5. クライアントが証明書の信頼性・期限・ドメイン名を確認する<br>
+        6. 両者が安全に暗号通信へ使う鍵を確立する<br>
+        7. HTTPリクエストを暗号化して送信する<br>
+        8. サーバーが復号して処理し、HTTPレスポンスを暗号化して返す
+      </div>
+    </div>
+    <div class="point-box">
+      <p>
+        公開鍵暗号だけでWebページ全体を暗号化するのではありません。
+        TLSハンドシェイクで安全に鍵を確立し、
+        その後の大量のデータは高速な共通鍵暗号で保護します。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 証明書検証 ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.9em;">サーバー証明書で確認すること</div></h2>
+    <p>
+      サーバー証明書は、暗号化のためだけにあるものではありません。
+      クライアントが接続先を確認し、
+      不正なサーバーへ情報を送る危険を減らすために使われます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>確認項目</th>
+            <th>確認する内容</th>
+            <th>問題がある場合</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ドメイン名</td>
+            <td>アクセス先のドメイン名が、<br>証明書の対象に含まれているか確認します。</td>
+            <td>別のサイト用証明書などの場合、<br>名前の不一致として警告されます。</td>
+          </tr>
+          <tr>
+            <td>有効期間</td>
+            <td>証明書が有効となる開始日と、<br>有効期限の範囲内か確認します。</td>
+            <td>期限切れや利用開始前の場合、<br>安全な接続として扱えません。</td>
+          </tr>
+          <tr>
+            <td>信頼関係</td>
+            <td>信頼する認証局までの証明書チェーンを<br>検証できるか確認します。</td>
+            <td>発行元を信頼できない場合、<br>証明書警告が表示されます。</td>
+          </tr>
+          <tr>
+            <td>失効状態</td>
+            <td>証明書が有効期限前に<br>失効していないか確認する場合があります。</td>
+            <td>秘密鍵の漏えいなどで失効していれば、<br>接続を拒否する必要があります。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="example">
+      <p>
+        証明書は「このWebサイトの内容や運営者が必ず安全である」ことを
+        保証するものではありません。
+        詐欺サイトでも、自分が管理するドメイン用の
+        有効な証明書を取得できる場合があります。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== ブラウザ以外 ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.92em;">ブラウザ以外で使われる<br class="mobile-break">HTTPS</div></h2>
+    <p>
+      HTTPSはブラウザ専用ではありません。
+      HTTPを使うクライアントであれば、
+      スマートフォンアプリやIoT機器でもHTTPSを利用できます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>利用例</th>
+            <th>HTTPSで送る情報</th>
+            <th>実装上の違い</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Webブラウザ</td>
+            <td>Webページ、Cookie、フォーム入力、<br>画像やスクリプトなどを送受信します。</td>
+            <td>証明書警告、HSTS、混在コンテンツなどを<br>画面上で利用者へ通知します。</td>
+          </tr>
+          <tr>
+            <td>スマートフォンアプリ</td>
+            <td>ログイン情報、API要求、<br>アプリ内データなどを送受信します。</td>
+            <td>OSの信頼ストアや、アプリ独自の<br>証明書検証を利用する場合があります。</td>
+          </tr>
+          <tr>
+            <td>IoT機器</td>
+            <td>センサー情報、設定値、<br>制御命令などを送受信できます。</td>
+            <td>処理能力や証明書更新の方法が<br>設計上の制約になる場合があります。</td>
+          </tr>
+          <tr>
+            <td>業務システム</td>
+            <td>システム間API、認証トークン、<br>業務データなどを送受信します。</td>
+            <td>クライアント証明書やmTLSで、<br>接続元も認証する場合があります。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="point-box">
+      <p>
+        TLSを使用していても、上位の通信がHTTPでなければHTTPSではありません。
+        例えばMQTTをTLSで保護する通信は安全な暗号通信ですが、
+        「MQTT over TLS」でありHTTPSとは区別されます。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 保護される範囲 ===== -->
+
+  <section class="card">
+
+    <h2>HTTPSで保護される情報</h2>
+    <p>
+      TLS接続が成立した後は、HTTPのヘッダーや本文などが暗号化されます。
+      ただし、通信を成立させるために必要な情報まで
+      すべて見えなくなるわけではありません。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>情報の種類</th>
+            <th>通常の扱い</th>
+            <th>注意点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HTTPヘッダー</td>
+            <td>Cookieや認証情報を含め、<br>TLS接続内で暗号化されます。</td>
+            <td>接続先サーバーやTLS終端装置では、<br>処理のために復号されます。</td>
+          </tr>
+          <tr>
+            <td>HTTP本文</td>
+            <td>フォーム入力、JSON、HTMLなどが<br>暗号化されます。</td>
+            <td>端末内やサーバー内での保存状態は、<br>HTTPSとは別に保護が必要です。</td>
+          </tr>
+          <tr>
+            <td>URLのパス・クエリ</td>
+            <td>HTTPリクエストの一部として、<br>通常は暗号化されます。</td>
+            <td>ブラウザ履歴やサーバーログなどには、<br>平文で残る場合があります。</td>
+          </tr>
+          <tr>
+            <td>接続先IPアドレス</td>
+            <td>通信を届けるために必要なので、<br>通常は外部から確認できます。</td>
+            <td>通信先やサービスを推測する材料に<br>なる場合があります。</td>
+          </tr>
+          <tr>
+            <td>通信量・通信時刻</td>
+            <td>パケットの大きさや発生時刻は、<br>通信経路上で観測できます。</td>
+            <td>本文が読めなくても、通信の傾向を<br>分析される可能性があります。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="point-box">
+      <p>
+        HTTPSは通信中の情報を保護しますが、
+        端末の画面、ブラウザ履歴、アクセスログ、データベースなどに
+        保存された情報まで自動的に暗号化するものではありません。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== TLS終端 ===== -->
+
+  <section class="card">
+
+    <h2>TLS終端とは</h2>
+    <p>
+      TLS終端とは、暗号化されたTLS通信を受け取り、
+      その接続を終了してデータを復号する場所を指します。
+      Webサーバーだけでなく、WAF、ロードバランサー、
+      リバースプロキシなどがTLSを終端する場合もあります。
+    </p>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0; font-size:0.9em; overflow-x:auto; line-height:2;">
+      <div style="min-width:680px; white-space:nowrap;">
+        利用者 ── HTTPS ── WAF・LBでTLS終端<br>
+        WAF・LB ── HTTP または HTTPS ── 内部Webサーバー<br>
+        ※ 内部もHTTPSにする場合は、WAF・LBが新しいTLS接続を確立する
+      </div>
+    </div>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3>Webサーバーで終端</h3>
+        クライアントからWebサーバーまで<br>
+        TLSを維持します。<br>
+        各サーバーで証明書を管理する構成です。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>WAF・LBで終端</h3>
+        前段装置で復号し、負荷分散や<br>
+        HTTP内容の検査を行います。<br>
+        証明書管理も集約できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>終端後に再暗号化</h3>
+        前段装置で復号・検査した後、<br>
+        内部サーバーまで新しいTLS接続で<br>
+        再暗号化します。
+      </div>
+    </div>
+
+  </section>
+  <!-- ===== 攻撃検知 ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.92em;">暗号化通信内の攻撃を<br class="mobile-break">検知する仕組み</div></h2>
+    <p>
+      攻撃者もHTTPSを利用できます。
+      攻撃者が正規のTLS接続を作り、その中で不正なHTTPリクエストを送った場合、
+      TLSから見れば正常に暗号化された通信です。
+    </p>
+
+    <p style="margin-top:15px;">
+      SQLインジェクションや不正なファイルアップロードなどを判断するには、
+      HTTPの内容を復号できる場所で検査する必要があります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>検査場所</th>
+            <th>HTTP内容の検査</th>
+            <th>主な特徴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TLSパススルーの装置</td>
+            <td>暗号鍵がなければ、<br>本文の詳細検査は原則困難です。</td>
+            <td>IPアドレス、通信量、接続傾向などを<br>分析できる場合があります。</td>
+          </tr>
+          <tr>
+            <td>TLSを終端するWAF</td>
+            <td>復号したHTTPリクエストを<br>ルールなどで検査できます。</td>
+            <td>攻撃を検知・遮断した後、<br>内部へ再暗号化できます。</td>
+          </tr>
+          <tr>
+            <td>Webサーバー</td>
+            <td>接続先なので、復号後の内容を<br>確認できます。</td>
+            <td>サーバー機能やログで、<br>異常な要求を検知できます。</td>
+          </tr>
+          <tr>
+            <td>Webアプリケーション</td>
+            <td>入力値や処理内容を最も詳しく<br>検証できます。</td>
+            <td>入力検証、認証、認可などを<br>アプリ側で実施します。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="point-box">
+      <p>
+        TLSの改ざん検知と、WAFなどの攻撃検知は別の役割です。
+        TLSは通信途中の不正な変更を検知しますが、
+        正規のTLS接続内に入れられた攻撃内容までは判断しません。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== メリット ===== -->
+
+  <section class="card">
+
+    <h2>メリット</h2>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3>通信内容を守れる</h3>
+        パスワード、個人情報、業務データを<br>
+        暗号化し、盗聴される危険を<br>
+        減らせます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>接続先を確認できる</h3>
+        証明書を検証し、目的のドメインを<br>
+        提供するサーバーへ接続しているか<br>
+        確認できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>改ざんを検知できる</h3>
+        通信途中で内容を書き換えられた場合、<br>
+        正常なデータとして受け入れないように<br>
+        できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3><span style="font-size:0.92em;">公衆Wi-Fiでの危険を減らせる</span></h3>
+        同じネットワーク上の第三者から、<br>
+        HTTP内容を直接読まれる危険を<br>
+        減らせます。
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ===== デメリット ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.9em;">デメリット・運用上の負担</div></h2>
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>発生する負担</th>
+            <th>主な対策</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>証明書管理</td>
+            <td>発行、配布、更新、失効などの<br>管理が必要です。</td>
+            <td>自動更新、期限監視、<br>証明書台帳を整備します。</td>
+          </tr>
+          <tr>
+            <td>処理負荷</td>
+            <td>ハンドシェイクや暗号化・復号の<br>処理が追加されます。</td>
+            <td>セッション再開、負荷分散、<br>適切な機器設計を行います。</td>
+          </tr>
+          <tr>
+            <td>監視の難しさ</td>
+            <td>途中の監視装置からは、暗号化された<br>HTTP本文を確認しにくくなります。</td>
+            <td>適切な場所でTLSを終端し、<br>復号後のログやWAFで監視します。</td>
+          </tr>
+          <tr>
+            <td>構成の複雑化</td>
+            <td>WAF、LB、プロキシを使うと、<br>証明書と暗号化区間が増えます。</td>
+            <td>終端場所、再暗号化、責任範囲を<br>構成図と手順書で明確にします。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="example">
+      <p>
+        現在の一般的な環境ではHTTPSの処理負荷は現実的に管理できますが、
+        大量アクセスを扱うシステムでは、TLS接続数や暗号処理能力を含めた
+        性能設計が必要です。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 注意点 ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.92em;">HTTPSを利用するときの<br class="mobile-break">注意点</div></h2>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3><span style="font-size:0.94em;">サイト全体の安全は保証しない</span></h3>
+        HTTPSでも、詐欺サイトや<br>
+        マルウェアを配布するサイトは<br>
+        存在します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>証明書警告を無視しない</h3>
+        期限切れ、名前の不一致など、<br>
+        接続先を検証できない理由を<br>
+        確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>混在コンテンツに注意する</h3>
+        HTTPSページからHTTPの画像や<br>
+        スクリプトを読み込むと、<br>
+        保護が不完全になる場合があります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>端末とサーバーも守る</h3>
+        復号後の情報、ログ、秘密鍵などは、<br>
+        HTTPSとは別の対策で保護します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>URLへ秘密情報を書かない</h3>
+        パスやクエリは暗号化されても、<br>
+        履歴やログなどへ残る可能性があります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>古いTLSを残さない</h3>
+        安全でないTLSバージョンや<br>
+        暗号方式を無効にし、<br>
+        利用環境との互換性も確認します。
+      </div>
+    </div>
+
+  </section>
+  <!-- ===== ゼロトラスト ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.92em;">内部ネットワークと<br class="mobile-break">ゼロトラスト</div></h2>
+    <p>
+      WAFやロードバランサーでTLSを終端した後、
+      内部WebサーバーまでHTTPで送る構成も技術的には可能です。
+      ただし、内部ネットワークだから安全と決めつけると、
+      侵入後の盗聴や内部不正に対応できません。
+    </p>
+
+    <p style="margin-top:15px;">
+      ゼロトラストでは、ネットワーク上の場所だけを理由に
+      通信相手を信頼しません。
+      情報の機密性、経路、境界、既存の暗号化対策を確認し、
+      必要に応じて内部区間もTLSで再暗号化します。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>構成・条件</th>
+            <th>内部TLSの考え方</th>
+            <th>確認ポイント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>別ホスト・別VM間</td>
+            <td>ネットワークを通るため、<br>内部もTLSにする必要性が高くなります。</td>
+            <td>経由機器、管理者、共有範囲、<br>盗聴リスクを確認します。</td>
+          </tr>
+          <tr>
+            <td>クラウド・共有基盤</td>
+            <td>環境を内部だから安全とせず、<br>再暗号化を基本候補にします。</td>
+            <td>テナント分離、サービス間認証、<br>鍵管理を確認します。</td>
+          </tr>
+          <tr>
+            <td>機密情報を扱う通信</td>
+            <td>個人情報や認証情報などは、<br>通信経路全体の保護を検討します。</td>
+            <td>法令、契約、社内基準、<br>データ分類を確認します。</td>
+          </tr>
+          <tr>
+            <td>同一ホスト内</td>
+            <td>ループバックやUnixソケットなどでは、<br>別の保護で代替できる場合があります。</td>
+            <td>同居プロセス、権限分離、<br>残るリスクを確認します。</td>
+          </tr>
+          <tr>
+            <td>IPsecなどを利用</td>
+            <td>別レイヤーで経路が保護されるため、<br>TLSとの重複を評価します。</td>
+            <td>暗号化の開始・終了位置と、<br>通信相手の認証方法を確認します。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="point-box">
+      <p>
+        ゼロトラストが求める本質は、
+        「内部通信は必ず同じ方式のTLSにする」という一律の指定ではなく、
+        場所だけを信頼せず、通信を継続的に保護・認証することです。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 関連技術 ===== -->
+
+  <section class="card">
+
+    <h2>関連技術との関係</h2>
+    <div class="parts-grid">
+      <div class="part-box">
+        <h3>HTTP</h3>
+        WebページやAPIの要求と応答を<br>
+        定めるプロトコルです。HTTPSでは、<br>
+        HTTPをTLSで保護します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>TLS</h3>
+        通信の暗号化、認証、完全性保護を<br>
+        行います。HTTPS以外の<br>
+        プロトコルにも利用されます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>PKI</h3>
+        公開鍵と証明書を使い、<br>
+        信頼関係を管理するための<br>
+        仕組みです。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>HSTS</h3>
+        ブラウザへHTTPS接続を強制し、<br>
+        HTTPへ接続する危険を減らします。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>WAF</h3>
+        復号後のHTTPリクエストを検査し、<br>
+        Webアプリケーションを狙う攻撃を<br>
+        検知・遮断します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>LB・リバースプロキシ</h3>
+        通信の振り分けや転送を行い、<br>
+        TLS終端・再暗号化を<br>
+        担当する場合があります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>HTTP/2・HTTP/3</h3>
+        HTTP/2は主にTCPとTLS、<br>
+        HTTP/3はQUICを使って、<br>
+        HTTPS通信を効率よく処理します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3><span style="font-size:0.94em;">mTLS・サービスメッシュ</span></h3>
+        mTLSで通信相手を相互認証し、<br>
+        サービス間通信を<br>
+        暗号化・制御します。
+      </div>
+    </div>
+
+  </section>
+  <!-- ===== 実務 ===== -->
+
+  <section class="card">
+
+    <h2>実務上の確認ポイント</h2>
+    <p>
+      HTTPSを導入しただけで終わりではありません。
+      証明書、TLS設定、終端場所、内部通信、監視まで含めて
+      継続的に管理する必要があります。
+    </p>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0; font-size:0.9em; overflow-x:auto; line-height:2;">
+      <div style="min-width:680px; white-space:nowrap;">
+        1. 対象となるドメイン名と証明書の範囲を確認する<br>
+        2. 証明書の有効期限、更新方法、失効時の手順を決める<br>
+        3. 証明書チェーンと中間証明書を正しく設定する<br>
+        4. 秘密鍵の保存場所、アクセス権、バックアップ方針を確認する<br>
+        5. 使用するTLSバージョンと暗号方式を確認する<br>
+        6. HTTPからHTTPSへの転送とHSTSの利用可否を確認する<br>
+        7. 画像、CSS、JavaScriptを含めて混在コンテンツがないか確認する<br>
+        8. WAF、LB、リバースプロキシのどこでTLSを終端するか決める<br>
+        9. 終端後の内部通信をHTTPにするか、HTTPSで再暗号化するか決める<br>
+        10. HTTP/2・HTTP/3とファイアウォール・監視装置の対応を確認する<br>
+        11. 復号後の攻撃検査、アクセスログ、アラートの取得方法を確認する<br>
+        12. 証明書期限切れや更新失敗を検知する監視を設定する
+      </div>
+    </div>
+    <div class="point-box">
+      <p>
+        特に重要なのは「どこからどこまで暗号化されているか」を
+        構成図で明確にすることです。
+        利用者からWAFまではHTTPSでも、
+        WAFから内部サーバーまではHTTPという構成もあります。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== まとめ ===== -->
+
+  <section class="card">
+
+    <h2>まとめ</h2>
+    <div style="background:#f8f9fa; border:1px solid #ddd; border-radius:12px; padding:25px; margin:25px 0; font-size:0.9em; overflow-x:auto; line-height:2;">
+      <div style="min-width:680px; white-space:nowrap;">
+        1. HTTPSは、HTTP通信をTLSで保護する仕組み<br>
+        2. 主な役割は、暗号化・接続先の認証・改ざん検知<br>
+        3. ブラウザだけでなく、アプリ、API、IoT機器でも利用できる<br>
+        4. TLSを使っていても、上位プロトコルがHTTPでなければHTTPSではない<br>
+        5. 通信開始時に証明書を検証し、安全に暗号鍵を確立する<br>
+        6. HTTPヘッダー、本文、URLのパスやクエリは通常暗号化される<br>
+        7. 接続先IPアドレス、通信量、通信時刻などは隠れない<br>
+        8. HTTPSは端末内・サーバー内・保存データまで自動的に守るものではない<br>
+        9. TLS終端は、Webサーバー、WAF、LB、リバースプロキシなどで行われる<br>
+        10. HTTP内容の攻撃検査には、復号後のデータを確認できる場所が必要<br>
+        11. TLS自体は、正規の暗号通信内に入れられた攻撃までは判断しない<br>
+        12. 内部区間も、情報の機密性と経路のリスクに応じて再暗号化する<br>
+        13. mTLSでは、サーバーだけでなくクライアント側も証明書で認証する<br>
+        14. 証明書更新、TLS設定、終端場所、監視を継続的に管理する
+      </div>
+    </div>
+    <div class="point-box">
+      <p>
+        一言でまとめると、HTTPSは
+        「HTTPで扱う情報を、TLSによって安全な通信路で運ぶ仕組み」です。
+        ただし、Webサイト全体の安全を実現するには、
+        WAF、認証、アクセス制御、脆弱性対策などとの組み合わせが必要です。
+      </p>
+
+    </div>
+
+  </section>
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+  </div>
+</div>
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+</body>
+</html>
