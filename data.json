@@ -286,5 +286,9 @@
   {
    "term": "OCR",
    "link": "OCR.html"
+  },
+  {
+   "term": "HTTP",
+   "link": "HTTP.html"
   }
 ]
