@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HTTP</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+
+    HTTP
+
+    <span style="
+      display:block;
+      font-size:0.55em;
+      font-weight:normal;
+      margin-top:8px;">
+
+      <div style="font-size:0.9em;"><br>
+      WebブラウザやアプリとWebサーバーが、<br>
+      データをやり取りするための通信ルール</div>
+
+    </span>
+
+  </h1>
+
+  <p>
+    <span style="font-size:0.85em;">
+      Webページ、画像、動画、JSONなどを、<br>
+      リクエストとレスポンスで受け渡す仕組み
+    </span>
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<main>
+
+<div class="container">
+
+  <!-- ===== HTTPとは ===== -->
+
+  <section class="card">
+
+    <h2>HTTPとは？</h2>
+
+    <p>
+      HTTPとは、<strong>Hypertext Transfer Protocol</strong>の略で、
+      Webブラウザやスマートフォンアプリなどの<strong>クライアント</strong>と、
+      WebサイトやWeb APIを提供する<strong>サーバー</strong>の間で、
+      データをやり取りするための通信ルールです。
+    </p>
+
+    <p style="margin-top:15px;">
+      Webページを開くとき、ブラウザはサーバーへ
+      「このページを送ってください」という要求を送ります。
+      サーバーは要求を処理し、HTMLや画像などのデータと、
+      処理結果を表す情報を返します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      font-size:1.05em;
+      line-height:2;">
+
+      <strong>
+        ブラウザ・アプリ<br>
+        <div style="margin-left: 120px;">↓ HTTPリクエスト</div>
+        Webサーバー<br>
+        <div style="margin-left: 120px;">↓ HTTPレスポンス</div>
+        ブラウザ・アプリに結果を表示
+      </strong>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPの中心は、クライアントが要求を送る
+        <strong>リクエスト</strong>と、
+        サーバーが結果を返す<strong>レスポンス</strong>です。
+        HTTPはWeb通信の内容と意味を決める、
+        アプリケーション層のプロトコルです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まずはイメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      HTTPは、レストランで注文して料理を受け取る流れにたとえると
+      理解しやすくなります。
+      利用者が注文を伝え、店側が内容を確認して、
+      料理や結果を返す流れがHTTP通信に似ています。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;">
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:560px;
+          line-height:1.8;">
+
+          利用者がブラウザでURLを開く
+
+        </div>
+
+        <div style="font-size:1.4em; color:#666;">↓</div>
+
+        <div style="
+          background:#eaf4ff;
+          border:1px solid #9fc5f8;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:560px;
+          font-weight:bold;
+          line-height:1.8;">
+
+          ブラウザがHTTPリクエストを送る
+
+        </div>
+
+        <div style="font-size:1.4em; color:#666;">↓</div>
+
+        <div style="
+          background:#fff4e5;
+          border:1px solid #f0c36d;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:560px;
+          font-weight:bold;
+          line-height:1.8;">
+
+          サーバーがページやデータを準備する
+
+        </div>
+
+        <div style="font-size:1.4em; color:#666;">↓</div>
+
+        <div style="
+          background:#fff;
+          border:1px solid #ddd;
+          border-radius:10px;
+          padding:14px 18px;
+          width:100%;
+          max-width:560px;
+          line-height:1.8;">
+
+          HTTPレスポンスを受け取り、<br>画面へ表示する
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        レストランの注文内容に相当するものがHTTPリクエスト、
+        料理や「売り切れです」という返答に相当するものが
+        HTTPレスポンスです。
+        HTTPは、何をどの形式で要求し、どのように結果を返すかを決めます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== なぜ必要 ===== -->
+
+  <section class="card">
+
+    <h2>なぜHTTPが必要なのか</h2>
+
+    <p>
+      ブラウザ、アプリ、サーバーがそれぞれ独自の方法で通信すると、
+      製品や開発元が異なるだけでデータをやり取りできなくなります。
+      HTTPという共通ルールを使うことで、
+      異なる端末やシステム同士でもWeb上で通信できます。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>共通の形式で通信する</h3>
+        ブラウザやサーバーの種類が異なっても、<br>
+        同じルールで要求と応答を行えます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>処理結果を伝える</h3>
+        成功、未検出、権限不足、障害などを、<br>
+        ステータスコードで伝えられます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>多様なデータを扱う</h3>
+        HTML、画像、音声、動画、JSONなどを、<br>
+        種類を示しながら受け渡せます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>追加情報を付ける</h3>
+        言語、認証、キャッシュ、データ形式などを、<br>
+        ヘッダーで伝えられます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>Web APIを利用する</h3>
+        画面表示だけでなく、アプリとサーバーの間で、<br>
+        データや機能をやり取りできます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>機能を組み合わせる</h3>
+        Cookie、TLS、キャッシュ、プロキシなどと、<br>
+        組み合わせてWebサービスを構成できます。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPはWebページを見るためだけの仕組みではありません。
+        スマートフォンアプリ、クラウドサービス、Web API、
+        ファイル配信など、多くの通信で利用されています。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Webページとの違い ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.9em;">HTTP・HTML・URLの違い</div></h2>
+
+    <p>
+      HTTP、HTML、URLは一緒に登場することが多いため、
+      同じもののように見えますが、それぞれ役割が異なります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>用語</th>
+            <th>役割</th>
+            <th>イメージ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>HTTP</td>
+            <td>クライアントとサーバーが、<br>
+            データをやり取りする通信ルールです。</td>
+            <td>注文と返答の方法</td>
+          </tr>
+
+          <tr>
+            <td>HTML</td>
+            <td>見出し、文章、画像、リンクなど、<br>
+            Webページの構造を表す文書形式です。</td>
+            <td>受け取る料理や資料の中身</td>
+          </tr>
+
+          <tr>
+            <td>URL</td>
+            <td>通信方式、接続先、取得する場所などを、<br>
+            指し示すための文字列です。</td>
+            <td>店や届け先の住所</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        ブラウザはURLを手がかりに接続先を決め、
+        HTTPでサーバーへ要求を送り、
+        返されたHTMLを解釈してWebページを表示します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 通信の流れ ===== -->
+
+  <section class="card">
+
+    <h2>Webページを開くときの流れ</h2>
+
+    <p>
+      実際にWebページを開くときは、HTTPだけでなく、
+      名前解決や通信経路の確立など、複数の処理が行われます。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        1. 利用者がブラウザへURLを入力する<br>
+        2. DNSを使い、ドメイン名に対応するIPアドレスを調べる<br>
+        3. サーバーとの通信経路を確立する<br>
+        4. HTTPSの場合は、TLSで暗号化通信を準備する<br>
+        5. ブラウザがHTTPリクエストを送る<br>
+        6. サーバーが要求を受け取り、必要な処理を行う<br>
+        7. サーバーがHTTPレスポンスを返す<br>
+        8. ブラウザがHTML、CSS、画像などを追加で取得する<br>
+        9. 受け取った内容を組み立て、画面へ表示する
+
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPはWeb通信全体の一部分です。
+        接続先を調べるDNS、データを運ぶTCPやQUIC、
+        通信を保護するTLSなどと組み合わせて動作します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== リクエスト ===== -->
+
+  <section class="card">
+
+    <h2>HTTPリクエストの構成</h2>
+
+    <p>
+      HTTPリクエストは、クライアントがサーバーへ送る要求です。
+      主に、何をしたいかを示すメソッド、対象の場所、
+      追加情報を示すヘッダー、必要に応じたボディで構成されます。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        GET /products/100 HTTP/1.1<br>
+        Host: example.com<br>
+        Accept: application/json<br>
+        Authorization: Bearer ********
+
+      </div>
+
+    </div>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>構成要素</th>
+            <th>役割</th>
+            <th>例</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>メソッド</td>
+            <td>取得、送信、更新、削除など、<br>
+            サーバーへ求める操作を表します。</td>
+            <td>GET、POST、PUT、<br>
+            PATCH、DELETE</td>
+          </tr>
+
+          <tr>
+            <td>対象</td>
+            <td>サーバー内のどのページやデータを、<br>
+            操作するかを表します。</td>
+            <td>/products/100</td>
+          </tr>
+
+          <tr>
+            <td>ヘッダー</td>
+            <td>接続先、認証、対応形式、言語などの、<br>
+            追加情報を伝えます。</td>
+            <td>Host、Accept、<br>
+            Authorization</td>
+          </tr>
+
+          <tr>
+            <td>ボディ</td>
+            <td>登録・更新するデータなど、<br>
+            要求と一緒に送る内容です。</td>
+            <td>JSON、フォームデータ、<br>
+            ファイルなど</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        GETでは取得対象をURLで示すことが一般的です。
+        POSTやPUTなどでは、送信するデータを
+        リクエストボディへ入れることがあります。
+        実際の使い方はWebサービスの設計によって異なります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== レスポンス ===== -->
+
+  <section class="card">
+
+    <h2>HTTPレスポンスの構成</h2>
+
+    <p>
+      HTTPレスポンスは、サーバーがクライアントへ返す回答です。
+      処理結果を示すステータスコード、追加情報を示すヘッダー、
+      必要に応じたHTMLやJSONなどのボディで構成されます。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        HTTP/1.1 200 OK<br>
+        Content-Type: application/json<br>
+        Content-Length: 48<br><br>
+        {"id":100,"name":"Keyboard","price":12800}
+
+      </div>
+
+    </div>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>構成要素</th>
+            <th>役割</th>
+            <th>例</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>ステータスコード</td>
+            <td>要求が成功したか、転送されたか、<br>
+            エラーになったかを示します。</td>
+            <td>200、301、404、500</td>
+          </tr>
+
+          <tr>
+            <td>ヘッダー</td>
+            <td>データ形式、長さ、キャッシュ、Cookieなどの、<br>
+            追加情報を伝えます。</td>
+            <td>Content-Type、<br>
+            Cache-Control、Set-Cookie</td>
+          </tr>
+
+          <tr>
+            <td>ボディ</td>
+            <td>WebページやAPIの結果など、<br>
+            クライアントへ返す実際の内容です。</td>
+            <td>HTML、JSON、画像、<br>
+            ファイルなど</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== メソッド ===== -->
+
+  <section class="card">
+
+    <h2>主なHTTPメソッド</h2>
+
+    <p>
+      HTTPメソッドは、サーバーへ何を求めているかを示します。
+      初学者は、まずGETとPOSTの役割を理解し、
+      PUT、PATCH、DELETEは発展的なメソッドとして覚えると整理しやすくなります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>メソッド</th>
+            <th>大まかな役割</th>
+            <th>主な利用例</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>GET</td>
+            <td>サーバーからページやデータを、<br>
+            取得するために使います。</td>
+            <td>商品一覧の表示、<br>
+            APIから情報を取得する</td>
+          </tr>
+
+          <tr>
+            <td>POST</td>
+            <td>データや処理内容をサーバーへ送り、<br>
+            処理を依頼するときに使われます。</td>
+            <td>フォーム送信、ログイン、<br>
+            新規データの作成</td>
+          </tr>
+
+          <tr>
+            <td>PUT</td>
+            <td>指定した対象の状態を、<br>
+            作成または置き換えるために使われます。</td>
+            <td>登録済みデータ全体の、<br>
+            置き換え</td>
+          </tr>
+
+          <tr>
+            <td>PATCH</td>
+            <td>指定した対象の一部分を、<br>
+            変更するために使われます。</td>
+            <td>住所や表示名だけを、<br>
+            部分的に更新する</td>
+          </tr>
+
+          <tr>
+            <td>DELETE</td>
+            <td>指定した対象の削除を、<br>
+            サーバーへ要求します。</td>
+            <td>登録データの削除を、<br>
+            APIへ依頼する</td>
+          </tr>
+
+          <tr>
+            <td>HEAD</td>
+            <td>GETと同様の情報を要求しますが、<br>
+            原則としてレスポンスボディを受け取りません。</td>
+            <td>更新日時やデータ形式など、<br>
+            ヘッダーだけを確認する</td>
+          </tr>
+
+          <tr>
+            <td>OPTIONS</td>
+            <td>対象に対して利用できる通信方法などを、<br>
+            確認するために使われます。</td>
+            <td>CORSの事前確認など</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        メソッド名だけで実際の処理が自動的に決まるわけではありません。
+        サーバー側の実装とAPI設計が、
+        それぞれのメソッドをどのように処理するかを決めます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ステータスコード ===== -->
+
+  <section class="card">
+
+    <h2>ステータスコード</h2>
+
+    <p>
+      ステータスコードは、サーバーがリクエストを処理した結果を
+      3桁の数字で示すものです。
+      数字の最初の桁によって、大まかな意味を分類できます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>分類</th>
+            <th>意味</th>
+            <th>代表例</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>100番台</td>
+            <td>要求を受け取り、処理を続けていることなどを、<br>
+            補助的に伝える情報です。</td>
+            <td>100 Continue</td>
+          </tr>
+
+          <tr>
+            <td>200番台</td>
+            <td>要求が正常に受け付けられ、<br>
+            処理されたことを示します。</td>
+            <td>200 OK、201 Created、<br>
+            204 No Content</td>
+          </tr>
+
+          <tr>
+            <td>300番台</td>
+            <td>別の場所への移動や、<br>
+            キャッシュ利用などを示します。</td>
+            <td>301 Moved Permanently、<br>
+            304 Not Modified</td>
+          </tr>
+
+          <tr>
+            <td>400番台</td>
+            <td>要求内容、認証、権限、対象の指定などに、<br>
+            問題があることを示します。</td>
+            <td>400 Bad Request、401 Unauthorized、<br>
+            403 Forbidden、404 Not Found</td>
+          </tr>
+
+          <tr>
+            <td>500番台</td>
+            <td>サーバー内部や上流システムなどで、<br>
+            処理できない問題が起きたことを示します。</td>
+            <td>500 Internal Server Error、<br>
+            502 Bad Gateway、503 Service Unavailable</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        404は「通信そのものが失敗した」という意味ではなく、
+        サーバーへ到達したうえで、要求された対象を
+        見つけられなかったことを示す場合に使われます。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ヘッダー ===== -->
+
+  <section class="card">
+
+    <h2>HTTPヘッダーの役割</h2>
+
+    <p>
+      HTTPヘッダーは、リクエストやレスポンスの本文とは別に、
+      通信に必要な追加情報を伝える部分です。
+      データ形式、認証、キャッシュ、Cookie、接続元など、
+      多くの情報がヘッダーで扱われます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>ヘッダー例</th>
+            <th>主な役割</th>
+            <th>注意点</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Content-Type</td>
+            <td>ボディに入っているデータの種類を、<br>
+            クライアントやサーバーへ伝えます。</td>
+            <td>実際のデータ形式と一致させる必要があります。</td>
+          </tr>
+
+          <tr>
+            <td>Authorization</td>
+            <td>アクセストークンなど、<br>
+            認証に必要な情報を送るために使われます。</td>
+            <td>ログや画面へ不用意に表示しないようにします。</td>
+          </tr>
+
+          <tr>
+            <td>Cookie</td>
+            <td>ブラウザが保存しているCookieを、<br>
+            サーバーへ送信します。</td>
+            <td>送信範囲や安全属性を適切に設定します。</td>
+          </tr>
+
+          <tr>
+            <td>Set-Cookie</td>
+            <td>サーバーがブラウザへ、<br>
+            Cookieの保存や更新を指示します。</td>
+            <td>Secure、HttpOnly、SameSiteなどを検討します。</td>
+          </tr>
+
+          <tr>
+            <td>Cache-Control</td>
+            <td>ブラウザや中継装置が、<br>
+            データを保存・再利用する方法を示します。</td>
+            <td>機密情報を不用意にキャッシュさせないようにします。</td>
+          </tr>
+
+          <tr>
+            <td>Location</td>
+            <td>転送先や、作成されたデータの場所などを、<br>
+            クライアントへ伝えます。</td>
+            <td>不正な転送先を生成しないように検証します。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ボディと形式 ===== -->
+
+  <section class="card">
+
+    <h2>ボディとデータ形式</h2>
+
+    <p>
+      HTTPボディには、WebページのHTML、APIのJSON、画像、動画、
+      フォーム入力、アップロードファイルなど、実際に送受信する内容が入ります。
+      データの種類は、主にContent-Typeヘッダーで示します。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>HTML</h3>
+        Webページの文章や構造を表し、<br>
+        ブラウザが画面表示に利用します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>JSON</h3>
+        項目名と値を組み合わせた形式で、<br>
+        Web APIで広く利用されます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>フォームデータ</h3>
+        入力欄の値やファイルなどを、<br>
+        Webフォームから送信します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>画像・動画・音声</h3>
+        バイナリデータとして送受信し、<br>
+        ブラウザやアプリで表示・再生します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>PDF・圧縮ファイル</h3>
+        ダウンロード用ファイルとして、<br>
+        HTTPレスポンスで配信できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>空のボディ</h3>
+        結果だけを伝え、本文を返さない通信もあります。<br>
+        204などが代表例です。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPはデータの中身をHTMLだけに限定しません。
+        どのような形式を使うかは、
+        Content-TypeやAPI仕様などでクライアントとサーバーが共有します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ステートレス ===== -->
+
+  <section class="card">
+
+    <h2>HTTPはステートレス</h2>
+
+    <p>
+      HTTPは基本的に、各リクエストを独立して扱う
+      <strong>ステートレス</strong>なプロトコルです。
+      サーバーが前回のリクエストを、
+      HTTPの基本動作だけで自動的に記憶するわけではありません。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      text-align:center;
+      font-size:1.02em;
+      line-height:2;">
+
+      <strong>
+        1回目：商品ページを取得する<br>
+        2回目：カートページを取得する<br>
+        ↓<br>
+        それぞれのリクエストは、<br>基本的に独立して処理される
+      </strong>
+
+    </div>
+
+    <p>
+      ログイン状態や買い物かごの内容を維持するときは、
+      Cookie、セッション、アクセストークンなどを組み合わせて、
+      利用者や状態を識別します。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>仕組み</th>
+            <th>主な役割</th>
+            <th>HTTPとの関係</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Cookie</td>
+            <td>ブラウザへ小さな情報を保存し、<br>
+            次回以降の通信で送信します。</td>
+            <td>CookieとSet-Cookieという、<br>
+            HTTPヘッダーを使って送受信します。</td>
+          </tr>
+
+          <tr>
+            <td>セッション</td>
+            <td>ログイン状態などを、<br>
+            主にサーバー側で管理します。</td>
+            <td>Cookieなどで識別子を受け渡し、<br>
+            サーバー上の状態と対応付けます。</td>
+          </tr>
+
+          <tr>
+            <td>アクセストークン</td>
+            <td>APIを利用する権限や認証結果を、<br>
+            文字列として表します。</td>
+            <td>Authorizationヘッダーなどを使い、<br>
+            リクエストごとに送信します。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        「HTTPとは別にCookieが動く」というより、
+        CookieはHTTPヘッダーを利用して状態管理を支援する仕組みです。
+        HTTP自体が履歴を自動保持しないため、
+        アプリケーションがCookieやセッションを使って状態を管理します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== HTTPとHTTPS ===== -->
+
+  <section class="card">
+
+    <h2>HTTPとHTTPSの違い</h2>
+
+    <p>
+      HTTPSは、HTTP通信を<strong>TLS</strong>で保護する仕組みです。
+      TLSを使うことで、通信内容の暗号化、改ざん検知、
+      接続先サーバーの確認を行います。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>HTTP</th>
+            <th>HTTPS</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>通信の保護</td>
+            <td>HTTP単体では、通信内容を、<br>
+            暗号化する仕組みを持ちません。</td>
+            <td>TLSを使い、通信内容を、<br>
+            暗号化して保護します。</td>
+          </tr>
+
+          <tr>
+            <td>改ざん検知</td>
+            <td>通信途中の変更を、<br>
+            HTTP単体では十分に検知できません。</td>
+            <td>TLSによって、通信内容の、<br>
+            不正な変更を検知します。</td>
+          </tr>
+
+          <tr>
+            <td>接続先の確認</td>
+            <td>HTTP単体では、証明書による、<br>
+            サーバー確認を行いません。</td>
+            <td>電子証明書を使って、<br>
+            接続先ドメインを確認します。</td>
+          </tr>
+
+          <tr>
+            <td>URLの先頭</td>
+            <td>http://</td>
+            <td>https://</td>
+          </tr>
+
+          <tr>
+            <td>一般的なポート</td>
+            <td>80番が標準的に使われます。</td>
+            <td>443番が標準的に使われます。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPSであっても、Webサイトの内容や運営者が
+        必ず安全であることまでは保証しません。
+        HTTPSは主に、接続先との通信経路を保護する仕組みです。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== TLS ===== -->
+
+  <section class="card">
+
+    <h2>TLSが行う主な保護</h2>
+
+    <p>
+      TLSは、インターネット上で安全に通信するために、
+      主に暗号化、完全性の確認、認証を行います。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>暗号化</h3>
+        通信内容を第三者が読みにくい形へ変換し、<br>
+        盗聴による情報漏えいを防ぎます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>完全性</h3>
+        通信内容が途中で不正に変更されていないかを、<br>
+        確認できるようにします。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>認証</h3>
+        電子証明書を使い、接続しているサーバーが、<br>
+        対象ドメインに対応するか確認します。
+      </div>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        TLSの内部では公開鍵暗号、共通鍵暗号、電子証明書などが使われます。
+        HTTPの基本を学ぶ段階では、まず
+        「HTTPSはHTTPをTLSで保護する」と理解すれば十分です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== バージョン ===== -->
+
+  <section class="card">
+
+    <h2>HTTPの主なバージョン</h2>
+
+    <p>
+      HTTPには複数のバージョンがあります。
+      どのバージョンでもリクエスト、レスポンス、メソッド、
+      ステータスコードなどの基本的な意味は共通していますが、
+      データの運び方や効率化の方法が異なります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>バージョン</th>
+            <th>主な特徴</th>
+            <th>理解のポイント</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>HTTP/1.1</td>
+            <td>広く利用されてきた方式で、<br>
+            メッセージをテキスト形式で表します。</td>
+            <td>複数の通信を効率化するため、<br>
+            接続の再利用などを行います。</td>
+          </tr>
+
+          <tr>
+            <td>HTTP/2</td>
+            <td>1つの接続の中で、複数の通信を、<br>
+            並行して扱えるようにします。</td>
+            <td>バイナリフレームやヘッダー圧縮を使い、<br>
+            通信効率を高めます。</td>
+          </tr>
+
+          <tr>
+            <td>HTTP/3</td>
+            <td>TCPではなく、UDPを基盤とする、<br>
+            QUIC上で動作します。</td>
+            <td>信頼性、暗号化、複数ストリームなどを、<br>
+            QUIC側で提供します。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTP/3がUDPだけで信頼性を実現しているわけではありません。
+        UDPを基盤とするQUICが、再送、順序制御、暗号化などを提供し、
+        その上でHTTP/3が動作します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== キャッシュ ===== -->
+
+  <section class="card">
+
+    <h2>キャッシュの仕組み</h2>
+
+    <p>
+      キャッシュとは、一度取得したデータをブラウザや中継装置に保存し、
+      必要に応じて再利用する仕組みです。
+      同じデータを毎回サーバーから受け取らずに済むため、
+      表示速度や通信量を改善できます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>仕組み</th>
+            <th>役割</th>
+            <th>注意点</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Cache-Control</td>
+            <td>データを保存してよいか、<br>
+            どの程度再利用できるかを示します。</td>
+            <td>個人情報や認証後の画面では、<br>
+            保存方法を慎重に設定します。</td>
+          </tr>
+
+          <tr>
+            <td>ETag</td>
+            <td>データの版を識別する値を付け、<br>
+            変更の有無を確認します。</td>
+            <td>生成方法やサーバー構成によって、<br>
+            同じ内容でも値が変わる場合があります。</td>
+          </tr>
+
+          <tr>
+            <td>Last-Modified</td>
+            <td>データの最終更新日時を示し、<br>
+            再取得が必要か判断します。</td>
+            <td>更新日時だけでは、細かな変更を、<br>
+            正確に区別できない場合があります。</td>
+          </tr>
+
+          <tr>
+            <td>304 Not Modified</td>
+            <td>保存済みのデータを再利用できることを、<br>
+            サーバーが伝えます。</td>
+            <td>ボディを再送しないため、<br>
+            通信量を削減できます。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== できること ===== -->
+
+  <section class="card">
+
+    <h2>HTTPでできること</h2>
+
+    <p>
+      HTTPは、Webページの表示以外にも、
+      アプリケーション間のさまざまな通信に利用されています。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>Webページを表示する</h3>
+        HTML、CSS、JavaScript、画像などを取得し、<br>
+        ブラウザで画面を組み立てます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>Web APIを利用する</h3>
+        アプリとサーバーの間で、<br>
+        JSONなどのデータを送受信します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>ファイルを送受信する</h3>
+        PDF、画像、動画、圧縮ファイルなどを、<br>
+        アップロード・ダウンロードできます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>フォームを送信する</h3>
+        問い合わせ、申込、検索条件などを、<br>
+        サーバーへ送信できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>認証情報を扱う</h3>
+        Cookieやトークンを使い、<br>
+        ログイン状態や権限を確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>機器やサービスを操作する</h3>
+        管理画面やAPIを通じて、<br>
+        クラウドやネットワーク機器を操作します。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== メリット ===== -->
+
+  <section class="card">
+
+    <h2>メリット</h2>
+
+    <p>
+      HTTPは標準化された共通ルールであり、
+      多様な機器、OS、ブラウザ、開発言語で利用できます。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>相互接続しやすい</h3>
+        異なる製品やシステムでも、<br>
+        HTTPに対応していれば通信できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>用途が広い</h3>
+        Webページ、API、ファイル配信など、<br>
+        幅広い用途で利用できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>結果を標準的に表せる</h3>
+        メソッドやステータスコードによって、<br>
+        要求内容と処理結果を整理できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>中継・拡張しやすい</h3>
+        プロキシ、CDN、ロードバランサーなどを、<br>
+        通信経路へ組み込めます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>キャッシュを利用できる</h3>
+        保存済みデータを再利用し、<br>
+        表示時間や通信量を改善できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>開発環境が充実している</h3>
+        ブラウザ開発者ツールやAPI検証ツールなど、<br>
+        確認手段が豊富です。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== デメリット ===== -->
+
+  <section class="card">
+
+    <h2>デメリット・注意点</h2>
+
+    <p>
+      HTTPは便利ですが、HTTP単体ですべての安全性や状態管理を
+      提供するわけではありません。
+      利用時にはTLS、認証、入力検証、ログ管理などを組み合わせます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>注意点</th>
+            <th>起こり得る問題</th>
+            <th>主な対策</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>HTTP単体では暗号化されない</td>
+            <td>通信内容を盗聴されたり、<br>
+            改ざんされたりする可能性があります。</td>
+            <td>原則としてHTTPSを利用し、<br>
+            TLS設定を適切に管理します。</td>
+          </tr>
+
+          <tr>
+            <td>状態を自動保持しない</td>
+            <td>ログイン状態や利用者情報を、<br>
+            HTTPだけでは継続管理できません。</td>
+            <td>Cookie、セッション、トークンを、<br>
+            安全に組み合わせます。</td>
+          </tr>
+
+          <tr>
+            <td>入力内容を信用できない</td>
+            <td>不正な値や想定外の形式が、<br>
+            サーバーへ送られる可能性があります。</td>
+            <td>サーバー側で形式、長さ、権限を、<br>
+            必ず検証します。</td>
+          </tr>
+
+          <tr>
+            <td>ヘッダーやURLに情報が残る</td>
+            <td>アクセスログ、履歴、中継装置などに、<br>
+            機密情報が記録される場合があります。</td>
+            <td>パスワードやトークンをURLへ入れず、<br>
+            ログの記録範囲を管理します。</td>
+          </tr>
+
+          <tr>
+            <td>キャッシュによる情報残存</td>
+            <td>共有端末や中継装置に、<br>
+            重要情報が残る可能性があります。</td>
+            <td>Cache-Controlなどを、<br>
+            データの機密性に合わせて設定します。</td>
+          </tr>
+
+          <tr>
+            <td>タイムアウトや再試行が必要</td>
+            <td>ネットワーク障害や混雑により、<br>
+            応答が返らない場合があります。</td>
+            <td>適切なタイムアウト、再試行、<br>
+            エラー処理を設計します。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== セキュリティ ===== -->
+
+  <section class="card">
+
+    <h2>セキュリティ上の確認ポイント</h2>
+
+    <p>
+      HTTP通信を安全に利用するには、
+      通信経路だけでなく、認証情報、入力値、Cookie、
+      レスポンスヘッダー、ログなどを総合的に管理します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        1. 通信は原則としてHTTPSを利用する<br>
+        2. 電子証明書の有効期限と対象ドメインを確認する<br>
+        3. 古いTLS方式や弱い暗号設定を残さない<br>
+        4. 認証トークンやCookieをログへ不用意に記録しない<br>
+        5. CookieへSecure、HttpOnly、SameSiteなどを適切に設定する<br>
+        6. URLへパスワードや秘密情報を入れない<br>
+        7. リクエストの形式、長さ、文字種、権限をサーバー側で検証する<br>
+        8. Content-Typeと実際のデータ形式を確認する<br>
+        9. CORSを必要以上に広く許可しない<br>
+        10. セキュリティヘッダーを用途に合わせて設定する<br>
+        11. エラー画面へ内部構成や秘密情報を表示しない<br>
+        12. アクセスログと監査ログの保存・閲覧権限を管理する
+
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        HTTPSを使うだけで、Webアプリケーションの安全性が
+        すべて確保されるわけではありません。
+        HTTPSは通信経路を保護し、入力検証や認可などは
+        アプリケーション側で別に実装する必要があります。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== Cookie ===== -->
+
+  <section class="card">
+
+    <h2>Cookie利用時の注意点</h2>
+
+    <p>
+      Cookieはログイン状態や利用者設定の維持に便利ですが、
+      設定を誤ると盗難、なりすまし、意図しない送信などの危険があります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>主な役割</th>
+            <th>確認ポイント</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Secure</td>
+            <td>CookieをHTTPS通信時だけ、<br>
+            送信するようにします。</td>
+            <td>認証用Cookieでは、<br>
+            原則として有効化します。</td>
+          </tr>
+
+          <tr>
+            <td>HttpOnly</td>
+            <td>JavaScriptからCookieを、<br>
+            読み取りにくくします。</td>
+            <td>スクリプトからの参照が、<br>
+            不要なCookieで利用します。</td>
+          </tr>
+
+          <tr>
+            <td>SameSite</td>
+            <td>別サイトからの要求時に、<br>
+            Cookieを送る範囲を制御します。</td>
+            <td>ログイン連携などの要件と、<br>
+            CSRF対策を両立させます。</td>
+          </tr>
+
+          <tr>
+            <td>Domain・Path</td>
+            <td>どのドメインやパスへ、<br>
+            Cookieを送信するかを限定します。</td>
+            <td>必要以上に広い範囲へ、<br>
+            送信しないようにします。</td>
+          </tr>
+
+          <tr>
+            <td>有効期限</td>
+            <td>Cookieをいつまで保存するかを、<br>
+            指定します。</td>
+            <td>認証情報を長期間残しすぎないようにします。</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 実務確認 ===== -->
+
+  <section class="card">
+
+    <h2>実務上の確認ポイント</h2>
+
+    <p>
+      WebサイトやWeb APIを設計・調査するときは、
+      表示結果だけでなく、メソッド、URL、ヘッダー、
+      ステータスコード、認証、タイムアウトなどを確認します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        1. 通信先のURL、ドメイン、ポート、プロトコルを確認する<br>
+        2. HTTPかHTTPSかを確認する<br>
+        3. 使用するHTTPメソッドと対象パスを確認する<br>
+        4. 必須ヘッダーとContent-Typeを確認する<br>
+        5. リクエストボディの形式と文字コードを確認する<br>
+        6. 成功時と失敗時のステータスコードを確認する<br>
+        7. レスポンスボディの形式と項目を確認する<br>
+        8. Cookie、セッション、トークンなどの認証方式を確認する<br>
+        9. タイムアウト、再試行、重複送信への対応を確認する<br>
+        10. キャッシュの可否と有効期限を確認する<br>
+        11. プロキシ、WAF、ロードバランサー経由の動作を確認する<br>
+        12. CORSやリダイレクトの条件を確認する<br>
+        13. 最大送受信サイズとファイル形式の制限を確認する<br>
+        14. エラー時に利用者へ返す情報とログへ残す情報を分ける<br>
+        15. ブラウザ開発者ツールやAPI検証ツールで実通信を確認する
+
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        実務では「画面が開くか」だけでなく、
+        どのリクエストに対して何が返り、
+        エラー時にどのようなコードと情報が返るかまで確認します。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== トラブル ===== -->
+
+  <section class="card">
+
+    <h2>よくあるトラブルの見分け方</h2>
+
+    <p>
+      Web通信で問題が起きたときは、
+      ステータスコードだけでなく、DNS、TLS、プロキシ、
+      サーバー処理など、どの段階で失敗しているかを切り分けます。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>症状</th>
+            <th>考えられる原因</th>
+            <th>主な確認場所</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>名前解決できない</td>
+            <td>ドメイン名、DNS設定、<br>
+            名前解決経路に問題がある可能性があります。</td>
+            <td>DNS設定、名前解決結果、<br>
+            社内DNS・外部DNS</td>
+          </tr>
+
+          <tr>
+            <td>TLSエラーになる</td>
+            <td>証明書期限、ドメイン不一致、<br>
+            信頼関係や暗号設定に問題がある可能性があります。</td>
+            <td>電子証明書、証明書チェーン、<br>
+            TLSバージョン</td>
+          </tr>
+
+          <tr>
+            <td>401・403が返る</td>
+            <td>認証情報が不足している、または、<br>
+            操作権限がない可能性があります。</td>
+            <td>Cookie、トークン、利用者権限、<br>
+            認可設定</td>
+          </tr>
+
+          <tr>
+            <td>404が返る</td>
+            <td>URLやAPIパスが誤っている、または、<br>
+            対象が削除されている可能性があります。</td>
+            <td>URL、ルーティング、<br>
+            公開パス</td>
+          </tr>
+
+          <tr>
+            <td>500番台が返る</td>
+            <td>サーバー内部、上流サービス、<br>
+            データベースなどで障害が起きた可能性があります。</td>
+            <td>サーバーログ、アプリログ、<br>
+            上流サービスの状態</td>
+          </tr>
+
+          <tr>
+            <td>応答が遅い</td>
+            <td>回線、DNS、TLS、サーバー処理、<br>
+            大容量データなどが影響している可能性があります。</td>
+            <td>ブラウザ開発者ツール、<br>
+            サーバー処理時間、通信量</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 関連技術 ===== -->
+
+  <section class="card">
+
+    <h2>関連技術との関係</h2>
+
+    <p>
+      HTTPは単独で動くのではなく、
+      接続先の特定、データ転送、暗号化、認証、負荷分散など、
+      多くの周辺技術と組み合わせて利用されます。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>DNS</h3>
+        ドメイン名をIPアドレスへ変換し、<br>
+        接続先サーバーを見つけます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>TCP</h3>
+        HTTP/1.1やHTTP/2で一般的に使われ、<br>
+        データを信頼性高く届けます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>QUIC</h3>
+        UDPを基盤とし、HTTP/3の通信、<br>
+        暗号化、複数ストリームなどを提供します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>TLS</h3>
+        HTTP通信を暗号化し、改ざん検知と、<br>
+        接続先の確認を行います。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>Cookie・セッション</h3>
+        HTTPのステートレス性を補い、<br>
+        ログイン状態などを管理します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>Web API</h3>
+        HTTPを使い、アプリケーション間で、<br>
+        データや機能を提供します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>プロキシ</h3>
+        クライアントの代理として外部へ接続し、<br>
+        通信制御や記録を行います。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>リバースプロキシ</h3>
+        サーバーの前段でHTTP通信を受け、<br>
+        振り分け、TLS終端、保護などを行います。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>ロードバランサー</h3>
+        HTTPリクエストを複数のサーバーへ分散し、<br>
+        負荷や障害の影響を抑えます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CDN</h3>
+        利用者に近い拠点からデータを配信し、<br>
+        表示速度や可用性を改善します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>WAF</h3>
+        HTTPリクエストを検査し、<br>
+        Webアプリへの攻撃を防御します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CORS</h3>
+        ブラウザから別のオリジンへ、<br>
+        HTTPアクセスできる範囲を制御します。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 発展 ===== -->
+
+  <section class="card">
+
+    <h2>発展学習として覚える内容</h2>
+
+    <p>
+      HTTPの基本を学ぶ段階では、まずリクエストとレスポンス、
+      GETとPOST、ステータスコード、HTTPSを理解できれば十分です。
+      次の内容は、Web開発やネットワークを深く学ぶときに確認します。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+
+        <thead>
+          <tr>
+            <th>発展テーマ</th>
+            <th>学ぶ内容</th>
+            <th>関係する場面</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>PUT・PATCH・DELETE</td>
+            <td>Web APIでデータを作成、置換、<br>
+            部分更新、削除する考え方を学びます。</td>
+            <td>REST API、業務システム連携</td>
+          </tr>
+
+          <tr>
+            <td>Cookie・セッション</td>
+            <td>ログイン状態を維持する方法と、<br>
+            Cookie属性や有効期限を学びます。</td>
+            <td>会員サイト、管理画面</td>
+          </tr>
+
+          <tr>
+            <td>TLS・電子証明書</td>
+            <td>暗号化、証明書チェーン、<br>
+            ドメイン確認などを学びます。</td>
+            <td>HTTPS化、証明書更新</td>
+          </tr>
+
+          <tr>
+            <td>HTTP/2・HTTP/3</td>
+            <td>多重化、ヘッダー圧縮、QUICなど、<br>
+            通信効率化の仕組みを学びます。</td>
+            <td>Web高速化、通信調査</td>
+          </tr>
+
+          <tr>
+            <td>キャッシュ</td>
+            <td>保存、再検証、CDN連携、<br>
+            機密情報の扱いを学びます。</td>
+            <td>表示速度、通信量削減</td>
+          </tr>
+
+          <tr>
+            <td>認証・認可</td>
+            <td>Cookie、トークン、OAuth、JWTなどの、<br>
+            役割と安全な利用方法を学びます。</td>
+            <td>ログイン、外部サービス連携</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card"
+    style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      HTTPとは、Webブラウザやアプリなどのクライアントと、
+      Webサーバーの間で、ページやデータをやり取りするための通信ルールです。
+      クライアントがHTTPリクエストを送り、
+      サーバーがHTTPレスポンスを返す形で通信します。
+    </p>
+
+    <p style="margin-top:15px;">
+      リクエストにはメソッド、対象、ヘッダー、ボディがあり、
+      レスポンスにはステータスコード、ヘッダー、ボディがあります。
+      初学者は、まずGET・POST、200・404・500などのステータスコード、
+      HTTPとHTTPSの違いを理解することが重要です。
+    </p>
+
+    <p style="margin-top:15px;">
+      HTTPは基本的にステートレスであるため、
+      ログイン状態などはCookie、セッション、トークンを使って管理します。
+      また、通信を安全に行うにはHTTPSを利用し、
+      TLS、認証、入力検証、Cookie属性などを適切に設定する必要があります。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.88em;
+      line-height:2;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+
+        1. HTTPは、クライアントとサーバーが通信するための共通ルール<br>
+        2. クライアントはHTTPリクエストを送り、サーバーはHTTPレスポンスを返す<br>
+        3. GETは主に取得、POSTは主にデータ送信や処理依頼に使われる<br>
+        4. PUT、PATCH、DELETEはWeb APIでよく使われる発展的なメソッド<br>
+        5. ステータスコードは、成功、転送、要求側エラー、サーバー側エラーを示す<br>
+        6. ヘッダーは、認証、データ形式、Cookie、キャッシュなどの追加情報を伝える<br>
+        7. ボディには、HTML、JSON、画像、ファイルなどの実データが入る<br>
+        8. HTTPは基本的に、過去の要求を自動記憶しないステートレスな仕組み<br>
+        9. CookieはHTTPヘッダーを使い、状態管理を支援する<br>
+        10. HTTPSは、HTTP通信をTLSで保護する仕組み<br>
+        11. TLSは、暗号化、改ざん検知、接続先確認を行う<br>
+        12. HTTP/2は多重化などで効率化し、HTTP/3はQUIC上で動作する<br>
+        13. キャッシュは表示速度と通信量を改善するが、機密情報の残存に注意する<br>
+        14. 実務ではメソッド、URL、ヘッダー、コード、認証、タイムアウトを確認する<br>
+        15. HTTPSだけに任せず、入力検証、認可、ログ管理なども適切に行う
+
+      </div>
+
+    </div>
+
+    <div class="point-box">
+
+      <p>
+        一言でまとめると、HTTPは
+        「Web上で何を要求し、どのように結果を返すかを決める通信ルール」です。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+
+  </div>
+
+</div>
+
+</main>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
