@@ -302,5 +302,9 @@
   {
    "term": "XDR",
    "link": "XDR.html"
+  },
+  {
+   "term": "CUDA",
+   "link": "CUDA.html"
   }
 ]
