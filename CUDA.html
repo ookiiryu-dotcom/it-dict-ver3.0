@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CUDA</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===== ヘッダー ===== -->
+
+<header>
+
+  <h1>
+    CUDA
+
+    <span style="
+      display:block;
+      font-size:0.55em;
+      font-weight:normal;
+      margin-top:8px;">
+      NVIDIA GPUを計算に利用するための<br>並列計算基盤
+    </span>
+  </h1>
+
+  <p>
+    <span style="font-size:0.85em;">
+      大量の計算をGPU上で並行して実行し、<br>
+      AI・画像処理・科学技術計算などを高速化する仕組み
+    </span>
+  </p>
+
+</header>
+
+<!-- ===== メイン ===== -->
+
+<div class="container">
+
+  <!-- ===== CUDAとは ===== -->
+
+  <section class="card">
+
+    <h2>CUDAとは？</h2>
+
+    <p>
+      CUDA（クーダ）とは、NVIDIAが提供する、
+      GPUを汎用的な計算に利用するための
+      並列計算プラットフォーム兼プログラミングモデルです。
+    </p>
+
+    <p style="margin-top:15px;">
+      GPUは本来、画面や3DCGを描画するために発展してきました。
+      CUDAを利用すると、その高い並列処理能力を、
+      AI、画像・動画処理、シミュレーション、データ分析などにも活用できます。
+    </p>
+
+    <p style="margin-top:15px;">
+      開発者はCUDA C++やCUDA Pythonを利用して処理を作成できます。
+      また、PyTorchなどのフレームワークや、
+      GPU対応ライブラリを通して間接的に利用することもできます。
+    </p>
+
+    <div class="point-box">
+      <p>
+        CUDAの役割は、並列化できる大量の計算をNVIDIA GPUへ任せ、
+        アプリケーション全体の処理を高速化することです。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== イメージ ===== -->
+
+  <section class="card">
+
+    <h2>まずはイメージで理解する</h2>
+
+    <p>
+      大量の画像に同じ加工をする作業を考えてみます。
+      CPUは少人数の熟練者が複雑な仕事を順番に進めるイメージ、
+      GPUは大人数で似た作業を同時に進めるイメージです。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      overflow-x:auto;">
+
+      <div style="
+        min-width:680px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:18px;
+        text-align:center;">
+
+        <div style="
+          background:#fff4e5;
+          border:1px solid #f0c36d;
+          border-radius:10px;
+          padding:18px;
+          width:190px;">
+          AIの計算<br>
+          画像データ<br>
+          数値データ
+        </div>
+
+        <div style="font-size:1.5em; color:#666;">
+          →
+        </div>
+
+        <div style="
+          background:#eaf4ff;
+          border:2px solid #6ea8fe;
+          border-radius:10px;
+          padding:18px;
+          width:190px;
+          font-weight:bold;">
+          CUDA<br>
+          処理を小さく分割
+        </div>
+
+        <div style="font-size:1.5em; color:#666;">
+          →
+        </div>
+
+        <div style="
+          background:#eaf7ea;
+          border:1px solid #82c785;
+          border-radius:10px;
+          padding:18px;
+          width:190px;">
+          NVIDIA GPU<br>
+          多数の処理を<br>
+          並行して実行
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        100万個の画素に同じ計算を適用するような処理は、
+        画素ごとの仕事に分けやすいため、GPUの並列処理と相性がよい例です。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 必要性 ===== -->
+
+  <section class="card">
+
+    <h2>なぜCUDAが必要なのか</h2>
+
+    <p>
+      AIや科学技術計算では、行列計算など、
+      同じ種類の演算を大量のデータに繰り返す処理が発生します。
+      CPUだけで処理すると、完了までに長い時間がかかる場合があります。
+    </p>
+
+    <p style="margin-top:15px;">
+      GPUは多数の演算を並行して実行する設計になっています。
+      CUDAは、開発者やアプリケーションがこの計算能力を利用するための、
+      プログラミング方法、実行環境、ライブラリ、開発ツールを提供します。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>計算時間の短縮</h3>
+        大量の並列計算をGPUへ任せ、<br>
+        対応処理の完了を速めます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>大規模処理への対応</h3>
+        AI学習やシミュレーションなど、<br>
+        計算量の多い処理を実行しやすくします。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>開発負担の軽減</h3>
+        最適化済みライブラリやツールを利用し、<br>
+        GPU処理を開発しやすくします。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== CPUとの違い ===== -->
+
+  <section class="card">
+
+    <h2>CPU処理との違い</h2>
+
+    <p>
+      CPUとGPUは、どちらが常に優れているという関係ではありません。
+      得意な処理が異なるため、CPUが全体を管理し、
+      並列化しやすい部分をGPUへ任せる形で協力します。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>CPU</th>
+            <th>GPUを使うCUDA処理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>得意な処理</td>
+            <td>複雑な判断、順序に依存する処理、<br>
+            OSやアプリ全体の制御が得意です。</td>
+            <td>同じ種類の演算を大量のデータへ行う、<br>
+            並列処理が得意です。</td>
+          </tr>
+          <tr>
+            <td>処理の進め方</td>
+            <td>比較的少数の高性能なコアで、<br>
+            複雑な処理を進めます。</td>
+            <td>多数のスレッドを使い、<br>
+            小さく分けた処理を並行して進めます。</td>
+          </tr>
+          <tr>
+            <td>主な役割</td>
+            <td>データ準備、条件分岐、入出力、<br>
+            GPUへの処理指示などを行います。</td>
+            <td>行列演算、画素処理、シミュレーションなどの<br>
+            計算量が多い部分を担当します。</td>
+          </tr>
+          <tr>
+            <td>向かない場面</td>
+            <td>極めて大規模な並列計算では、<br>
+            GPUより時間がかかる場合があります。</td>
+            <td>細かな分岐や前後関係が多く、<br>
+            並列化しにくい処理には向きません。</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        CUDAはCPUを置き換えるものではありません。
+        CPUとGPUが役割を分担する「異種混在システム」として動作します。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 構成要素 ===== -->
+
+  <section class="card">
+
+    <h2>CUDAの主な構成要素</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>CPU・ホスト</h3>
+        アプリ全体を動かし、データを準備して、<br>
+        GPUへ処理を指示します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>GPU・デバイス</h3>
+        CUDAに対応するNVIDIA GPU上で、<br>
+        多数の計算を並行して実行します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CUDAドライバー・ランタイム</h3>
+        OSやアプリケーションとGPUの間で、<br>
+        実行やメモリ管理を支えます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CUDA Toolkit</h3>
+        コンパイラ、ライブラリ、デバッグ、<br>
+        性能分析などの開発ツールを提供します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>GPU対応ライブラリ</h3>
+        行列演算やAI処理など、よく使う計算を<br>
+        GPU向けに最適化して提供します。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== 実行の流れ ===== -->
+
+  <section class="card">
+
+    <h2>CUDA処理の基本的な流れ</h2>
+
+    <p>
+      一般的な構成では、CPU側をホスト、GPU側をデバイスと呼びます。
+      CPUが処理を準備し、GPUで実行する関数を呼び出します。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+        1. CPU側で入力データとGPUで行う処理を準備する<br>
+        2. 必要なデータをCPU側のメモリからGPU側のメモリへ渡す<br>
+        3. CPUがGPU上で実行するカーネルを起動する<br>
+        4. GPUが処理を多数のスレッドへ分けて並行実行する<br>
+        5. 必要な計算結果をGPU側からCPU側へ戻す<br>
+        6. CPUが結果の保存・表示や次の処理を行う
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        GPUへ処理を依頼した後、CPUが別の作業を進められる場合があります。
+        そのため、完了を待つ必要がある場所では、
+        CPUとGPUの処理を正しく同期させることが重要です。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 実行モデル ===== -->
+
+  <section class="card">
+
+    <h2>カーネル・スレッド・ブロック</h2>
+
+    <p>
+      CUDAでは、GPU上で実行する処理を「カーネル」と呼びます。
+      一つのカーネルを多数のスレッドが実行し、
+      それぞれが異なるデータを担当します。
+    </p><br>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>カーネル</h3>
+        GPU上で多数のスレッドが実行する、<br>
+        計算内容を記述した関数です。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>スレッド</h3>
+        分割されたデータの一部分を処理する、<br>
+        小さな実行単位です。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>スレッドブロック</h3>
+        複数のスレッドをまとめた単位です。<br>
+        ブロック内で連携できる仕組みがあります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>グリッド</h3>
+        カーネルを実行する複数のブロックを、<br>
+        全体としてまとめた単位です。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        大量のデータをスレッドへ適切に割り当てることが、
+        CUDAの性能を引き出すための基本になります。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== メモリ ===== -->
+
+  <section class="card">
+
+    <h2>CUDAとメモリの関係</h2>
+
+    <p>
+      一般的なCPUと外付けGPUの構成では、
+      CPUが使うメインメモリとGPUが使うGPUメモリは分かれています。
+      GPUで計算するには、必要なデータを適切な場所へ用意します。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>メモリ</th>
+            <th>主な特徴</th>
+            <th>確認するポイント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ホストメモリ</td>
+            <td>CPUが主に利用するメインメモリです。<br>
+            入力データやアプリ全体を保持します。</td>
+            <td>GPUへ渡すデータ量や、<br>
+            転送回数を確認します。</td>
+          </tr>
+          <tr>
+            <td>グローバルメモリ</td>
+            <td>GPU上の多くのスレッドから利用できる、<br>
+            容量の大きなGPUメモリ領域です。</td>
+            <td>アクセス方法が非効率だと、<br>
+            計算を待たせる原因になります。</td>
+          </tr>
+          <tr>
+            <td>共有メモリ</td>
+            <td>同じスレッドブロック内で共有できる、<br>
+            高速で容量の小さな領域です。</td>
+            <td>再利用するデータを置くことで、<br>
+            グローバルメモリへのアクセスを減らせます。</td>
+          </tr>
+          <tr>
+            <td>レジスタ</td>
+            <td>各スレッドが計算途中の値などに使う、<br>
+            非常に高速な領域です。</td>
+            <td>使い過ぎると同時実行できる<br>
+            スレッド数へ影響する場合があります。</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="example">
+      <p>
+        GPUの演算性能が高くても、必要なデータが届くまで待つ時間が長いと、
+        アプリケーション全体は期待したほど速くなりません。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 利用方法 ===== -->
+
+  <section class="card">
+
+    <h2>CUDAを利用する主な方法</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>CUDA C++などで直接開発</h3>
+        カーネルやメモリ転送を記述し、<br>
+        GPU処理を細かく制御します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>GPU対応ライブラリを利用</h3>
+        行列演算や信号処理などの、<br>
+        最適化済み機能を呼び出します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>フレームワークから利用</h3>
+        PyTorchなどを通して、内部のCUDA対応処理を<br>
+        間接的に利用します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>Pythonから利用</h3>
+        CUDA PythonやGPU対応パッケージを使い、<br>
+        PythonからGPU計算を扱います。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        CUDAを利用するために、必ず自分でカーネルを書く必要はありません。
+        目的に合うライブラリやフレームワークがあれば、
+        それを利用する方が開発しやすい場合があります。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== できること ===== -->
+
+  <section class="card">
+
+    <h2>CUDAが使われる主な分野</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>AI・機械学習</h3>
+        ニューラルネットワークの学習や推論で、<br>
+        大量の行列演算を実行します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>画像・動画処理</h3>
+        フィルター、変換、解析、エンコードなどを<br>
+        高速化します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>科学技術計算</h3>
+        気象、流体、物理、化学などの<br>
+        シミュレーションに利用されます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>データ分析</h3>
+        大量データの集計、検索、変換、<br>
+        数値計算などを高速化します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>3DCG・レンダリング</h3>
+        光や物体の計算など、<br>
+        描画に必要な処理へ利用されます。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== メリット ===== -->
+
+  <section class="card">
+
+    <h2>CUDAのメリット</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>並列計算を高速化できる</h3>
+        大量の似た演算を同時に処理し、<br>
+        計算時間を短縮できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>開発環境がまとまっている</h3>
+        コンパイラ、ライブラリ、デバッグ、<br>
+        性能分析のためのツールを利用できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>AI分野で利用しやすい</h3>
+        主要なAIフレームワークや関連ライブラリから、<br>
+        GPU処理を利用できます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>複数分野へ応用できる</h3>
+        AIだけでなく、画像処理、研究、設計、<br>
+        データ分析などへ利用できます。
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== デメリット ===== -->
+
+  <section class="card">
+
+    <h2>CUDAのデメリットと限界</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>NVIDIA GPUへの依存</h3>
+        CUDAはNVIDIA向けのため、他社GPUへ移行する際に、<br>
+        コードやライブラリの変更が必要になる場合があります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>すべての処理は速くならない</h3>
+        並列化しにくい処理や小さ過ぎる処理では、<br>
+        効果が出にくい場合があります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>データ転送に時間がかかる</h3>
+        CPUとGPUの間でデータを何度も移動すると、<br>
+        転送時間がボトルネックになります。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>GPUメモリに上限がある</h3>
+        モデルやデータがGPUメモリへ収まらない場合、<br>
+        分割や別の構成が必要です。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>最適化に専門知識が必要</h3>
+        スレッド配置、メモリアクセス、同期などが、<br>
+        性能や正しさへ影響します。
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        GPUへ渡す準備や結果を戻す時間の方が計算時間より長い場合、
+        CUDAを利用してもCPUだけで実行する場合より遅くなる可能性があります。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== ボトルネック ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.9em;">データ転送ボトルネックを抑える方法</div></h2>
+
+    <p>
+      GPUの性能を生かすには、演算そのものだけでなく、
+      CPUとGPUの間でデータを運ぶ回数や方法も考える必要があります。
+    </p>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+        1. GPU上で再利用できるデータは保持し、不要な往復を減らす<br>
+        2. 小さなデータ転送を何度も行わず、可能な範囲でまとめて転送する<br>
+        3. ページロックメモリを使い、対応する転送を効率化する<br>
+        4. CUDA Streamsを使い、可能な環境では転送と計算を重ねて実行する<br>
+        5. Unified Memoryを用途に応じて使い、データ配置と移動方法を調整する
+      </div>
+
+    </div>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>Unified Memory</h3>
+        CPUとGPUから扱える統一的なアドレス空間を提供し、<br>
+        メモリ管理を簡略化します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CUDA Streams</h3>
+        処理を複数の流れとして管理し、対応環境では<br>
+        データ転送と計算を重ねられます。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>NVLink</h3>
+        対応するGPUやサーバー構成で、GPU間などを<br>
+        高速に接続するハードウェア技術です。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        Unified Memoryを使っても、物理的なデータ移動が
+        必ずなくなるわけではありません。
+        また、NVLinkはすべてのCUDA対応PCで利用できる機能ではありません。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 他社技術 ===== -->
+
+  <section class="card">
+
+    <h2><div style="font-size:0.9em;">他社GPU・並列計算技術との違い</div></h2>
+
+    <p>
+      CUDAはNVIDIA GPU向けの技術です。
+      AMDやIntelなどの環境には別の並列計算基盤や標準があり、
+      対象ハードウェアや開発方法、利用できるライブラリが異なります。
+    </p>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>技術</th>
+            <th>主な対象</th>
+            <th>CUDAとの関係</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CUDA</td>
+            <td>NVIDIA GPUを対象とする、<br>
+            並列計算基盤です。</td>
+            <td>NVIDIA向けの開発ツールや、<br>
+            最適化済みライブラリを利用できます。</td>
+          </tr>
+          <tr>
+            <td>ROCm・HIP</td>
+            <td>主にAMD GPUでの計算に使われます。<br>
+            HIPはC++の実行APIとカーネル言語です。</td>
+            <td>HIPはCUDAに近いインターフェースを持ち、<br>
+            CUDAコードの移植を支援します。</td>
+          </tr>
+          <tr>
+            <td>oneAPI・SYCL</td>
+            <td>Intelを含む複数種類のCPU、GPU、<br>
+            アクセラレーターを扱う考え方です。</td>
+            <td>CUDAコードをSYCLへ移植するための<br>
+            支援ツールがあります。</td>
+          </tr>
+          <tr>
+            <td>OpenCL</td>
+            <td>複数メーカーのCPU、GPUなどを対象とする、<br>
+            オープンな並列計算規格です。</td>
+            <td>CUDAとはAPIや開発方法が異なり、<br>
+            CUDAコードをそのまま使うものではありません。</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        「移植を支援できること」と「完全互換であること」は別です。
+        移行時にはコード、ライブラリ、対応GPU、性能を個別に検証します。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 関連技術 ===== -->
+
+  <section class="card">
+
+    <h2>CUDAと関連技術の関係</h2>
+
+    <div class="table-wrap" style="width:100%; overflow-x:auto;">
+
+      <table style="min-width:1000px; width:100%;">
+        <thead>
+          <tr>
+            <th>関連技術</th>
+            <th>主な役割</th>
+            <th>CUDAとの関係</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>cuBLAS</td>
+            <td>ベクトルや行列などの<br>
+            線形代数計算を高速化します。</td>
+            <td>CUDA上で動作する、<br>
+            GPU向け数値計算ライブラリです。</td>
+          </tr>
+          <tr>
+            <td>cuDNN</td>
+            <td>ニューラルネットワークで使う処理を、<br>
+            GPU向けに最適化して提供します。</td>
+            <td>AIフレームワークがCUDA GPUを<br>
+            利用する際の基盤になります。</td>
+          </tr>
+          <tr>
+            <td>PyTorchなど</td>
+            <td>AIモデルの作成、学習、推論を行うための<br>
+            高水準な機能を提供します。</td>
+            <td>対応環境では内部からCUDAや、<br>
+            CUDA対応ライブラリを利用します。</td>
+          </tr>
+          <tr>
+            <td>TensorRT</td>
+            <td>学習済みAIモデルの推論を、<br>
+            NVIDIA環境向けに最適化します。</td>
+            <td>CUDAを含むNVIDIAのGPU基盤上で、<br>
+            高速な推論実行を支援します。</td>
+          </tr>
+          <tr>
+            <td>NVLink</td>
+            <td>対応するGPU間などのデータ通信を、<br>
+            高速化します。</td>
+            <td>複数GPUを使う大規模計算などで、<br>
+            通信性能を補うハードウェア技術です。</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ===== CUDAコア ===== -->
+
+  <section class="card">
+
+    <h2>CUDAとCUDAコアは別のもの</h2>
+
+    <p>
+      CUDAは、GPU計算を利用するためのソフトウェア基盤や
+      プログラミングモデルを指します。
+      一方、CUDAコアは、NVIDIA GPU内部にある演算器を指す名称です。
+    </p>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>CUDA</h3>
+        GPUへ処理を指示し、並列計算を実行するための<br>
+        プラットフォームとプログラミングモデルです。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>CUDAコア</h3>
+        GPU内部で主に数値演算を担当する、<br>
+        ハードウェア上の演算器です。
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        CUDAコア数だけでGPU全体の性能は決まりません。
+        GPUの世代、動作周波数、メモリ性能、Tensorコア、
+        使用する処理やソフトウェアの最適化なども影響します。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 注意点 ===== -->
+
+  <section class="card">
+
+    <h2>利用時の注意点</h2>
+
+    <div class="parts-grid">
+
+      <div class="part-box">
+        <h3>バージョンの互換性</h3>
+        GPU、ドライバー、CUDA Toolkit、OS、<br>
+        フレームワークの対応関係を確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>GPUメモリ容量</h3>
+        使用するモデルやデータが、利用可能な<br>
+        GPUメモリへ収まるか確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>処理の正しさ</h3>
+        非同期実行や並列処理では、同期漏れや<br>
+        競合による誤った結果に注意します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>発熱と電力</h3>
+        高負荷のGPU処理では、電源容量、冷却、<br>
+        設置環境を確認します。
+      </div>
+
+      <br>
+
+      <div class="part-box">
+        <h3>費用と移植性</h3>
+        GPU本体やクラウド利用料だけでなく、<br>
+        将来の他社環境への移行も考慮します。
+      </div>
+
+    </div>
+
+    <div class="point-box">
+      <p>
+        「CUDAに対応している」という情報だけでは、
+        特定のGPU、OS、ドライバー、ライブラリの組み合わせで
+        正常に動作するとは限りません。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 実務確認 ===== -->
+
+  <section class="card">
+
+    <h2>導入・利用前の確認ポイント</h2>
+
+    <div style="
+      background:#f8f9fa;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding:25px;
+      margin:25px 0;
+      font-size:0.9em;
+      overflow-x:auto;
+      line-height:2;">
+
+      <div style="
+        min-width:680px;
+        white-space:nowrap;">
+        1. 使用するアプリやフレームワークがCUDAに対応しているか<br>
+        2. GPUのモデルとCompute Capabilityが必要条件を満たしているか<br>
+        3. OS、GPUドライバー、CUDA Toolkitの対応バージョンは合っているか<br>
+        4. cuDNNなど、追加ライブラリの必要性と対応バージョンは確認したか<br>
+        5. モデルやデータに対してGPUメモリ容量が十分か<br>
+        6. CPUとGPU間の転送を含め、処理全体が実際に速くなるか測定したか<br>
+        7. 複数GPU、仮想環境、コンテナ、クラウドでの利用条件を確認したか<br>
+        8. 電力、冷却、費用、障害時の運用方法を確認したか<br>
+        9. 将来ほかのGPU基盤へ移行する可能性と移植コストを考慮したか
+      </div>
+
+    </div>
+
+    <div class="example">
+      <p>
+        実務では理論上の演算性能だけで判断せず、
+        実際のモデル、データ量、同時実行数、転送時間を含む
+        本番に近い条件で比較します。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== まとめ ===== -->
+
+  <section class="card" style="border-left:6px solid #0d6efd;">
+
+    <h2>まとめ</h2>
+
+    <p>
+      CUDAとは、NVIDIA GPUの並列処理能力を、
+      AI、画像処理、科学技術計算、データ分析などへ利用するための
+      並列計算プラットフォーム兼プログラミングモデルです。
+    </p>
+
+    <p style="margin-top:15px;">
+      CPUがアプリケーション全体を管理し、
+      並列化しやすい大量の計算をGPUへ任せることで、
+      対応する処理を高速化します。
+    </p>
+
+    <p style="margin-top:15px;">
+      ただし、すべての処理が速くなるわけではありません。
+      CPUとGPU間のデータ転送、GPUメモリ容量、処理の並列化方法、
+      各ソフトウェアの対応バージョンが性能と安定性へ影響します。
+    </p>
+
+    <p style="margin-top:15px;">
+      CUDAはNVIDIA向けであり、AMDのROCm・HIP、
+      oneAPI・SYCL、OpenCLなどとは対象環境や開発方法が異なります。
+      将来の移行が想定される場合は、移植性も確認します。
+    </p>
+
+    <div class="point-box">
+      <p>
+        CUDAを効果的に使うには、GPUの性能だけを見るのではなく、
+        処理が並列化できるか、データを効率よく渡せるか、
+        実際の利用環境で速くなるかを確認することが重要です。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ===== 戻る ===== -->
+
+  <div class="back">
+
+    <a href="index.html">
+      ← 用語一覧へ戻る
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ===== フッター ===== -->
+
+<footer>
+  IT学習用サイト
+</footer>
+
+</body>
+</html>
